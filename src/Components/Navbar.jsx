@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { Outlet } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   // State to toggle the mobile menu visibility
@@ -12,6 +14,8 @@ const Navbar = () => {
 
 
   return (
+    <>
+
     <nav className="bg-gray-500 p-4">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         {/* Left: Empty for alignment */}
@@ -20,7 +24,7 @@ const Navbar = () => {
 
         {/* Middle: Links for Home, About, Cart */}
         <div className=" space-x-8  hidden md:flex">
-          <a href="#" className="text-white text-2xl hover:text-gray-400">Home</a>
+          <Link to="/" className="text-white text-2xl hover:text-gray-400">Home</Link>
           <a href="#" className="text-white text-2xl hover:text-gray-400">Login</a>
           <a href="#" className="text-white text-2xl hover:text-gray-400">
           <i className="fa-sharp fa-solid fa-cart-shopping"></i>
@@ -73,6 +77,11 @@ const Navbar = () => {
         </div>
       )}
     </nav>
+
+    <Outlet/>
+    
+    </>
+  
   );
 };
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Loader from "./Loader/Loader.jsx";
+import { Link } from "react-router-dom";
 
 
 
@@ -39,15 +40,16 @@ const Products = () => {
 
           <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
             {products.map((product) => (
+            
               <div key={product.id} className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                <a href="#">
+                <Link to={`/product/${product.id}`} >
                   <img
                     className="p-8 rounded-t-lg  h-96"
                     src={product.image}
                     alt="product image"
                    
                   />
-                </a>
+                </Link>
                 <div className="px-5 pb-5">
                   <a href="#">
                     <h5 className="text-xl h-24 font-semibold tracking-tight text-gray-900 dark:text-white">
