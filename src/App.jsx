@@ -1,13 +1,16 @@
 import { useState } from 'react'
 
 import './App.css'
+import Products from './Components/Products'
 
 function App() {
  
 
   return (
     <>
-    <h1>hello world</h1>
+   
+
+    <Products/>
       
     </>
   )
