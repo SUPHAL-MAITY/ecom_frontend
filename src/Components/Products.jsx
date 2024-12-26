@@ -4,6 +4,7 @@ import Loader from "./Loader/Loader.jsx";
 import { Link } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { addItem } from "../features/Cart/cart.js";
+import { ToastContainer, toast } from 'react-toastify';
 
 
 
@@ -40,11 +41,13 @@ const Products = () => {
 
   const handleAddtoCart=(product)=>{
     dispatch(addItem({id:product.id,title:product.title,price:product.price,image:product.image}))
+    toast("Item added to cart!")
   }
 
 
   return (
     <>
+      <ToastContainer />
 
     {loading && <Loader/>}
 

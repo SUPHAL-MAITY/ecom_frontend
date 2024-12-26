@@ -3,6 +3,7 @@ import { Outlet } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
 
+
 const Navbar = () => {
   // State to toggle the mobile menu visibility
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -21,6 +22,7 @@ const Navbar = () => {
 
   return (
     <>
+     
 
     <nav className="bg-gray-500 p-4">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
