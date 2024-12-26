@@ -25,10 +25,10 @@ const Navbar = () => {
         {/* Middle: Links for Home, About, Cart */}
         <div className=" space-x-8  hidden md:flex">
           <Link to="/" className="text-white text-2xl hover:text-gray-400">Home</Link>
-          <a href="#" className="text-white text-2xl hover:text-gray-400">Login</a>
-          <a href="#" className="text-white text-2xl hover:text-gray-400">
+          <Link to="/login" className="text-white text-2xl hover:text-gray-400">Login</Link>
+          <Link to="/cart" className="text-white text-2xl hover:text-gray-400">
           <i className="fa-sharp fa-solid fa-cart-shopping"></i>
-          </a>
+          </Link>
         </div>
         
         {/* Right: Search Bar (Visible only on medium screens and above) */}

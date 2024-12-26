@@ -2,13 +2,18 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Loader from "./Loader/Loader.jsx";
 import { Link } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import { addItem } from "../features/Cart/cart.js";
 
 
 
 const Products = () => {
   const [products, setProducts] = useState([]);
   const [loading,setLoading] = useState(false);
+  const dispatch = useDispatch();
   const totalStars = 5; 
+
+
   
 
   useEffect(() => {
@@ -28,6 +33,15 @@ const Products = () => {
       setLoading(false);
     }
   };
+
+
+  
+
+
+  const handleAddtoCart=(product)=>{
+    dispatch(addItem({id:product.id,title:product.title,price:product.price,image:product.image}))
+  }
+
 
   return (
     <>
@@ -98,12 +112,12 @@ const Products = () => {
                     <span className="text-3xl font-bold text-gray-900 dark:text-white">
                     $ {product.price}
                     </span>
-                    <a
-                      href="#"
+                    <button
+                      onClick={()=>handleAddtoCart(product)}
                       className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                     >
                       Add to cart
-                    </a>
+                    </button>
                   </div>
                 </div>
               </div>
