@@ -139,7 +139,7 @@ const Cart = () => {
                 </button>
               </div>
               <h6 className="text-indigo-600 font-manrope font-bold text-2xl leading-9 w-full max-w-[176px] text-center">
-                ${item.totalPrice}
+                ${parseFloat(item.totalPrice).toFixed(2)}
               </h6>
             </div>
           </div>
@@ -169,7 +169,7 @@ const Cart = () => {
                 Sub Total
               </p>
               <h6 className="font-semibold text-xl leading-8 text-gray-900">
-                ${cart.totalAmount}
+                ${parseFloat(cart.totalAmount.toFixed(2))}
               </h6>
             </div>
 
@@ -206,7 +206,7 @@ const Cart = () => {
                 Total
               </p>
               <h6 className="font-manrope font-medium text-2xl leading-9 text-indigo-500">
-                  {cart.totalAmount >500 ?cart.totalAmount :cart.totalAmount+ (cart.cartItems.length *15)}
+                  {cart.totalAmount >500 ? parseFloat(cart.totalAmount.toFixed(2)) : parseFloat( (cart.totalAmount+ (cart.cartItems.length *15)).toFixed(2))}
               </h6>
             </div>
           </div>

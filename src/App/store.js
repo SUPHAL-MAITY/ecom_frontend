@@ -15,7 +15,7 @@ const persistConfig = {
 
 
 
-  // Wrappin the cart reducer with persistReducer
+  // Wrapping the cart reducer with persistReducer
   const persistedCartReducer = persistReducer(persistConfig, cartReducer);
   
 

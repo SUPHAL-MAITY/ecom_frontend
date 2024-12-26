@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from "react-redux";
 
 const Navbar = () => {
   // State to toggle the mobile menu visibility
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const cart = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
+
+
 
   // Function to toggle the mobile menu
   const toggleMobileMenu = () => {
@@ -27,7 +33,10 @@ const Navbar = () => {
           <Link to="/" className="text-white text-2xl hover:text-gray-400">Home</Link>
           <Link to="/login" className="text-white text-2xl hover:text-gray-400">Login</Link>
           <Link to="/cart" className="text-white text-2xl hover:text-gray-400">
-          <i className="fa-sharp fa-solid fa-cart-shopping"></i>
+         
+          <i className=" relative inline-flex fa-sharp fa-solid fa-cart-shopping">
+           {cart.totalItems >0 && <div className="absolute inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -end-2 dark:border-gray-900">{cart.totalItems}</div> }  
+           </i>
           </Link>
         </div>
         
