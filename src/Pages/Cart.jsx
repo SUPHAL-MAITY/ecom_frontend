@@ -162,6 +162,8 @@ const Cart = () => {
 
 
           <div className="bg-gray-50 rounded-xl p-6 w-full mb-8 max-lg:max-w-xl max-lg:mx-auto">
+
+
             <div className="flex items-center justify-between w-full mb-6">
               <p className="font-normal text-xl leading-8 text-gray-400">
                 Sub Total
@@ -170,23 +172,49 @@ const Cart = () => {
                 ${cart.totalAmount}
               </h6>
             </div>
+
+
             <div className="flex items-center justify-between w-full pb-6 border-b border-gray-200">
               <p className="font-normal text-xl leading-8 text-gray-400">
                 Delivery Charge
               </p>
               <h6 className="font-semibold text-xl leading-8 text-gray-900">
-                $45.00
+              ${cart.cartItems.length *15}
               </h6>
+         
             </div>
+
+
+            {cart.totalAmount >500  && 
+              <div className="flex items-center justify-between w-full pb-6 border-b border-gray-200">
+              <p className="font-normal  text-xl leading-8 text-red-400">
+                Discount
+              </p>
+              <h6 className="font-semibold text-xl leading-8 text-gray-900">
+              ${cart.cartItems.length *15}
+              </h6>
+         
+            </div>
+            } 
+
+
+
+
+
             <div className="flex items-center justify-between w-full py-6">
               <p className="font-manrope font-medium text-2xl leading-9 text-gray-900">
                 Total
               </p>
               <h6 className="font-manrope font-medium text-2xl leading-9 text-indigo-500">
-                $405.00
+                  {cart.totalAmount >500 ?cart.totalAmount :cart.totalAmount+ (cart.cartItems.length *15)}
               </h6>
             </div>
           </div>
+
+
+
+
+
           <div className="flex items-center flex-col sm:flex-row justify-center gap-3 mt-8">
             <button className="rounded-full py-4 w-full max-w-[280px]  flex items-center bg-indigo-50 justify-center transition-all duration-500 hover:bg-indigo-100">
               <span className="px-2 font-semibold text-lg leading-8 text-indigo-600">

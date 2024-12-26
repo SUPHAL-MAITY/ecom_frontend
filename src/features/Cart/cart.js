@@ -6,6 +6,8 @@ const initialState={
     totalAmount:0,
     totalItems:0,
     
+
+    
 }
 
 
@@ -35,6 +37,7 @@ export const cartSlice=createSlice({
             })
             state.totalAmount +=newItem.price  ;
             state.totalItems += 1;
+            
 
             }
 
