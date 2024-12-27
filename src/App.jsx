@@ -2,10 +2,12 @@
 import './App.css'
 import { Routes, Route } from 'react-router-dom';
 
-import Home from './Pages/Home.jsx'
+
 import ProductDetails from './Pages/ProductDetails.jsx'
 import Navbar from './Components/Navbar.jsx';
 import Cart from './Pages/Cart.jsx';
+import AllProducts from './Pages/AllProducts.jsx';
+import Home from './Pages/Home/Home.jsx';
 
 function App() {
  
@@ -18,10 +20,17 @@ function App() {
 
      
        <Route   element={<Navbar/>}>
-            <Route path="/" element={<Home/>} />
+            <Route path="/" element={<AllProducts/>} />
             <Route path="/product/:id" element={<ProductDetails/>} />
             <Route path="/cart" element={<Cart/>} />
+           
+
                              
+
+       </Route>
+
+       <Route>
+          <Route path="/home" element={<Home/>} />
 
        </Route>
 
