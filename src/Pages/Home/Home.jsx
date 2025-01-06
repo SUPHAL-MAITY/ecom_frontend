@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Link } from 'react-router-dom';
 import "./Home.css";
 
 const Home = () => {
@@ -76,16 +77,16 @@ useEffect(()=>{
           <div className="menu">
             <ul>
               <li>
-                <a href="/watches">All watches</a>
+                <Link to="/watches">All watches</Link>
               </li>
               <li>
-                <a href="#">New edition</a>
+                <Link to="#">New edition</Link>
               </li>
               <li>
-                <a href="#">Editorial</a>
+                <Link to="#">Editorial</Link>
               </li>
               <li>
-                <a href="#">Collection</a>
+                <Link to="#">Collection</Link>
               </li>
             </ul>
           </div>
