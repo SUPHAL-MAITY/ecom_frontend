@@ -76,7 +76,7 @@ useEffect(()=>{
           <div className="menu">
             <ul>
               <li>
-                <a href="#">All watches</a>
+                <a href="/watches">All watches</a>
               </li>
               <li>
                 <a href="#">New edition</a>
@@ -90,6 +90,7 @@ useEffect(()=>{
             </ul>
           </div>
         </header>
+
 
         <div className="content">
           <div className="men common">
@@ -122,6 +123,8 @@ useEffect(()=>{
               <a href="">Shop Now</a>
             </div>
           </div>
+
+          
         </div>
       </div>
     </>
