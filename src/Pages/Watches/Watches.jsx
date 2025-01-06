@@ -1,9 +1,17 @@
 import React, { useState } from "react";
 import "./watches.css";
 import Products from "../../Components/Products";
+import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from "react-redux";
+
+
+
+
 
 const Watches = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
+   const cart = useSelector((state) => state.cart);
 
   const handleSidebarToggle = () => {
     console.log("button clicked");
@@ -11,14 +19,19 @@ const Watches = () => {
     setIsSidebarOpen((prev) => !prev);
   };
 
+  const handleProfileDropDownToggle = () => {
+    setIsProfileDropdownOpen((prev) => !prev);
+  };
+
   return (
     <>
       <div>
         {/* navbar */}
+
         <nav className="fixed top-0 z-50 w-full h-16 text-white bg-black border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
           <div className="px-3 py-3 lg:px-5 lg:pl-3">
             <div className="flex items-center justify-between">
-              <div className="flex items-center justify-start rtl:justify-end">
+              <div className="flex items-center justify-start ">
                 <button
                   onClick={handleSidebarToggle}
                   data-drawer-target="logo-sidebar"
@@ -43,13 +56,33 @@ const Watches = () => {
                 </button>
               </div>
 
-              <div className="flex items-center">
+              <div className="w-1/2 sm:w-1/3">
+            <input
+              type="text"
+              placeholder="Search..."
+              className="p-2 rounded w-full bg-gray-700 text-white focus:outline-none focus:ring-2 "
+            />
+          </div>
+
+
+
+              {/* profile button in navbar */}
+
+              <div className="flex justify-end ">
                 <div className="flex items-center ms-3">
+
+                <Link to="/cart" className="text-white text-2xl hover:text-gray-400 mr-6">
+                        
+                         <i className=" relative inline-flex fa-sharp fa-solid fa-cart-shopping">
+                          {cart.totalItems >0 && <div className="absolute inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -end-2 dark:border-gray-900">{cart.totalItems}</div> }  
+                          </i>
+                </Link>
                   {/*  profile  */}
-                  <div>
+                  <div className="flex flex-col items-center ">
                     <button
+                      onClick={handleProfileDropDownToggle}
                       type="button"
-                      className="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+                      className="flex text-sm bg-gray-800 rounded-full  "
                       aria-expanded="false"
                     >
                       <img
@@ -58,12 +91,61 @@ const Watches = () => {
                         alt="user photo"
                       />
                     </button>
+
+                    
                   </div>
                 </div>
               </div>
             </div>
           </div>
+
+          {/* dropdown menu */}
+
+          <div
+            id="dropdown"
+            className={`z-10  ${
+              isProfileDropdownOpen ? " " : "hidden"
+            }  bg-gray-700 divide-y divide-gray-100 rounded-lg shadow w-44 fixed right-0 `}
+          >
+            <ul
+              className="py-2 text-sm text-white "
+              aria-labelledby="dropdownDefaultButton"
+            >
+              <li>
+                <a href="#" className="block px-4 py-2 hover:bg-gray-600 ">
+                  Home
+                </a>
+              </li>
+              <li>
+                <a href="#" className="block px-4 py-2 hover:bg-gray-600 ">
+                  Editorial
+                </a>
+              </li>
+              <li>
+                <a href="#" className="block px-4 py-2 hover:bg-gray-600 ">
+                 Sign-in
+                </a>
+              </li>
+              <li>
+                <a href="#" className="block px-4 py-2 hover:bg-gray-600 ">
+                  sign-up
+                </a>
+              </li>
+
+              <li>
+                <a href="#" className="block px-4 py-2 hover:bg-gray-600 ">
+                  Logout
+                </a>
+              </li>
+
+             
+
+
+            </ul>
+          </div>
         </nav>
+
+
 
         {/* sidebar */}
 
@@ -74,6 +156,8 @@ const Watches = () => {
           }   bg-gray-800  sm:translate-x-0  aria-label="Sidebar"`}
         >
           <div className="h-full  px-3 pb-4 overflow-y-auto bg-gray-800  dark:bg-gray-800">
+
+
             {/* list of items */}
 
             {/* <ul className="space-y-2 flex flex-col items-start font-medium">
@@ -199,19 +283,21 @@ const Watches = () => {
             {/*  side bar content*/}
 
             <div className="w-full p-4   ">
-
               {/* First Row */}
               <div className="flex justify-between items-center mb-4">
-                <div className="text-lg font-semibold text-white font-serif">Filter</div>
+                <div className="text-lg font-semibold text-white font-serif">
+                  Filter
+                </div>
                 <div className="text-xl text-white">
-                <i class="fa-solid fa-filter"></i>
-                  {/* Replace with your icon library */}
+                  <i class="fa-solid fa-filter"></i>
                 </div>
               </div>
 
               {/* Second Row */}
               <div className="mb-6">
-                <div className="text-md text-white font-semibold  font-mono mb-2">Gender</div>
+                <div className="text-md text-white font-semibold  font-mono mb-2">
+                  Gender
+                </div>
                 <div className="space-y-2 text-white">
                   <label className="flex items-center">
                     <input
@@ -248,7 +334,9 @@ const Watches = () => {
 
               {/* Third Row */}
               <div>
-                <div className="text-md font-semibold mb-2 text-white font-mono">Price</div>
+                <div className="text-md font-semibold mb-2 text-white font-mono">
+                  Price
+                </div>
                 <div className="space-y-2 text-white">
                   {[
                     { label: "0-1000", value: "0-1000" },
@@ -275,10 +363,13 @@ const Watches = () => {
                 </button>
               </div>
             </div>
+
+
           </div>
         </aside>
 
         <div className="p-4 sm:ml-64">
+
           {/* main content here */}
 
           <div className="p-4 border-2 border-gray-200  rounded-lg dark:border-gray-700 mt-14">
