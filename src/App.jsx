@@ -9,7 +9,9 @@ import Cart from './Pages/Cart.jsx';
 
 import Home from './Pages/Home/Home.jsx';
 import Watches from './Pages/Watches/Watches.jsx';
+import Signup from './Pages/Signup/Signup.jsx';
 import Login from './Pages/Login/Login.jsx';
+
 
 function App() {
  
@@ -27,6 +29,7 @@ function App() {
             <Route path="/cart" element={<Cart/>} />
             
             <Route path="/watches" element={<Watches/>} />
+            <Route path="/signup" element={<Signup/>} />
             <Route path="/login" element={<Login/>} />
            
            
@@ -35,7 +38,7 @@ function App() {
        </Route>
 
        <Route>          
-            <Route path="/home" element={<Home/>} />  
+            <Route path="/" element={<Home/>} />  
                              
        </Route>
 

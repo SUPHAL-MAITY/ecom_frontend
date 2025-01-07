@@ -123,13 +123,13 @@ import { toggleSidebar, toggleDropdown } from "../features/Toggle/toggle.js";
               aria-labelledby="dropdownDefaultButton"
             >
               <li>
-                <Link to="/home" className="block px-4 py-2 hover:bg-gray-600 ">
+                <Link to="/" className="block px-4 py-2 hover:bg-gray-600 ">
                   Home
                 </Link>
               </li>
               <li>
-                <Link to="#" className="block px-4 py-2 hover:bg-gray-600 ">
-                  Editorial
+                <Link to="/watches" className="block px-4 py-2 hover:bg-gray-600 ">
+                  Collection
                 </Link>
               </li>
               <li>
@@ -138,7 +138,7 @@ import { toggleSidebar, toggleDropdown } from "../features/Toggle/toggle.js";
                 </Link>
               </li>
               <li>
-                <Link to="#" className="block px-4 py-2 hover:bg-gray-600 ">
+                <Link to="/signup" className="block px-4 py-2 hover:bg-gray-600 ">
                   sign-up
                 </Link>
               </li>
