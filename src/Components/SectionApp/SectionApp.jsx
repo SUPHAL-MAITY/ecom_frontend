@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Footer = () => {
+const SectionApp = () => {
   return (
     <div className='flex flex-col w-full sm:flex-row ' >
 
@@ -40,4 +40,5 @@ const Footer = () => {
   )
 }
 
-export default Footer
+export default SectionApp;
+

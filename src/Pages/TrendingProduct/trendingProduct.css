@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Abel&family=Bitter:ital,wght@0,100..900;1,100..900&family=Caveat:wght@400..700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Faculty+Glyphic&family=Funnel+Display:wght@300..800&family=Geist+Mono:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Satisfy&display=swap');
+
+.trending_grid_1{
+
+    display: grid;
+    grid-template-rows: 550px 1fr;
+    padding: 6px;
+
+}
+
+
+.trending_page_img1{
+    height: 100%;
+    width: 100%;
+}
+
+.trending_page_heading{
+    font-family: "Bitter", serif;
+    font-optical-sizing: auto;
+    font-weight: 400px;
+    font-style: normal;
+    font-size: 24px;
+    color: red;
+    word-break: break-all;
+}
+
+.trending_page_para{
+    margin:12px 0;
+
+    font-family: "Bitter", serif;
+    font-optical-sizing: auto;
+    font-weight: 300px;
+    font-style: normal;
+    font-size: 18px;
+    
+
+
+}
+
+
+
+
+@media (max-width: 480px) {
+    .trending_grid_1{
+
+        
+        grid-template-rows: 400px 1fr;
+        
+    
+    }
+    
+  }
