@@ -65,8 +65,8 @@ const TrendingProduct = () => {
 
          <div className="flex flex-col ">
             <h1 className='trending_page_heading' style={{color:"black"}}>Featured Products </h1>
-            <div className="grid grid-cols-1  sm:grid-cols-[70%_30%] sm:gap-2 border border-red-500">
-                <div className="trending_grid_1  border border-red-500">
+            <div className="grid grid-cols-1  sm:grid-cols-[70%_30%] sm:gap-2 ">
+                <div className="trending_grid_1  ">
                     <img  className='trending_page_img1' src="watch1.png" alt="" />
                     <div className="grid grid-rows-[40px_1fr]">
                         <p className='trending_page_para'>Spotlight</p>
@@ -76,9 +76,9 @@ const TrendingProduct = () => {
                    
                 </div> 
 
-                <div  className=' grid grid-rows-2 border border-red-500'>
-                    <div className="border border-red-500" ><img style={{height:"100%",width:"100%"}} src="watch3.png" alt="" /></div>
-                    <div className="border border-red-500"><img style={{height:"100%",width:"100%"}} src="watch4.png" alt="" /></div>
+                <div  className=' grid grid-rows-2 '>
+                    <div className="" ><img style={{height:"100%",width:"100%"}} src="watch3.png" alt="" /></div>
+                    <div className=""><img style={{height:"100%",width:"100%"}} src="watch4.png" alt="" /></div>
                    
 
                 </div>

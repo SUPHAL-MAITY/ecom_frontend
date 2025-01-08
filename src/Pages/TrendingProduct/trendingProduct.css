@@ -4,7 +4,7 @@
 
     display: grid;
     grid-template-rows: 550px 1fr;
-    padding: 6px;
+    padding: 0 6px;
 
 }
 
@@ -47,6 +47,15 @@
         grid-template-rows: 400px 1fr;
         
     
+    }
+
+
+    .trending_page_heading{
+        display: -webkit-box;
+        -webkit-line-clamp: 2; 
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
     
   }

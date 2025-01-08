@@ -83,7 +83,7 @@ useEffect(()=>{
                 <Link to="#">New edition</Link>
               </li>
               <li>
-                <Link to="#">Editorial</Link>
+                <Link to="/trending">Trending</Link>
               </li>
               <li>
                 <Link to="#">Collection</Link>
