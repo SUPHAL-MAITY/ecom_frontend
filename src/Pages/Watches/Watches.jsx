@@ -50,7 +50,7 @@ const Watches = () => {
                   Filter
                 </div>
                 <div className="text-xl text-white">
-                  <i class="fa-solid fa-filter"></i>
+                  <i className="fa-solid fa-filter"></i>
                 </div>
               </div>
 

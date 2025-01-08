@@ -5,7 +5,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { toggleSidebar, toggleDropdown } from "../features/Toggle/toggle.js";
 
 
+
  const Navbar = () => {
+  
+
   
 
   const cart = useSelector((state) => state.cart);
@@ -159,6 +162,7 @@ import { toggleSidebar, toggleDropdown } from "../features/Toggle/toggle.js";
         <Outlet/>
 
       </div>
+    
       
     
     </>

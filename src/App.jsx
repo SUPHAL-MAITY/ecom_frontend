@@ -11,6 +11,9 @@ import Home from './Pages/Home/Home.jsx';
 import Watches from './Pages/Watches/Watches.jsx';
 import Signup from './Pages/Signup/Signup.jsx';
 import Login from './Pages/Login/Login.jsx';
+import TrendingProduct from './Pages/TrendingProduct/TrendingProduct.jsx';
+
+
 
 
 function App() {
@@ -31,6 +34,10 @@ function App() {
             <Route path="/watches" element={<Watches/>} />
             <Route path="/signup" element={<Signup/>} />
             <Route path="/login" element={<Login/>} />
+            <Route path="/trending" element={<TrendingProduct/>} />
+           
+
+            
            
            
                              
