@@ -12,6 +12,7 @@ import Watches from './Pages/Watches/Watches.jsx';
 import Signup from './Pages/Signup/Signup.jsx';
 import Login from './Pages/Login/Login.jsx';
 import TrendingProduct from './Pages/TrendingProduct/TrendingProduct.jsx';
+import AdminDashboard from './Pages/AdminDashboard/AdminDashboard.jsx';
 
 
 
@@ -35,6 +36,7 @@ function App() {
             <Route path="/signup" element={<Signup/>} />
             <Route path="/login" element={<Login/>} />
             <Route path="/trending" element={<TrendingProduct/>} />
+            <Route path="/admin" element={<AdminDashboard/>} />
            
 
             
