@@ -145,6 +145,12 @@ import { toggleSidebar, toggleDropdown } from "../features/Toggle/toggle.js";
                   sign-up
                 </Link>
               </li>
+              <li>
+                <Link to="/admin" className="block px-4 py-2 hover:bg-gray-600 ">
+                 Admin
+                </Link>
+              </li>
+
 
               <li>
                 <Link href="#" className="block px-4 py-2 hover:bg-gray-600 ">

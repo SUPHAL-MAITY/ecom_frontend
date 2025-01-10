@@ -28,6 +28,21 @@
     word-break: break-all;
 }
 
+.trending_page_heading2{
+    font-family: "Bitter", serif;
+    font-optical-sizing: auto;
+    font-weight: 400px;
+    font-style: normal;
+    font-size: 24px;
+    color: rgb(122, 116, 116);
+    word-break: break-all;
+    display: -webkit-box;
+    -webkit-line-clamp: 1; 
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .trending_page_para{
     margin:12px 0;
 
@@ -36,7 +51,7 @@
     font-weight: 300px;
     font-style: normal;
     font-size: 18px;
-    
+   
 
 
 }
