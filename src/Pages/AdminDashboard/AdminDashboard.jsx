@@ -5,6 +5,7 @@ import { FaChartBar, FaChartPie } from "react-icons/fa";
 import { LiaBabyCarriageSolid } from "react-icons/lia";
 import { FaArrowUp } from "react-icons/fa";
 import {PieChart,Pie,Cell,Tooltip,AreaChart, XAxis, YAxis, CartesianGrid, Area} from "recharts"
+import SidebarForAdmin from "../../Components/SidebarForAdmin/SidebarForAdmin";
 
 
 
@@ -55,20 +56,9 @@ const AdminDashboard = () => {
   return (
     <>
       <div className="app-container">
-        <div className="sidebar">
-          <div className="sidebar-item first-sidebar-item">
-            <FaChartBar />
-            <h2 className="">Sales This Month</h2>
-          </div>
-          <div className="sidebar-item">
-          <FaChartPie />
-            <h2 className="">Recent Orders</h2>
-          </div>
-          <div className="sidebar-item">
-          <LiaBabyCarriageSolid />
-            <h2 className="">All Products</h2>
-          </div>
-        </div>
+      
+
+        <SidebarForAdmin/>
 
 
 

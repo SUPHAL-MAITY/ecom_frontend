@@ -73,12 +73,12 @@ const TrendingProduct = () => {
 
 
          <div className="flex flex-col ">
-            <h1 className='trending_page_heading' style={{color:"black",paddingLeft:"6px"}}>Featured Products </h1>
-            <div className="grid grid-cols-1  sm:grid-cols-[66%_34%]  ">
+            <h1 className='trending_page_heading' style={{color:"red",paddingLeft:"6px"}}>Featured Products </h1>
+            <div className="grid grid-cols-1  sm:grid-cols-[60%_40%]  ">
                 <div className="trending_grid_1  ">
                     <img  className='trending_page_img1' src="watch1.png" alt="" />
                     <div className="grid grid-rows-[40px_1fr] bg-gray-100">
-                        <p className='trending_page_para'>Spotlight</p>
+                        <p className='trending_page_para text-red-500'>Spotlight</p>
                         <h1 className="trending_page_heading" >Lorem, ipsum dolor sit amet consectetur adipisicing elit. Praesentium similique , Lorem, ipsum dolor sit amet consectetur adipisicing elit. Praesentium similique,Lorem, ipsum dolor sit amet consectetur adipisicing elit. Praesentium similique   </h1>
                        
                     </div>
