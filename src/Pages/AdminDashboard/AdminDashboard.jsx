@@ -56,9 +56,13 @@ const AdminDashboard = () => {
   return (
     <>
       <div className="app-container">
-      
 
-        <SidebarForAdmin/>
+        
+      
+      <div className="w-[250px] border border-red-500  ">
+            <SidebarForAdmin/>
+
+        </div>
 
 
 

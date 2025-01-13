@@ -16,6 +16,7 @@ import AdminDashboard from './Pages/AdminDashboard/AdminDashboard.jsx';
 import RecentOrders from './Pages/RecentOrders/RecentOrders.jsx';
 import AllProducts from './Pages/AllProducts/AllProducts.jsx';
 import AllUsers from './Pages/AllUsers/AllUsers.jsx';
+import AddProduct from './Pages/AddProduct/AddProduct.jsx';
 
 
 
@@ -43,6 +44,7 @@ function App() {
             <Route path="/recent-order" element={<RecentOrders/>} />
             <Route path="/all-products" element={<AllProducts/>} />
             <Route path="/all-users" element={<AllUsers/>} />
+            <Route path="/add-product" element={<AddProduct/> }/>
            
 
             

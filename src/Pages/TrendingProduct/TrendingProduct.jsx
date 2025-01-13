@@ -37,6 +37,7 @@ const TrendingProduct = () => {
           autoPlaySpeed={2000}
           infinite={true}
           responsive={responsive}
+           customTransition="all 1"
         >
           <div style={{ height: "300px", width: "400px" }}>
             <img
@@ -264,7 +265,7 @@ const TrendingProduct = () => {
             <div
               className=" flex justify-center bg-gray-100"
               data-aos="flip-up"
-              data-aos-duration="2000"
+              data-aos-duration="4000"
             >
               {" "}
               <img

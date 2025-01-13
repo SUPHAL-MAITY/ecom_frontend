@@ -16,6 +16,7 @@ export default function RecentOrders() {
     { id: '#SKP-567', created: '7 min ago', customer: 'Dan Wilson', total: '$590.00', profit: '$50.00', status: 'Shipped' },
   ]
 
+  
   return (
     <>   
 
