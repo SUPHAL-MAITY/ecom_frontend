@@ -31,6 +31,12 @@ const TrendingProduct = () => {
   return (
     <>
       <div>
+
+      <div className="" data-aos="flip-up" data-aos-duration="2000">
+          <img src="orient.png" alt=""   className="h-[740px] hidden lg:block w-full  mb-6 hover:blur-sm"/>
+        </div>
+
+
         <Carousel
           swipeable={true}
           autoPlay={true}
@@ -181,9 +187,7 @@ const TrendingProduct = () => {
           </div>
         </Carousel>
 
-        <div className="" data-aos="flip-up" data-aos-duration="2000">
-          <img src="orient.png" alt=""   className="h-[740px] hidden lg:block w-full mt-6 mb-6 hover:blur-sm"/>
-        </div>
+       
 
         {/* trending section  */}
 
