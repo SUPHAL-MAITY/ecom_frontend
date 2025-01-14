@@ -17,6 +17,7 @@ import RecentOrders from './Pages/RecentOrders/RecentOrders.jsx';
 import AllProducts from './Pages/AllProducts/AllProducts.jsx';
 import AllUsers from './Pages/AllUsers/AllUsers.jsx';
 import AddProduct from './Pages/AddProduct/AddProduct.jsx';
+import Checkout from './Pages/Checkout/Checkout.jsx';
 
 
 
@@ -45,6 +46,7 @@ function App() {
             <Route path="/all-products" element={<AllProducts/>} />
             <Route path="/all-users" element={<AllUsers/>} />
             <Route path="/add-product" element={<AddProduct/> }/>
+            <Route path="/checkout" element={<Checkout/> }/>
            
 
             
