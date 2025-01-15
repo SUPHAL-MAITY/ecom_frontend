@@ -68,7 +68,8 @@ const Checkout = () => {
     
         console.log("Cart:", cart);
     
-        // Prepare data for the API call
+        // sedning product details from the cart to
+
         const body = {
             products: cart.cartItems,
         };
@@ -77,7 +78,7 @@ const Checkout = () => {
             // Send request to your backend to create the checkout session
             const response = await axios.post(
                 `${apiUrl}/api/v1/create-checkout-session`,
-                body, // Pass the body directly
+                body,
                 {
                     headers: {
                         'Content-Type': 'application/json',

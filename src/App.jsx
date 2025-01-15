@@ -18,6 +18,8 @@ import AllProducts from './Pages/AllProducts/AllProducts.jsx';
 import AllUsers from './Pages/AllUsers/AllUsers.jsx';
 import AddProduct from './Pages/AddProduct/AddProduct.jsx';
 import Checkout from './Pages/Checkout/Checkout.jsx';
+import PaymentSuccess from './Pages/PaymentSuccess/PaymentSuccess.jsx';
+import PaymentFailed from './Pages/PaymentFailed/PaymentFailed.jsx';
 
 
 
@@ -47,6 +49,8 @@ function App() {
             <Route path="/all-users" element={<AllUsers/>} />
             <Route path="/add-product" element={<AddProduct/> }/>
             <Route path="/checkout" element={<Checkout/> }/>
+            <Route path="/success" element={<PaymentSuccess/> }/>
+            <Route path="/fail" element={<PaymentFailed/> }/>
            
 
             
