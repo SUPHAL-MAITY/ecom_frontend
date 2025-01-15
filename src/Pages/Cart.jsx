@@ -1,10 +1,12 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { addItem,removeItem } from "../features/Cart/cart.js";
+import { useNavigate } from "react-router";
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
+  const navigate=useNavigate()
 
 
 
@@ -236,7 +238,7 @@ const Cart = () => {
                 />
               </svg>
             </button>
-            <button className="rounded-full w-full max-w-[280px] py-4 text-center justify-center items-center bg-indigo-600 font-semibold text-lg text-white flex transition-all duration-500 hover:bg-indigo-700">
+            <button onClick={ ()=>{navigate("/checkout")}} className="rounded-full w-full max-w-[280px] py-4 text-center justify-center items-center bg-indigo-600 font-semibold text-lg text-white flex transition-all duration-500 hover:bg-indigo-700">
               Continue to Payment
               <svg
                 className="ml-2"
