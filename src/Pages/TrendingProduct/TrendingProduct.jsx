@@ -31,11 +31,13 @@ const TrendingProduct = () => {
   return (
     <>
       <div>
-
-      <div className="" data-aos="flip-up" data-aos-duration="2000">
-          <img src="orient.png" alt=""   className="h-[740px] hidden lg:block w-full  mb-6 hover:blur-sm"/>
+        <div className="" data-aos="flip-up" data-aos-duration="2000">
+          <img
+            src="orient.png"
+            alt=""
+            className="h-[740px] hidden lg:block w-full  mb-6 hover:blur-sm"
+          />
         </div>
-
 
         <Carousel
           swipeable={true}
@@ -43,7 +45,7 @@ const TrendingProduct = () => {
           autoPlaySpeed={2000}
           infinite={true}
           responsive={responsive}
-           customTransition="all 1"
+          customTransition="all 1"
         >
           <div style={{ height: "300px", width: "400px" }}>
             <img
@@ -186,8 +188,6 @@ const TrendingProduct = () => {
             />
           </div>
         </Carousel>
-
-       
 
         {/* trending section  */}
 
@@ -352,6 +352,10 @@ const TrendingProduct = () => {
             </div>
           </div>
         </div>
+
+
+
+        
 
         {/* App section */}
 
