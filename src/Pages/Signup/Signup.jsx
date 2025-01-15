@@ -8,7 +8,7 @@ const Signup = () => {
 
 
   return (
-    <div className="  flex flex-col  sm:flex-row">
+    <div className="  flex flex-col  sm:flex-row  font-serif">
       <div className="w-full bg-zinc-300  hidden  sm:flex  justify-center items-center  sm:w-1/2  sm:h-screen ">    
            <img className="w-1/2 h-1/2   rounded-2xl ring-2  ring-gray-300   hover:scale-110 ease-in-out duration-500  shadow-[0_0_20px_4px] shadow-slate-700" src="elegant.png" alt="" />
 

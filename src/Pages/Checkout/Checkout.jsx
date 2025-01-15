@@ -82,7 +82,7 @@ const Checkout = () => {
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4 font-serif">
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-        <h1 className="text-2xl font-bold font-sans mb-6">
+        <h1 className="text-2xl font-bold  mb-6">
           Billing Information
         </h1>
         
