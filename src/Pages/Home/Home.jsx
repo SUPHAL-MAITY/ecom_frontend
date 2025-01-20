@@ -80,7 +80,7 @@ useEffect(()=>{
                 <Link to="/watches">All watches</Link>
               </li>
               <li>
-                <Link to="#">New edition</Link>
+                <Link to="/new-edition">New edition</Link>
               </li>
               <li>
                 <Link to="/trending">Trending</Link>
