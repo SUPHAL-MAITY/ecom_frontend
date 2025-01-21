@@ -74,6 +74,8 @@ const Checkout = () => {
     }
   };
 
+  
+
 
   const handleBlockVisiblity=()=>{
     setFirstBlockVsible(prev=>!prev);
