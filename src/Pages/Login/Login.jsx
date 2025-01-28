@@ -1,10 +1,10 @@
-import React,{useEffect,useState}  from "react";
+import React  from "react";
 import "./login.css";
 
 import {useFormik} from "formik"
-import useDebounce from "../../hooks/useDebounce.jsx";
 import axios from "axios"
 import * as Yup from "yup";
+import { ToastContainer, toast } from 'react-toastify';
 
 const Login = () => {
 
@@ -28,8 +28,12 @@ const formik=useFormik({
         }catch(err){
             console.log(err)
             
+            console.log(err.response.status)
+            if(err.response.status===401){
+                toast.error("Invalid credentials")
+            }
             resetForm()
-            alert("invalid credentials")
+           
 
         }
     }
@@ -41,6 +45,9 @@ const formik=useFormik({
 
   return (
     <>
+     <ToastContainer
+           
+           />
       <div className="panda">
         <div className="ear"></div>
         <div className="face">
@@ -63,6 +70,7 @@ const formik=useFormik({
           <div className="finger"></div>
         </div>
       </div>
+     
 
       <form  onSubmit={formik.handleSubmit}   className="login-form">
         <div className="hand"></div>
