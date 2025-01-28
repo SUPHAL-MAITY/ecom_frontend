@@ -137,52 +137,54 @@ useEffect(()=>{
 
   return (
     <div className="  flex flex-col  sm:flex-row  font-serif">
-      <div className="w-full bg-zinc-300  hidden  sm:flex  justify-center items-center  sm:w-1/2  sm:h-screen ">
+      <div className="w-full   hidden  sm:flex  justify-center items-center  sm:w-1/2   ">
         <img
-          className="w-1/2 h-1/2   rounded-2xl ring-2  ring-gray-300   hover:scale-110 ease-in-out duration-500  shadow-[0_0_20px_4px] shadow-slate-700"
+          className="w-1/2 h-[50vh]   rounded-2xl ring-2  ring-gray-300   hover:scale-110 ease-in-out duration-500  shadow-[0_0_20px_4px] shadow-slate-700"
           src="elegant.png"
           alt=""
         />
       </div>
-      <div className="w-full   sm:w-1/2 flex justify-center items-center  ">
+      <div className="w-full bg-zinc-300  sm:w-1/2 flex justify-center items-center  ">
         <div className="w-full sm:w-2/3  h-fit flex justify-center my-4  mx-4 bg-white border border-gray-200 rounded-lg shadow-md overflow-hidden">
-          <form  onSubmit={formik.handleSubmit} className="w-full p-4  flex  flex-col  ">
+          <form  onSubmit={formik.handleSubmit} className="w-full p-4 h-screen flex  flex-col bg-transparent ">
             
+            {/* first name and address block */}
             
-            
-            <div className="grid mt-4  gap-6 mb-6 md:grid-cols-2">
+            <div className="grid mt-4  gap-1  mb-1  md:grid-cols-2">
               <div>
                 <label
                   htmlFor="first_name"
-                  className="block mb-2 text-sm font-medium text-gray-900 "
+                  className="block mb-1 text-sm font-medium text-gray-900 "
                 >
                   First name
                 </label>
                 <input
                   type="text"
                   id="first_name"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 "
                   placeholder="John"
                   value={firstName}
                   onChange={(e)=>setFirstName(e.target.value)}
                   required
+                  onBlur={formik.handleBlur}
                 />
-               {formik.errors.name &&  <p className="text-red-500"> {formik.errors.name}</p>}
+               {formik.touched.name && formik.errors.name &&  <p className="text-red-500"> {formik.errors.name}</p>}
               </div>
               <div>
                 <label
                   htmlFor="last_name"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  className="block mb-1 text-sm font-medium text-gray-900 dark:text-white"
                 >
                   Last name
                 </label>
                 <input
                   type="text"
                   id="last_name"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 "
                   placeholder="Doe"
                   value={lastName}
                   onChange={(e)=>setLastName(e.target.value)}
+                  
                  
                 />
               </div>
@@ -192,35 +194,37 @@ useEffect(()=>{
               <div>
                 <label
                   htmlFor="address1"
-                  className="block mb-2 text-sm font-medium text-gray-900 "
+                  className="block mb-1 text-sm font-medium text-gray-900 "
                 >
                   Address 1
                 </label>
                 <input
                   type="text"
                   id="address1"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 "
                   placeholder=""
                   value={address1}
                   onChange={(e)=>setAddress1(e.target.value)}
+                  onBlur={formik.handleBlur}
                   
                 />
-                 {formik.errors.address &&  <p className="text-red-500"> {formik.errors.address}</p>}
+                 {formik.touched.address && formik.errors.address &&  <p className="text-red-500"> {formik.errors.address}</p>}
               </div>
               <div>
                 <label
                   htmlFor="address2"
-                  className="block mb-2 text-sm font-medium text-gray-900 "
+                  className="block mb-1 text-sm font-medium text-gray-900 "
                 >
                   Address 2
                 </label>
                 <input
                   type="text"
                   id="address2"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 "
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 "
                   placeholder=""
                   value={address2}
                   onChange={(e)=>setAddress2(e.target.value)}
+                  onBlur={formik.handleBlur}
                   
                 />
                
@@ -235,41 +239,43 @@ useEffect(()=>{
               <div>
                 <label
                   htmlFor="phone"
-                  className="block mb-2 text-sm font-medium text-gray-900 "
+                  className="block mb-1 text-sm font-medium text-gray-900 "
                 >
                   Phone number
                 </label>
                 <input
                   type="number"
                   id="phone"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 "
                   placeholder="985124****"
                   value={formik.values.phone}
                   onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
                   
                 />
 
-                {formik.errors.phone &&  <p className="text-red-500"> {formik.errors.phone}</p>}
+                {formik.touched.phone && formik.errors.phone &&  <p className="text-red-500"> {formik.errors.phone}</p>}
               </div>
 
 
             <div className="mb-6">
               <label
                 htmlFor="email"
-                className="block mb-2 text-sm font-medium text-gray-900 "
+                className="block mt-1 mb-1 text-sm font-medium text-gray-900 "
               >
                 Email address
               </label>
               <input
                 type="email"
                 id="email"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 "
                 placeholder="john.doe@company.com"
                 
                 value={formik.values.email}
                 onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
               />
-               {formik.errors.email &&  <p className="text-red-500"> {formik.errors.email}</p>}
+               {formik.touched.email && formik.errors.email &&  <p className="text-red-500"> {formik.errors.email}</p>}
             </div>
 
             {/* password */}
@@ -277,20 +283,21 @@ useEffect(()=>{
             <div className="mb-6">
               <label
                 htmlFor="password"
-                className="block mb-2 text-sm font-medium text-gray-900 "
+                className="block mb-1 text-sm font-medium text-gray-900 "
               >
                 Password
               </label>
               <input
                 type="password"
                 id="password"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 "
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 "
                 placeholder="•••••••••"
                 name="password"
                 value={formik.values.password}
                 onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
               />
-              {formik.errors.password &&  <p className="text-red-500"> {formik.errors.password}</p>}
+              {formik.touched.password && formik.errors.password &&  <p className="text-red-500"> {formik.errors.password}</p>}
             </div>
 
             {/* confirm password */}
@@ -306,13 +313,14 @@ useEffect(()=>{
                 type="password"
                 id="confirmPassword"
                 name="confirmPassword"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 "
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 "
                 placeholder="•••••••••"
                 
                 value={formik.values.confirmPassword}
                 onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
               />
-              {formik.errors.confirmPassword &&  <p className="text-red-500"> {formik.errors.confirmPassword}</p>}
+              {formik.touched.confirmPassword && formik.errors.confirmPassword &&  <p className="text-red-500"> {formik.errors.confirmPassword}</p>}
             </div>
 
        
@@ -325,12 +333,7 @@ useEffect(()=>{
              {formik.isSubmitting ? "submitting":"submit"} 
             </button>
 
-            <p>{formik.values.name}</p>
-            <p>{formik.values.phone}</p>
-            <p>{formik.values.email}</p>
-            <p>{formik.values.password}</p>
-            <p>{formik.values.address}</p>
-            <p>{formik.values.confirmPassword}</p>
+           
           </form>
         </div>
       </div>
