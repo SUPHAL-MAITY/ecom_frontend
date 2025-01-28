@@ -133,7 +133,7 @@ useEffect(()=>{
 
 
 
-
+https://www.bhmpics.com/downloads/gradient-black-background/35.black-gradient-spotlight-backdrop-wallpaper-260nw-1898141578.jpg
 
   return (
     <div className="  flex flex-col  sm:flex-row  font-serif">
@@ -144,7 +144,7 @@ useEffect(()=>{
           alt=""
         />
       </div>
-      <div className="w-full bg-zinc-300  sm:w-1/2 flex justify-center items-center  ">
+      <div className="w-full drop-shadow-2xl border-l-2  sm:w-1/2 flex justify-center items-center  ">
         <div className="w-full sm:w-2/3  h-fit flex justify-center my-4  mx-4 bg-white border border-gray-200 rounded-lg shadow-md overflow-hidden">
           <form  onSubmit={formik.handleSubmit} className="w-full p-4 h-screen flex  flex-col bg-transparent ">
             
