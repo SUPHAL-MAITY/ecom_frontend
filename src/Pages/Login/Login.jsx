@@ -24,6 +24,9 @@ const formik=useFormik({
             const {data}=await axios.post("http://localhost:3000/api/v1/login",{values},{withCredentials:true})
             console.log(data)
             resetForm()
+            if(data.statusCode===200){
+                toast.success("Login successful")
+            }
 
         }catch(err){
             console.log(err)
