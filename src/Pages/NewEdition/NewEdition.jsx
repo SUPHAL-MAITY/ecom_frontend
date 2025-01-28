@@ -43,7 +43,7 @@ const NewEdition = () => {
             alt="Luxury watch background"
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-black/50"></div>
+          <div className="absolute inset-0 bg-black/50"> </div>
         </div>
         
       
