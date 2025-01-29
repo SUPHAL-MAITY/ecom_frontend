@@ -133,10 +133,11 @@ useEffect(()=>{
 
 
 
-https://www.bhmpics.com/downloads/gradient-black-background/35.black-gradient-spotlight-backdrop-wallpaper-260nw-1898141578.jpg
+
 
   return (
     <div className="  flex flex-col  sm:flex-row  font-serif">
+
       <div className="w-full   hidden  sm:flex  justify-center items-center  sm:w-1/2   ">
         <img
           className="w-1/2 h-[50vh]   rounded-2xl ring-2  ring-gray-300   hover:scale-110 ease-in-out duration-500  shadow-[0_0_20px_4px] shadow-slate-700"
@@ -144,13 +145,16 @@ https://www.bhmpics.com/downloads/gradient-black-background/35.black-gradient-sp
           alt=""
         />
       </div>
-      <div className="w-full drop-shadow-2xl border-l-2  sm:w-1/2 flex justify-center items-center  ">
-        <div className="w-full sm:w-2/3  h-fit flex justify-center my-4  mx-4 bg-white border border-gray-200 rounded-lg shadow-md overflow-hidden">
-          <form  onSubmit={formik.handleSubmit} className="w-full p-4 h-screen flex  flex-col bg-transparent ">
+
+     {/* right portion of page */}
+
+      <div className="w-full drop-shadow-2xl min-h-screen border-l-2  sm:w-1/2 flex justify-center items-center  ">
+        <div className="w-full sm:w-2/3 my-4  h-fit flex justify-center   mx-4 bg-white border border-gray-200 rounded-lg shadow-md overflow-hidden">
+          <form  onSubmit={formik.handleSubmit} className="w-full p-4 h-auto flex  flex-col  ">
             
             {/* first name and address block */}
             
-            <div className="grid mt-4  gap-1  mb-1  md:grid-cols-2">
+            <div className="grid mt-4  gap-1 2xl:gap-6   mb-1  md:grid-cols-2">
               <div>
                 <label
                   htmlFor="first_name"
@@ -165,7 +169,7 @@ https://www.bhmpics.com/downloads/gradient-black-background/35.black-gradient-sp
                   placeholder="John"
                   value={firstName}
                   onChange={(e)=>setFirstName(e.target.value)}
-                  required
+                 
                   onBlur={formik.handleBlur}
                 />
                {formik.touched.name && formik.errors.name &&  <p className="text-red-500"> {formik.errors.name}</p>}
@@ -236,10 +240,10 @@ https://www.bhmpics.com/downloads/gradient-black-background/35.black-gradient-sp
 
            
               
-              <div>
+              <div >
                 <label
                   htmlFor="phone"
-                  className="block mb-1 text-sm font-medium text-gray-900 "
+                  className="block mb-1 2xl:mt-6 2xl:mb-4  text-sm font-medium text-gray-900 "
                 >
                   Phone number
                 </label>
@@ -258,10 +262,10 @@ https://www.bhmpics.com/downloads/gradient-black-background/35.black-gradient-sp
               </div>
 
 
-            <div className="mb-6">
+            <div className="">
               <label
                 htmlFor="email"
-                className="block mt-1 mb-1 text-sm font-medium text-gray-900 "
+                className="block mt-1 mb-1 2xl:mt-6 2xl:mb-4 text-sm font-medium text-gray-900 "
               >
                 Email address
               </label>
@@ -280,10 +284,10 @@ https://www.bhmpics.com/downloads/gradient-black-background/35.black-gradient-sp
 
             {/* password */}
 
-            <div className="mb-6">
+            <div className="">
               <label
                 htmlFor="password"
-                className="block mb-1 text-sm font-medium text-gray-900 "
+                className="block mb-1 2xl:mt-6 2xl:mb-4 text-sm font-medium text-gray-900 "
               >
                 Password
               </label>
@@ -302,10 +306,10 @@ https://www.bhmpics.com/downloads/gradient-black-background/35.black-gradient-sp
 
             {/* confirm password */}
 
-            <div className="mb-6">
+            <div className="">
               <label
                 htmlFor="confirmPassword"
-                className="block mb-2 text-sm font-medium text-gray-900 "
+                className="block mb-2  2xl:mt-6 2xl:mb-4 text-sm font-medium text-gray-900 "
               >
                Confirm  Password
               </label>
@@ -313,14 +317,17 @@ https://www.bhmpics.com/downloads/gradient-black-background/35.black-gradient-sp
                 type="password"
                 id="confirmPassword"
                 name="confirmPassword"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 "
+                className= {`bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg 
+                  focus:ring-blue-500 focus:border-blue-500 block w-full p-2 
+                  dark:bg-gray-700 dark:border-gray-600 
+                  ${formik.touched.confirmPassword && formik.errors.confirmPassword ? "" : " mb-4 2xl:mb-10"}`}
                 placeholder="•••••••••"
                 
                 value={formik.values.confirmPassword}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
               />
-              {formik.touched.confirmPassword && formik.errors.confirmPassword &&  <p className="text-red-500"> {formik.errors.confirmPassword}</p>}
+              {formik.touched.confirmPassword && formik.errors.confirmPassword &&  <p className="text-red-500 mb-4 2xl:mb-10"> {formik.errors.confirmPassword}</p>}
             </div>
 
        
