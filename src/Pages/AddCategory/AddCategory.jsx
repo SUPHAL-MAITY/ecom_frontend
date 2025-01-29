@@ -11,6 +11,7 @@ import { ToastContainer, toast } from "react-toastify";
 export default function AddCategory() {
   let [name, setName] = useState("");
   const [image, setImage] = useState("");
+  const[isSubmitting,setIsSubmitting]=useState(false)
 
   const my_api = import.meta.env.VITE_API_BASE_URL;
 
@@ -39,7 +40,8 @@ export default function AddCategory() {
     
     try {
       name = name.trim();
-      console.log(image.size);
+      // console.log(image.size);
+      setIsSubmitting(true)
       const { data } = await axios.post(
         `${my_api}/create-category`,
         { name, image },
@@ -49,10 +51,12 @@ export default function AddCategory() {
           },
         }
       );
+      setIsSubmitting(false)
       delayReload()
       console.log("data", data);
       toast("category created successfully!");
     } catch (err) {
+      setIsSubmitting(false)
       console.log(err);
       ///validating for existance of same name
       if (err.response.status == 409) {
@@ -101,7 +105,7 @@ export default function AddCategory() {
                 type="submit"
                 className="mt-4 w-full bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600 transition"
               >
-                Submit
+                {isSubmitting ? "Submitting...":"Submit" }
               </button>
             </form>
           </div>
