@@ -22,7 +22,7 @@ const AddProduct = () => {
 
      
    <div className="relative flex items-stretch min-h-screen">
-        <div className="w-[250px] border border-red-500  ">
+        <div className="w-[250px]   ">
             <SidebarForAdmin/>
 
         </div>

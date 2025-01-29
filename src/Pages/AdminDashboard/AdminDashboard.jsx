@@ -59,7 +59,7 @@ const AdminDashboard = () => {
 
         
       
-      <div className="w-[250px] border border-red-500  ">
+      <div className="w-[250px]  ">
             <SidebarForAdmin/>
 
         </div>

@@ -32,6 +32,10 @@ const SidebarForAdmin = () => {
                <FaUsers />
                <Link to="/add-product"><h2 className="font-serif">Add Products</h2></Link> 
              </div>
+             <div className="sidebar-item">
+               <FaUsers />
+               <Link to="/add-category"><h2 className="font-serif">Add Brand</h2></Link> 
+             </div>
     </div>
    
   )
