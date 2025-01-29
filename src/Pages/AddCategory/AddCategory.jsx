@@ -1,14 +1,35 @@
 import { useState } from "react";
 import SidebarForAdmin from "../../Components/SidebarForAdmin/SidebarForAdmin";
+import axios from "axios"
 import "./AddCategory.css";
+import { ToastContainer, toast } from 'react-toastify';
 
 export default function AddCategory() {
-  const [brandName, setBrandName] = useState("");
+  let [name, setName] = useState("");
   
-
-  const handleSubmit = (e) => {
+  
+  const my_api=import.meta.env.VITE_API_BASE_URL
+  const handleSubmit =async(e) => {
     e.preventDefault();
-    if (brandName.trim() === "") return;
+    if (name.trim() === ""){
+        toast.error("please  fill the input")
+        setName("")
+        return
+    };
+    try{
+         name=name.trim()
+        const {data}=await axios.post(`${my_api}/create-category`,{name})
+        setName("")
+        console.log("data",data)
+        toast("category created successfully!")
+    }catch(err){
+        console.log(err)
+        if(err.response.status==409){
+            setName("")
+            toast(`${name} brand  already exists`)
+        }
+
+    }
     
   };
 
@@ -25,8 +46,10 @@ export default function AddCategory() {
 
 </div>
 
+
+<div className="main-content2  flex items-center justify-center min-h-screen  bg-[url(fossil.png)] bg-cover bg-center ">
+<ToastContainer /> 
   
-<div className="main-content2  flex items-center justify-center min-h-screen  bg-[url(fossil.png)] bg-cover bg-center bg-gray-100">
   <div className=" bg-white/30 backdrop-blur-xs border border-white/20 p-6 rounded-lg shadow-lg w-96">
     <h2 className="text-xl font-bold text-white font-serif mb-4">Add a Brand Name</h2>
     
@@ -34,8 +57,8 @@ export default function AddCategory() {
         
         <input
           type="text"
-          value={brandName}
-          onChange={(e) => setBrandName(e.target.value)}
+          value={name}
+          onChange={(e) => setName(e.target.value)}
           className="w-full p-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 font-serif"
           placeholder="Enter brand name"
         />
