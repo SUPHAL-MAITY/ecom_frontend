@@ -21,6 +21,7 @@ import Checkout from './Pages/Checkout/Checkout.jsx';
 import PaymentSuccess from './Pages/PaymentSuccess/PaymentSuccess.jsx';
 import PaymentFailed from './Pages/PaymentFailed/PaymentFailed.jsx';
 import NewEdition from './Pages/NewEdition/NewEdition.jsx';
+import AddCategory from './Pages/AddCategory/AddCategory.jsx';
 
 
 
@@ -53,6 +54,7 @@ function App() {
             <Route path="/success" element={<PaymentSuccess/> }/>
             <Route path="/fail" element={<PaymentFailed/> }/>
             <Route path="/new-edition" element={<NewEdition/> }/>
+            <Route path="/add-category" element={<AddCategory/> }/>
            
 
             
