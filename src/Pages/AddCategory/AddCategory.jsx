@@ -4,22 +4,42 @@ import axios from "axios";
 import "./AddCategory.css";
 import { ToastContainer, toast } from "react-toastify";
 
+
+
+
+
 export default function AddCategory() {
   let [name, setName] = useState("");
   const [image, setImage] = useState("");
 
   const my_api = import.meta.env.VITE_API_BASE_URL;
 
+
+  function delayReload(){
+    setTimeout(()=>{
+        window.location.reload()
+    },1500)
+  }
+
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (name.trim() === "") {
       toast.error("please  fill the input");
       setName("");
       return;
     }
+    if(image.size>=5*1024*1024){
+        toast.error("image size must be less than 5mb")
+        return;
+        delayReload()
+    }
+    
     try {
       name = name.trim();
-      console.log(image);
+      console.log(image.size);
       const { data } = await axios.post(
         `${my_api}/create-category`,
         { name, image },
@@ -29,16 +49,16 @@ export default function AddCategory() {
           },
         }
       );
-      setName("");
-      setImage("");
+      delayReload()
       console.log("data", data);
       toast("category created successfully!");
     } catch (err) {
       console.log(err);
       ///validating for existance of same name
       if (err.response.status == 409) {
-        setName("");
+        
         toast(`${name} brand  already exists`);
+        delayReload()
       }
     }
   };
