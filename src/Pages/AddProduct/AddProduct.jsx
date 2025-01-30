@@ -13,6 +13,7 @@ const AddProduct = () => {
     const [selectedImage, setSelectedImage] = useState(0)
     const [brands,setBrands]=useState([])
 
+    const [isSubmitting,setIsSubmitting]=useState(false)
     
     
    
@@ -92,26 +93,31 @@ const AddProduct = () => {
     const handleSubmit=async(e)=>{
         e.preventDefault();
         console.log("formData",formData)
+        // converting formData  to FormData
+
+        const formDataToSend = new FormData();
+        formData.images.forEach((image) => {
+        formDataToSend.append("images", image);
+        });
+
+        Object.entries(formData).forEach(([key, value]) => {
+            if (key !== "images") {
+              formDataToSend.append(key, value);
+            }
+          });  
+
+        
 
         try {
-            const formDataToSend = new FormData();
-                formData.images.forEach((image) => {
-                formDataToSend.append("images", image);
-                });
 
-                Object.entries(formData).forEach(([key, value]) => {
-                    if (key !== "images") {
-                      formDataToSend.append(key, value);
-                    }
-                  });  
-
-
-                  console.log("formDataToSend",formDataToSend)
+           setIsSubmitting(true)
+            console.log("formDataToSend",formDataToSend)
 
             const {data}=await axios.post(`${my_api}/create-product`,formDataToSend, {headers: {
                 "Content-Type": "multipart/form-data", 
               }})
             console.log(data)
+            setIsSubmitting(false)
             alert("Product Added Successfully")
             setFormData({
                 title: "Fastrack Limitless Glide Smart Watch, Advanced UltraVU HD Display",
@@ -125,10 +131,12 @@ const AddProduct = () => {
                 images:[]
             })
             setSelectedImage(0)
-            setSelectedGender('Woman')
+            
             setFormData({...formData,images:[]})
             
         } catch (error) {
+            setIsSubmitting(false)
+            console.log(error)
             
         }
     }
@@ -170,7 +178,7 @@ const AddProduct = () => {
                 <h1 className="text-2xl font-semibold font-serif">Add New Product</h1>
                 <div className="space-x-3">
                 
-                <button type='submit' className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 font-serif">Add Product</button>
+                <button type='submit'  className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 font-serif">{isSubmitting?"Product Adding...":"Add Product"}</button>
                 </div>
             </div>
 
