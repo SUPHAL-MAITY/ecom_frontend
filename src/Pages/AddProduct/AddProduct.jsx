@@ -178,7 +178,7 @@ const AddProduct = () => {
                 <h1 className="text-2xl font-semibold font-serif">Add New Product</h1>
                 <div className="space-x-3">
                 
-                <button type='submit'  className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 font-serif">{isSubmitting?"Product Adding...":"Add Product"}</button>
+                <button type='submit' disabled={isSubmitting} className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 font-serif">{isSubmitting?"Product Adding...":"Add Product"}</button>
                 </div>
             </div>
 
