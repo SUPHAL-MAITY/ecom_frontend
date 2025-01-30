@@ -9,7 +9,7 @@ const my_api = import.meta.env.VITE_API_BASE_URL;
 const AddProduct = () => {
   
     // const [selectedSize, setSelectedSize] = useState('S')
-    const [selectedGender, setSelectedGender] = useState('Woman')
+   
     const [selectedImage, setSelectedImage] = useState(0)
     const [brands,setBrands]=useState([])
 
