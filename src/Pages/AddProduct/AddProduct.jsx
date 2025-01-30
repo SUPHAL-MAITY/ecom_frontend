@@ -130,6 +130,18 @@ const AddProduct = () => {
         'watch3.png',
     ]
 
+
+
+
+    const handleInputButton=()=>{
+        console.log("button clicked")
+        if(formData.images.length===4){
+            alert("You can only upload 4 images")
+            return
+        }
+        document.getElementById("imageInput").click()
+    }
+
   return (
     <>
 
@@ -275,7 +287,7 @@ const AddProduct = () => {
                         />
                     </div>
                     <div className="flex gap-2">
-                        {thumbnails.map((thumb, index) => (
+                        {formData.images.map((file, index) => (
                         <button
                             key={index}
                             onClick={() => setSelectedImage(index)}
@@ -284,13 +296,13 @@ const AddProduct = () => {
                             }`}
                         >
                             <img
-                            src={thumb}
-                            alt={`Thumbnail ${index + 1}`}
-                            className="w-20 h-20 object-cover rounded"
+                            src={URL.createObjectURL(file)}
+                            alt={`Image ${index + 1}`}
+                            className="w-20 h-20 center object-cover rounded"
                             />
                         </button>
                         ))}
-                        <button className="border rounded-lg p-4 flex items-center justify-center min-w-[80px]">
+                        <button  type='button' onClick={handleInputButton}   className={`border rounded-lg p-4 flex items-center justify-center min-w-[80px] ${formData.images.length===4 ? "hidden" : ""} `}>
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
                         </svg>
@@ -299,7 +311,7 @@ const AddProduct = () => {
                         <input
                             type="file"
                             id="imageInput"
-                            // style={{ display: 'none' }}  // Hide the input (it will be triggered by the button)
+                            style={{ display: 'none' }}  // Hide the input (it will be triggered by the button)
                             accept=".jpg, .jpeg, .png" // Only allow image files
                             onChange={handleImages}
                             multiple
@@ -307,7 +319,7 @@ const AddProduct = () => {
                                             
                     </div>
                     </div>
-                    {console.log(formData.images)}
+                    {console.log("formdata images",formData.images)}
                 </div>
 
                 <div className="bg-white p-6 rounded-lg shadow">
