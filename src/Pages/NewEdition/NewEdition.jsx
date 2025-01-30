@@ -29,7 +29,7 @@ const NewEdition = () => {
       ];
 
 
-
+      // https://images.unsplash.com/photo-1547996160-81dfa63595aa?auto=format&fit=crop&q=80
     
   return (
     <>
@@ -39,7 +39,7 @@ const NewEdition = () => {
       <header className="relative h-screen">
         <div className="absolute inset-0">
           <img 
-            src="https://images.unsplash.com/photo-1547996160-81dfa63595aa?auto=format&fit=crop&q=80"
+            src="watch-bg.webp"
             alt="Luxury watch background"
             className="w-full h-full object-cover"
           />
