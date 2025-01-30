@@ -123,7 +123,7 @@ const AddProduct = () => {
     }
   
 
-    const sizes = ['XS', 'S', 'M', 'XL', 'XXL']
+    
     const thumbnails = [
         'watch1.png',
         'watch2.png',
@@ -183,25 +183,7 @@ const AddProduct = () => {
                     </div>
 
 
-                    {/* for size thats why commented out  */}
-                    {/* <div>
-                        <label className="block text-sm font-medium text-gray-700 font-serif">Size</label>
-                        <div className="flex gap-2 mt-1">
-                        {sizes.map((size) => (
-                            <button
-                            key={size}
-                            onClick={() => setSelectedSize(size)}
-                            className={`px-3 py-2 rounded-md font-serif ${
-                                selectedSize === size
-                                ? 'bg-blue-600 text-white'
-                                : 'bg-gray-100 text-gray-800 hover:bg-gray-200'
-                            }`}
-                            >
-                            {size}
-                            </button>
-                        ))}
-                        </div>
-                    </div> */}
+                  
 
                     <div>
                         <label className="block text-sm font-medium text-gray-700 font-serif">Gender</label>
