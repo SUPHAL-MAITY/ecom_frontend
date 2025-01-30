@@ -1,14 +1,127 @@
-import React ,{ useState } from 'react'
+import React ,{ useState,useEffect } from 'react'
 import SidebarForAdmin from '../../Components/SidebarForAdmin/SidebarForAdmin'
+import axios from 'axios'
 
-
+const my_api = import.meta.env.VITE_API_BASE_URL;
 
 
 const AddProduct = () => {
-
-    const [selectedSize, setSelectedSize] = useState('S')
+  
+    // const [selectedSize, setSelectedSize] = useState('S')
     const [selectedGender, setSelectedGender] = useState('Woman')
     const [selectedImage, setSelectedImage] = useState(0)
+    const [brands,setBrands]=useState([])
+
+    
+    
+   
+
+    const [formData, setFormData] = useState({
+        title: "Fastrack Limitless Glide Smart Watch, Advanced UltraVU HD Display",
+        description: "Ultra VU HD Display with Bright Pixel Resolution and is available in brand new amazing colours",
+        price: 700,
+        discountPrice: 499,
+        categoryId: "",
+        stock: 70,
+        gender: "",
+        discountType: "",
+        images:[]
+    });
+
+    
+    // event handler for handling form data
+    const handleChange=(e)=>{
+        let {name,value}=e.target;
+        console.log(name)
+        console.log(value)
+        setFormData({...formData,[name]:value})
+
+    }
+     
+    // event handler for handling multiple images
+    const handleImages=(e)=>{
+        if(formData.images.length===4){
+            alert("You can only upload 4 images")
+            return
+        }
+        let files=e.target.files;
+        console.log("files",files)
+        let imageArray=Array.from(files)
+        console.log("imageArray",imageArray)
+        setFormData({...formData, images:[...formData.images,...imageArray]})
+
+    }
+
+
+    
+    
+
+    useEffect(()=>{
+        getAllBrands()
+
+    },[])
+   
+    // get all brands for cateories dropdown
+    const getAllBrands=async()=>{
+        try {
+            const {data}=await axios.get(`${my_api}/get-all-category`)
+            console.log(data)
+            setBrands(data?.data)
+            
+        } catch (error) {
+            
+        }
+   
+    
+
+    }
+
+   
+
+    const handleSubmit=async(e)=>{
+        e.preventDefault();
+        console.log("formData",formData)
+
+        try {
+            const formDataToSend = new FormData();
+                formData.images.forEach((image) => {
+                formDataToSend.append("images", image);
+                });
+
+                Object.entries(formData).forEach(([key, value]) => {
+                    if (key !== "images") {
+                      formDataToSend.append(key, value);
+                    }
+                  });  
+
+
+                  console.log("formDataToSend",formDataToSend)
+
+            const {data}=await axios.post(`${my_api}/create-product`,formDataToSend, {headers: {
+                "Content-Type": "multipart/form-data", 
+              }})
+            console.log(data)
+            alert("Product Added Successfully")
+            setFormData({
+                title: "Fastrack Limitless Glide Smart Watch, Advanced UltraVU HD Display",
+                description: "Ultra VU HD Display with Bright Pixel Resolution and is available in brand new amazing colours",
+                price: 700,
+                discountPrice: 499,
+                categoryId: "",
+                stock: 70,
+                gender: "",
+                discountType: "",
+                images:[]
+            })
+            setSelectedImage(0)
+            setSelectedGender('Woman')
+            setFormData({...formData,images:[]})
+            
+        } catch (error) {
+            
+        }
+    }
+  
 
     const sizes = ['XS', 'S', 'M', 'XL', 'XXL']
     const thumbnails = [
@@ -29,13 +142,15 @@ const AddProduct = () => {
 
         
         <div className="  flex-1 overflow-x-auto">
-
+        <form onSubmit={handleSubmit}  encType="multipart/form-data"> 
+            
+        
         <div className="container mx-auto p-6">
             <div className="flex items-center justify-between mb-6">
                 <h1 className="text-2xl font-semibold font-serif">Add New Product</h1>
                 <div className="space-x-3">
-                <button className="px-4 py-2 border rounded-md hover:bg-gray-100 font-serif">Save Draft</button>
-                <button className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 font-serif">Add Product</button>
+                
+                <button type='submit' className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 font-serif">Add Product</button>
                 </div>
             </div>
 
@@ -49,8 +164,10 @@ const AddProduct = () => {
                         <input
                         id="name"
                         type="text"
-                        defaultValue="Puffer Jacket With Pocket Detail"
+                        name="title"                      
                         className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 font-serif"
+                        value={formData.title}
+                        onChange={handleChange}
                         />
                     </div>
                     <div>
@@ -59,10 +176,15 @@ const AddProduct = () => {
                         id="description"
                         rows={4}
                         className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 font-serif"
-                        defaultValue="Cropped puffer jacket made of technical fabric. High neck and long sleeves. Flap pocket at the chest and in-seam side pockets at the hip. Inside pocket detail. Hem with elastic interior. Zip-up front."
+                        name="description"
+                        value={formData.description}
+                        onChange={handleChange}
                         />
                     </div>
-                    <div>
+
+
+                    {/* for size thats why commented out  */}
+                    {/* <div>
                         <label className="block text-sm font-medium text-gray-700 font-serif">Size</label>
                         <div className="flex gap-2 mt-1">
                         {sizes.map((size) => (
@@ -79,7 +201,8 @@ const AddProduct = () => {
                             </button>
                         ))}
                         </div>
-                    </div>
+                    </div> */}
+
                     <div>
                         <label className="block text-sm font-medium text-gray-700 font-serif">Gender</label>
                         <div className="flex gap-4 mt-1">
@@ -90,11 +213,14 @@ const AddProduct = () => {
                                 className="form-radio"
                                 name="gender"
                                 value={gender}
-                                checked={selectedGender === gender}
-                                onChange={() => setSelectedGender(gender)}
+                                checked={ formData.gender===gender}
+                                onChange={handleChange}
                             />
                             <span className="ml-2">{gender}</span>
+                            <br/>
+                           
                             </label>
+                           
                         ))}
                         </div>
                     </div>
@@ -109,7 +235,9 @@ const AddProduct = () => {
                         <input
                         id="price"
                         type="number"
-                        defaultValue="47.55"
+                        name='price'
+                        value={formData.price}
+                        onChange={handleChange}
                         className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 font-serif"
                         />
                     </div>
@@ -118,16 +246,20 @@ const AddProduct = () => {
                         <input
                         id="stock"
                         type="number"
-                        defaultValue="77"
+                        name='stock'
+                        value={formData.stock}
+                        onChange={handleChange}
                         className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 font-serif"
                         />
                     </div>
                     <div>
-                        <label htmlFor="discount" className="block text-sm font-medium text-gray-700 font-serif">Discount</label>
+                        <label htmlFor="discount" className="block text-sm font-medium text-gray-700 font-serif">Discount Price</label>
                         <input
                         id="discount"
                         type="number"
-                        defaultValue="10"
+                        name='discountPrice'
+                        value={formData.discountPrice}
+                        onChange={handleChange}
                         className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
                         />
                     </div>
@@ -135,7 +267,9 @@ const AddProduct = () => {
                         <label htmlFor="discount-type" className="block text-sm font-medium text-gray-700 font-serif">Discount Type</label>
                         <select
                         id="discount-type"
-                        defaultValue="chinese-new-year"
+                        name='discountType'
+                        
+                        onChange={handleChange}
                         className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 font-serif"
                         >
                         <option value="chinese-new-year">Chinese New Year Discount</option>
@@ -179,24 +313,41 @@ const AddProduct = () => {
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
                         </svg>
                         </button>
+                         {/* this will be visible only when we click the plus button  */}
+                        <input
+                            type="file"
+                            id="imageInput"
+                            // style={{ display: 'none' }}  // Hide the input (it will be triggered by the button)
+                            accept=".jpg, .jpeg, .png" // Only allow image files
+                            onChange={handleImages}
+                            multiple
+                        />
+                                            
                     </div>
                     </div>
+                    {console.log(formData.images)}
                 </div>
 
                 <div className="bg-white p-6 rounded-lg shadow">
                     <h2 className="text-lg font-semibold mb-4 font-serif">Category</h2>
                     <div className="space-y-4">
                     <div>
-                        <label htmlFor="category" className="block text-sm font-medium text-gray-700 font-serif">Product Category</label>
+                        <label htmlFor="category" className="block text-sm font-medium text-gray-700 font-serif">Brand Name</label>
                         <select
                         id="category"
-                        defaultValue="jacket"
+                        name='categoryId'
+                        
                         className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 font-serif"
+                        onChange={handleChange}
+                       
                         >
-                        <option value="jacket">Jacket</option>
-                        <option value="pants">Pants</option>
-                        <option value="shirts">Shirts</option>
+                        {brands.map((brand)=>(
+                            <option key={brand._id}  value={brand._id}>{brand.name}</option>
+
+                        ))}                                          
                         </select>
+                      
+                       
                     </div>
                    
                     </div>
@@ -204,7 +355,8 @@ const AddProduct = () => {
                 </div>
             </div>
         </div>
-        
+
+        </form>
 
 
         </div>
