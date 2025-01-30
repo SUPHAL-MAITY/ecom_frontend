@@ -1,6 +1,7 @@
 import React ,{ useState,useEffect } from 'react'
 import SidebarForAdmin from '../../Components/SidebarForAdmin/SidebarForAdmin'
 import axios from 'axios'
+import { ToastContainer, toast } from 'react-toastify';
 
 const my_api = import.meta.env.VITE_API_BASE_URL;
 
@@ -40,9 +41,19 @@ const AddProduct = () => {
      
     // event handler for handling multiple images
     const handleImages=(e)=>{
+        // validation for 4 images
         if(formData.images.length===4){
-            alert("You can only upload 4 images")
+            
+            toast.error("You can only upload 4 images")
             return
+        }
+
+        ////validation for image size
+        if(e.target.files[0].size >5*1024*1024){
+            
+            toast.error("Image size should be less than 5MB")
+            return
+
         }
         let files=e.target.files;
         console.log("files",files)
@@ -135,16 +146,13 @@ const AddProduct = () => {
 
     const handleInputButton=()=>{
         console.log("button clicked")
-        if(formData.images.length===4){
-            alert("You can only upload 4 images")
-            return
-        }
+       
         document.getElementById("imageInput").click()
     }
 
   return (
     <>
-
+  <ToastContainer  />
      
    <div className="relative flex items-stretch min-h-screen">
         <div className="w-[250px]   ">
