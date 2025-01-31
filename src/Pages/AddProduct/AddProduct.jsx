@@ -6,7 +6,7 @@ import { ToastContainer, toast } from "react-toastify";
 const my_api = import.meta.env.VITE_API_BASE_URL;
 
 const AddProduct = () => {
-  // const [selectedSize, setSelectedSize] = useState('S')
+  
 
   const [selectedImage, setSelectedImage] = useState(0);
   const [brands, setBrands] = useState([]);
@@ -26,7 +26,7 @@ const AddProduct = () => {
     images: [],
   });
 
-  // event handler for handling form data
+  // event handler for handling change in   form data
   const handleChange = (e) => {
     let { name, value } = e.target;
     console.log(name);
@@ -47,16 +47,13 @@ const AddProduct = () => {
       toast.error("Image size should be less than 5MB");
       return;
     }
+    //adding images to formData
     let files = e.target.files;
     console.log("files", files);
     let imageArray = Array.from(files);
     console.log("imageArray", imageArray);
     setFormData({ ...formData, images: [...formData.images, ...imageArray] });
   };
-
-  useEffect(() => {
-    getAllBrands();
-  }, []);
 
   // get all brands for cateories dropdown
   const getAllBrands = async () => {
@@ -66,6 +63,12 @@ const AddProduct = () => {
       setBrands(data?.data);
     } catch (error) {}
   };
+
+  useEffect(() => {
+    getAllBrands();
+  }, []);
+
+  ////handler for submiting form
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -121,7 +124,7 @@ const AddProduct = () => {
     }
   };
 
-  const thumbnails = ["watch1.png", "watch2.png", "watch3.png"];
+  ////handler for selecting image on button click
 
   const handleInputButton = () => {
     console.log("button clicked");
@@ -307,17 +310,19 @@ const AddProduct = () => {
                 <div className="space-y-6">
                   <div className="bg-white p-6 rounded-lg shadow">
                     <h2 className="text-lg font-semibold mb-4 font-serif">
-                      Upload Img
+                      Upload Images
                     </h2>
                     <div className="space-y-4">
                       <div className="border rounded-lg p-2">
-                        <img
-                          src="watch1.png"
+                        <img                        
+                          src={formData.images.length>0 ?URL.createObjectURL(formData.images[selectedImage]):"watch1.png"}
                           alt="Product preview"
                           className="w-full object-cover rounded-lg"
                         />
                       </div>
+                      {/* mapping the preview of images  */}
                       <div className="flex gap-2">
+                        
                         {formData.images.map((file, index) => (
                           <button
                             key={index}
