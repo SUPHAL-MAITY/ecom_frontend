@@ -324,6 +324,7 @@ const AddProduct = () => {
                 </div>
 
                 <div className="space-y-6">
+                    
                   <div className="bg-white p-6 rounded-lg shadow">
                     <h2 className="text-lg font-semibold mb-4 font-serif">
                       Upload Images
@@ -393,6 +394,7 @@ const AddProduct = () => {
                     </div>
                     {console.log("formdata images", formData.images)}
                   </div>
+
 
                   <div className="bg-white p-6 rounded-lg shadow">
                     <h2 className="text-lg font-semibold mb-4 font-serif">

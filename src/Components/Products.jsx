@@ -67,7 +67,7 @@ const Products = () => {
 
       {loading && <Loader />}
 
-      <div className="bg-white">
+      <div className="bg-white font-serif">
         <div className="mx-auto max-w-2xl px-4  sm:px-6 sm:py-4 lg:max-w-7xl lg:px-8">
           <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
             {products.map((product) => (
@@ -93,7 +93,7 @@ const Products = () => {
                   <div className="flex items-center mt-2.5 mb-5">
                     {/* Render stars */}
                     {Array.from({ length: totalStars }, (_, index) => {
-                      const coloredStars = Math.round(product.rating.rate);
+                      const coloredStars = Math.round(product.rating);
 
                       return (
                         <svg
@@ -118,12 +118,16 @@ const Products = () => {
                     </span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-3xl font-bold text-gray-900 dark:text-white">
-                      ₹ {product.price}
+                    <span className="text-sm lg:text-2xl line-through text-gray-900 dark:text-white">
+                    ₹ {product.price}
+                    </span>
+                    <span className="text-sm lg:text-2xl font-bold text-gray-900 dark:text-white">
+                      
+                      ₹ {product.discountPrice}
                     </span>
                     <button
                       onClick={() => handleAddtoCart(product)}
-                      className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                      className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4  focus:outline-none focus:ring-blue-300 font-medium  rounded-lg text-xs lg:text-sm px-2 lg:px-5 py-1 lg:py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                     >
                       Add to cart
                     </button>
