@@ -5,12 +5,14 @@ import axios from "axios";
 
 const ProductDetails = () => {
     const [product,setProduct]=useState({})
+    const[selectedImage,setSelectedImage]=useState(0)
     const {id}=useParams();
 
  const fetchSingleProduct=async()=>{
     try {
-        const {data}=await axios.get(`https://fakestoreapi.com/products/${id}`)
-        setProduct(data)
+     
+        const {data}=await axios.get(`http://localhost:3000/api/v1/get-single-product/${id}`)
+        setProduct(data?.data)
         console.log(data)
         
     } catch (error) {
@@ -34,18 +36,17 @@ const ProductDetails = () => {
 
                 <div className="max-w-screen-xl px-4 mx-auto 2xl:px-0">
                 <div className="lg:grid lg:grid-cols-2 lg:gap-8 xl:gap-16">
-                  <div className="shrink-0 max-w-md lg:max-w-lg mx-auto">
+                  <div className="shrink-0 max-w-md lg:max-w-lg mx-auto shadow-lg">
                     <img
                       className="w-full h-96 dark:hidden"
-                      src={product.image}
+                      src={product.images?.[0]}
                       alt=""
                     />
-                    <img
-                      className="w-full h-96 hidden dark:block"
-                      src={product.image}
-                      alt=""
-                    />
+                  
+                  
                   </div>
+
+              
       
                   <div className="mt-6 sm:mt-8 lg:mt-0">
                     <h1 className="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">
@@ -53,7 +54,7 @@ const ProductDetails = () => {
                     </h1>
                     <div className="mt-4 sm:items-center sm:gap-4 sm:flex">
                       <p className="text-2xl font-extrabold text-gray-900 sm:text-3xl dark:text-white">
-                        ${product.price}
+                      ₹{product.price}
                       </p>
       
                       <div className="flex items-center gap-2 mt-2 sm:mt-0">
