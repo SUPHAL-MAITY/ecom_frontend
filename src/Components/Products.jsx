@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { addItem } from "../features/Cart/cart.js";
 import { ToastContainer, toast } from "react-toastify";
 
-const Products = () => {
+const Products = ({priceMin,priceMax}) => {
 
   const [page,setPage]=useState(1)
   const [products, setProducts] = useState([]);
@@ -18,6 +18,34 @@ const Products = () => {
   useEffect(() => {
     fetchData();
   }, [page]);
+
+
+  // http://localhost:3000/api/v1/filter?priceMax=2000&priceMin=1000
+  const fetchFilteredData=async()=>{
+
+    try {
+      setLoading(true);
+      const { data } = await axios.get(
+        `http://localhost:3000/api/v1/get-all-products?page=${page}`
+      
+      );
+      setProducts(data?.data?.products);
+      setTotalPages(data?.data?.totalPages)
+      setLoading(false);
+
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+
+  }
+
+  if(priceMin && priceMax){
+    console.log(priceMin)
+    console.log(priceMax)
+
+  }
 
   const fetchData = async () => {
     try {
@@ -35,6 +63,9 @@ const Products = () => {
       setLoading(false);
     }
   };
+
+
+  
 
   const handleAddtoCart = (product) => {
     dispatch(

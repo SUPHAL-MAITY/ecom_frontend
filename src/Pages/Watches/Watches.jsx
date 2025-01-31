@@ -10,8 +10,10 @@ import axios from "axios"
 
 
 const Watches = () => {
+  const [priceMin,setPriceMin]=useState(null)
+  const [priceMax,setPriceMax]=useState(null)
   
-   const [products,setProducts]=useState([])
+   
    const cart = useSelector((state) => state.cart);
    
 
@@ -19,7 +21,20 @@ const Watches = () => {
    const isSidebarOpen = useSelector((state) => state.toggle.isSidebarOpen);
   
 
+let price={}
+  
+const handleCheckboxChange=(e)=>{
+  console.log("checkbox clicked")
+  console.log(e.target.checked)
+  console.log(e.target.value)
+  let string=e.target.value;
+  let parts = string.split("-"); // Splitting the string into an array
+  let Min = parseInt(parts[0]); // First value
+  let Max = parseInt(parts[1]); // Second value
+  setPriceMax(Max)
+  setPriceMin(Min)
 
+}
 
 
 
@@ -110,13 +125,16 @@ const Watches = () => {
                     { label: "3001-4000", value: "3001-4000" },
                     { label: "4001-5000", value: "4001-5000" },
                     { label: "5001-10000", value: "5001-10000" },
+                    { label: "10001-20000", value: "10001-20000" },
+                    { label: "20001-30000", value: "20001-30000" },
                   ].map((price, index) => (
                     <label key={index} className="flex items-center">
                       <input
-                        type="checkbox"
+                        type="radio"
                         id={price.value}
                         name="price"
                         value={price.value}
+                        onChange={handleCheckboxChange}
                         className="mr-2"
                       />
                       {price.label}
@@ -138,7 +156,7 @@ const Watches = () => {
           {/* main content here */}
 
           <div className="p-4 border-2 border-gray-200  rounded-lg dark:border-gray-700 sm:mt-6">
-            <Products />
+            <Products  priceMin={priceMin} priceMax={priceMax} />
           </div>
         </div>
       </div>
