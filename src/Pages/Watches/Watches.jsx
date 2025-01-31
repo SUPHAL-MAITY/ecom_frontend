@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import "./watches.css";
 import Products from "../../Components/Products";
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
+import axios from "axios"
 
 
 
@@ -10,12 +11,15 @@ import { useSelector, useDispatch } from "react-redux";
 
 const Watches = () => {
   
-  
+   const [products,setProducts]=useState([])
    const cart = useSelector((state) => state.cart);
    
 
 
    const isSidebarOpen = useSelector((state) => state.toggle.isSidebarOpen);
+  
+
+
 
 
 

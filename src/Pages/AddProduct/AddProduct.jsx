@@ -26,13 +26,15 @@ const AddProduct = () => {
     images: [],
   });
 
+
+
   // event handler for handling change in   form data
   const handleChange = (e) => {
-    let { name, value } = e.target;
-    console.log(name);
-    console.log(value);
+    let { name, value } = e.target; 
     setFormData({ ...formData, [name]: value });
   };
+
+
 
   // event handler for handling multiple images
   const handleImages = (e) => {
@@ -42,11 +44,15 @@ const AddProduct = () => {
       return;
     }
 
+
+
     ////validation for image size
     if (e.target.files[0].size > 5 * 1024 * 1024) {
       toast.error("Image size should be less than 5MB");
       return;
     }
+
+
     //adding images to formData
     let files = e.target.files;
     console.log("files", files);
@@ -54,6 +60,8 @@ const AddProduct = () => {
     console.log("imageArray", imageArray);
     setFormData({ ...formData, images: [...formData.images, ...imageArray] });
   };
+
+
 
   // get all brands for cateories dropdown
   const getAllBrands = async () => {
@@ -64,9 +72,13 @@ const AddProduct = () => {
     } catch (error) {}
   };
 
+
+
   useEffect(() => {
     getAllBrands();
   }, []);
+
+
 
   ////handler for submiting form
 
@@ -101,7 +113,7 @@ const AddProduct = () => {
       );
       console.log(data);
       setIsSubmitting(false);
-      alert("Product Added Successfully");
+      toast.success("Product added successfully");
       setFormData({
         title:
           "Fastrack Limitless Glide Smart Watch, Advanced UltraVU HD Display",
@@ -119,16 +131,20 @@ const AddProduct = () => {
 
       setFormData({ ...formData, images: [] });
     } catch (error) {
+    
       setIsSubmitting(false);
+      toast.error("Something went wrong");
+
       console.log(error);
     }
   };
+
+
 
   ////handler for selecting image on button click
 
   const handleInputButton = () => {
     console.log("button clicked");
-
     document.getElementById("imageInput").click();
   };
 
@@ -313,12 +329,12 @@ const AddProduct = () => {
                       Upload Images
                     </h2>
                     <div className="space-y-4">
-                      <div className="border rounded-lg p-2">
+                      <div className="border rounded-lg p-2 w-[600px] h-[420px]">
                         {/* change of image on selection  */}
                         <img                        
                           src={formData.images.length>0 ?URL.createObjectURL(formData.images[selectedImage]):"watch1.png"}
                           alt="Product preview"
-                          className="w-full object-cover rounded-lg"
+                          className="w-full object-contain rounded-lg w-[600px] h-[400px] "
                         />
                       </div>
                       {/* mapping the preview of images  */}
@@ -326,6 +342,7 @@ const AddProduct = () => {
                         
                         {formData.images.map((file, index) => (
                           <button
+                            type="button"
                             key={index}
                             onClick={() => setSelectedImage(index)}
                             className={`relative border rounded-lg p-1 ${

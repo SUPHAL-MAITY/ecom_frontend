@@ -1,10 +1,13 @@
-import { useState } from 'react'
+import { useState,useEffect } from 'react'
 import SidebarForAdmin from '../../Components/SidebarForAdmin/SidebarForAdmin'
+import axios from "axios"
 
 
 const AllProducts = () => {
 
      const [searchQuery, setSearchQuery] = useState('')
+
+     const [products,setProducts]=useState([])
     
       const orders = [
         { id: '#XGY-346', created: '7 min ago', customer: 'Albert Flores', total: '$630.00', profit: '$86.70', status: 'Pending' },
@@ -15,8 +18,8 @@ const AllProducts = () => {
         { id: '#SKP-035', created: '2 day ago', customer: 'Eleanor Pena', total: '$290.00', profit: '$29.00', status: 'Rejected' },
         { id: '#SKP-567', created: '7 min ago', customer: 'Dan Wilson', total: '$590.00', profit: '$50.00', status: 'Shipped' },
       ]
-    
 
+   
 
 
   return (
