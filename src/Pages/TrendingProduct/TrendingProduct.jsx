@@ -35,7 +35,7 @@ const TrendingProduct = () => {
           <img
             src="orient.png"
             alt=""
-            className="h-[740px] hidden lg:block w-full  mb-6 hover:blur-sm"
+            className="h-[100vh] hidden lg:block w-full  mb-6 hover:blur-sm"
           />
         </div>
 

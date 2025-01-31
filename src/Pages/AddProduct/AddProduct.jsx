@@ -314,6 +314,7 @@ const AddProduct = () => {
                     </h2>
                     <div className="space-y-4">
                       <div className="border rounded-lg p-2">
+                        {/* change of image on selection  */}
                         <img                        
                           src={formData.images.length>0 ?URL.createObjectURL(formData.images[selectedImage]):"watch1.png"}
                           alt="Product preview"
