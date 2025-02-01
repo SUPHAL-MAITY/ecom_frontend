@@ -1,17 +1,22 @@
 import React, { useState,useEffect } from "react";
 import "./watches.css";
 import Products from "../../Components/Products";
-import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
-import axios from "axios"
+import { useRef } from "react";
+
 
 
 
 
 
 const Watches = () => {
+
+
   const [priceMin,setPriceMin]=useState(null)
   const [priceMax,setPriceMax]=useState(null)
+  const [selectedGender,setSelectedGender]=useState([])
+
+  const childRef=useRef(null)
   
    
    const cart = useSelector((state) => state.cart);
@@ -21,7 +26,7 @@ const Watches = () => {
    const isSidebarOpen = useSelector((state) => state.toggle.isSidebarOpen);
   
 
-let price={}
+
   
 const handleCheckboxChange=(e)=>{
   console.log("checkbox clicked")
@@ -35,6 +40,27 @@ const handleCheckboxChange=(e)=>{
   setPriceMin(Min)
 
 }
+
+////handling checkbox
+const handleChange=(e)=>{
+   const {checked,value}=e.target;
+
+   if(checked){
+    setSelectedGender([...selectedGender,value])
+   }else{
+    setSelectedGender(selectedGender.filter((item)=>item !==value))
+   }
+}
+
+
+const handleFetch=async()=>{
+  
+  if(childRef.current){
+    const response=await childRef.current.fetchFilteredData()
+    console.log("button clicked")
+  }
+}
+
 
 
 
@@ -79,36 +105,24 @@ const handleCheckboxChange=(e)=>{
                   Gender
                 </div>
                 <div className="space-y-2 text-white">
-                  <label className="flex items-center">
-                    <input
-                      type="checkbox"
-                      id="male"
-                      name="gender"
-                      value="male"
-                      className="mr-2"
-                    />
-                    Male
-                  </label>
-                  <label className="flex items-center ">
-                    <input
-                      type="checkbox"
-                      id="female"
-                      name="gender"
-                      value="female"
-                      className="mr-2"
-                    />
-                    Female
-                  </label>
-                  <label className="flex items-center">
-                    <input
-                      type="checkbox"
-                      id="unisex"
-                      name="gender"
-                      value="unisex"
-                      className="mr-2"
-                    />
-                    Unisex
-                  </label>
+                  {["Men","Woman","Unisex"].map((c,i)=>(
+                     <label key={i}  className="flex items-center">
+                     <input
+                       type="checkbox"
+                       id={c}
+                       key={i}
+                       name="gender"
+                       value={c}
+                       className="mr-2"
+                       onChange={handleChange}
+                     />
+                     {c}
+                   </label>
+
+                  ))}
+                 {console.log(selectedGender)}
+
+
                 </div>
               </div>
 
@@ -132,6 +146,7 @@ const handleCheckboxChange=(e)=>{
                       <input
                         type="radio"
                         id={price.value}
+                        key={index}
                         name="price"
                         value={price.value}
                         onChange={handleCheckboxChange}
@@ -141,7 +156,7 @@ const handleCheckboxChange=(e)=>{
                     </label>
                   ))}
                 </div>
-                <button className="mt-4 w-full py-2 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600">
+                <button  onClick={handleFetch}  className="mt-4 w-full py-2 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600">
                   Apply
                 </button>
               </div>
@@ -156,7 +171,7 @@ const handleCheckboxChange=(e)=>{
           {/* main content here */}
 
           <div className="p-4 border-2 border-gray-200  rounded-lg dark:border-gray-700 sm:mt-6">
-            <Products  priceMin={priceMin} priceMax={priceMax} />
+            <Products  priceMin={priceMin} priceMax={priceMax} gender={selectedGender} ref={childRef} />
           </div>
         </div>
       </div>
