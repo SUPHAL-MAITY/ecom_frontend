@@ -57,7 +57,7 @@ const Products=forwardRef(({priceMin,priceMax,gender},ref)=>{
         id: product.id,
         title: product.title,
         price: product.price,
-        image: product.image,
+        image: product.images[0],
       })
     );
     toast("Item added to cart!");
@@ -77,14 +77,6 @@ const Products=forwardRef(({priceMin,priceMax,gender},ref)=>{
 
 
 
-  console.log("gender",gender)
-
-
-
-  
-
-
-
   const fetchFilteredData=async()=>{
     console.log("data is fetched ")
     try {
@@ -94,6 +86,7 @@ const Products=forwardRef(({priceMin,priceMax,gender},ref)=>{
       );
       setFilterProducts(data.data.products)
       console.log("data",data)
+      setLoading(false)
      
 
       
