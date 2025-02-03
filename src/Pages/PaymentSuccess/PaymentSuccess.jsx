@@ -64,6 +64,18 @@ const PaymentSuccess = () => {
         if(orderResponse){
           alert("order saved sucessfully")
 
+          console.log("orderresponse",orderResponse)
+
+          const oderItemResponse=await axios.post(`${apiUrl}/create-order-items`,{
+            
+              orderId: orderResponse.data.data._id,
+              productId: "679c7c17a21b1a25bd7e9f37",
+              quantity: 2,
+              price: 49.99,
+              totalPrice: 99.98
+            
+          })
+
         }
        
 
