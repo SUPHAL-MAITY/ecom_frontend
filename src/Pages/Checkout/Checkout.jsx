@@ -40,6 +40,8 @@ const Checkout = () => {
       return;
     }
 
+
+
     console.log("Cart:", cart);
 
     // sedning product details from the cart to
@@ -169,7 +171,7 @@ const Checkout = () => {
               required
               value={formData.address}
               onChange={handleInputChange}
-              placeHolder="John Doe"
+              placeholder="John Doe"
             />
 
             <Input
@@ -180,7 +182,7 @@ const Checkout = () => {
               required
               value={formData.locality}
               onChange={handleInputChange}
-              placeHolder="John Doe"
+              placeholder="John Doe"
             />
 
             <Input
@@ -191,7 +193,7 @@ const Checkout = () => {
               required
               value={formData.landmark}
               onChange={handleInputChange}
-              placeHolder="John Doe"
+              placeholder="John Doe"
             />
 
             <Input
@@ -202,7 +204,7 @@ const Checkout = () => {
               required
               value={formData.country}
               onChange={handleInputChange}
-              placeHolder="John Doe"
+              placeholder="John Doe"
             />
 
 
@@ -210,8 +212,8 @@ const Checkout = () => {
            
 
           <div className="flex flex-col justify-center items-center mb-4">
-              <button classNameName="add_address_btn m-1 p-4" onClick={handleBlockVisiblity}>
-                <i class="fa-solid fa-plus"></i>
+              <button className="add_address_btn m-1 p-4" onClick={handleBlockVisiblity}>
+                <i className="fa-solid fa-plus"></i>
               </button>
               <h1 className="font-serif mt-2">{firstBlockVsible ? "Add New Shipping Address":"Add Esisting Address"  }</h1>
           </div>
