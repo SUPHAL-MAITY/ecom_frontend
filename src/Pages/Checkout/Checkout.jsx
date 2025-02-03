@@ -9,26 +9,50 @@ import "./Checkout.css";
 
 const Checkout = () => {
   const cart = useSelector((state) => state.cart);
-  const [formData, setFormData] = useState({
-    address: "",
-    locality: "",
-    landmark: "",
-    country: "",
-  });
-  const [firstBlockVsible,setFirstBlockVsible] = useState(false);
+ 
+
+  const [address1, setAddress1] = useState("");
+  const [address2, setAddress2] = useState("");
+
+
+
+
+  const [firstBlockVsible, setFirstBlockVsible] = useState(false);
 
   const apiUrl = "http://localhost:3000";
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+  const handleInputChange1 = (e) => {
+    setAddress1(e.target.value);
   };
 
 
+  const handleInputChange2 = (e) => {
+    setAddress2(e.target.value);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
+
+    ///validation
+    if (!address1 && !address2) {
+      alert("please provide at least one address");
+      return;
+    }
+    if(address1 && address2){
+      alert("please provide only one address")
+      return;
+    }
+    ///saving address1 and address2 to the local storage  that will be obtained in success page
+
+    if(address2){
+      localStorage.setItem("address2", address2);
+    }
+    if(address1){
+      localStorage.setItem("address1", address1);
+    }
+
+    
+    console.log("Form submitted");
 
     // Load Stripe
     const stripe = await loadStripe(
@@ -40,9 +64,7 @@ const Checkout = () => {
       return;
     }
 
-
-
-    console.log("Cart:", cart);
+    
 
     // sedning product details from the cart to
 
@@ -76,32 +98,22 @@ const Checkout = () => {
     }
   };
 
-  
-
-
-  const handleBlockVisiblity=()=>{
-    setFirstBlockVsible(prev=>!prev);
-  }
+  const handleBlockVisiblity = () => {
+    setFirstBlockVsible((prev) => !prev);
+  };
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4 font-serif">
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-        <h1 className="text-2xl font-bold  mb-6">
-          Billing Information
-        </h1>
-        
-       
-          <form onSubmit={handleSubmit}>
+        <h1 className="text-2xl font-bold  mb-6">Billing Information</h1>
 
-          <div className={firstBlockVsible ? "block":"hidden"}>
-          <Select
-              label="address"
-             
-              id="address"
-              name="address"
-              required
-              value={formData.address}
-              onChange={handleInputChange}
+        <form onSubmit={handleSubmit}>
+          <div className={firstBlockVsible ? "block" : "hidden"}>
+            <Select
+              label="address1"
+              id="address1"
+              value={address1}
+              onChange={handleInputChange1}
               options={[
                 { value: "", label: "Select a Address" },
                 { value: "us", label: "United States" },
@@ -110,129 +122,43 @@ const Checkout = () => {
                 { value: "au", label: "Australia" },
               ]}
             />
-
-            <Select
-              label="locality"
-              id="locality"
-              name="locality"
-              required
-              value={formData.locality}
-              onChange={handleInputChange}
-              options={[
-                { value: "", label: "Select a Address" },
-                { value: "us", label: "United States" },
-                { value: "ca", label: "Canada" },
-                { value: "uk", label: "United Kingdom" },
-                { value: "au", label: "Australia" },
-              ]}
-            />
-
-            <Select
-              label="landmark"
-              id="landmark"
-              name="landmark"
-              required
-              value={formData.landmark}
-              onChange={handleInputChange}
-              options={[
-                { value: "", label: "Select a Address" },
-                { value: "us", label: "United States" },
-                { value: "ca", label: "Canada" },
-                { value: "uk", label: "United Kingdom" },
-                { value: "au", label: "Australia" },
-              ]}
-            />
-
-            <Select
-              label="Country"
-              id="country"
-              name="country"
-              required
-              value={formData.country}
-              onChange={handleInputChange}
-              options={[
-                { value: "", label: "Select a country" },
-                { value: "us", label: "United States" },
-                { value: "ca", label: "Canada" },
-                { value: "uk", label: "United Kingdom" },
-                { value: "au", label: "Australia" },
-              ]}
-            />
-
-
           </div>
-           
-          <div className={firstBlockVsible ? "hidden":"block"}>
-          <Input
+
+          <div className={firstBlockVsible ? "hidden" : "block"}>
+            <Input
               label="address"
-              id="address"
-              name="address"
+              id="address2"
               type="text"
-              required
-              value={formData.address}
-              onChange={handleInputChange}
-              placeholder="John Doe"
+              value={address2}
+              onChange={handleInputChange2}
+              placeholder="123 Main street"
             />
-
-            <Input
-              label="locality"
-              id="locality"
-              name="locality"
-              type="text"
-              required
-              value={formData.locality}
-              onChange={handleInputChange}
-              placeholder="John Doe"
-            />
-
-            <Input
-              label="landmark"
-              id="landmark"
-              name="landmark"
-              type="text"
-              required
-              value={formData.landmark}
-              onChange={handleInputChange}
-              placeholder="John Doe"
-            />
-
-            <Input
-              label="country"
-              id="country"
-              name="country"
-              type="text"
-              required
-              value={formData.country}
-              onChange={handleInputChange}
-              placeholder="John Doe"
-            />
-
-
           </div>
-           
 
           <div className="flex flex-col justify-center items-center mb-4">
-              <button className="add_address_btn m-1 p-4" onClick={handleBlockVisiblity}>
-                <i className="fa-solid fa-plus"></i>
-              </button>
-              <h1 className="font-serif mt-2">{firstBlockVsible ? "Add New Shipping Address":"Add Esisting Address"  }</h1>
+            <button
+              type="button"
+              className="add_address_btn m-1 p-4"
+              onClick={handleBlockVisiblity}
+            >
+              <i className="fa-solid fa-plus"></i>
+            </button>
+            <h1 className="font-serif mt-2">
+              {firstBlockVsible
+                ? "Add New Shipping Address"
+                : "Add Esisting Address"}
+            </h1>
           </div>
 
-            <button
-              type="submit"
-              
-              className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 mt-4"
-            >
-              Pay $99.99
-            </button>
-          </form>
-
-        
-        </div>
-
-
+          <button
+            type="submit"
+            className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 mt-4"
+          >
+          Pay  {cart.totalAmount}
+          </button>
+        </form>
+      </div>
     </div>
-   
   );
 };
 

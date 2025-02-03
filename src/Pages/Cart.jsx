@@ -1,14 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { addItem,removeItem } from "../features/Cart/cart.js";
 import { useNavigate } from "react-router";
+
+
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   const navigate=useNavigate()
 
+  
 
+  useEffect(()=>{
+    ///clearing the address1 and address2
+    localStorage.removeItem("address2")
+    localStorage.removeItem("address1")
+
+  },[])
 
   console.log(cart)
 
@@ -23,7 +32,7 @@ const Cart = () => {
     }
   
 
-    
+
 
   return (
     <>

@@ -10,22 +10,36 @@ import Confetti from 'react-confetti'
 
 const apiUrl=import.meta.env.VITE_API_BASE_URL;
 
+const address2=localStorage.getItem("address2")
+const address1=localStorage.getItem("address1")
 
+
+console.log("address2 from local storage",address2)
+console.log("address1 from local storage",address1)
 
 const PaymentSuccess = () => {
 
     const { width, height } = useWindowSize()
     const [searchParams] = useSearchParams();
     const sessionId = searchParams.get("session_id");
-    const cart=useSelector((state)=>state.cart)
+
+
+   const cart=useSelector((state)=>state.cart)
 
    const apiUrl=import.meta.env.VITE_API_BASE_URL
    console.log(sessionId)
 
   useEffect(() => {
+    if(address2){
+      console.log("address 2 will be added")
+      addAddress()
+    }
     if (sessionId) {
       verifyPayment(sessionId);
     }
+
+  
+
   }, [sessionId]);
 
 
@@ -52,12 +66,12 @@ const PaymentSuccess = () => {
         // Save order details in your database
         const orderResponse= await axios.post(`${apiUrl}/create-order`, {
           
-            userId: "6798ddda9a17dc23d75fa18a",
-            status: "shipped",
-            totalPrice: 100.50,
-            shippingAddress: "Abc ldjl",
+            userId: "6798ddda9a17dc23d75fa18a", ///will be added in controller from middleware
+            status: "pending",
+            totalPrice: cart.totalAmount,
+            shippingAddress: address2 || address1,  
             paymentMethod: "card",
-            paymentIntentId: "pi_ABC12345"
+            paymentIntentId: data.payment_intent,
           
           
         });
@@ -68,7 +82,7 @@ const PaymentSuccess = () => {
 
           const oderItemResponse=await axios.post(`${apiUrl}/create-order-items`,{
             
-              orderId: orderResponse.data.data._id,
+              orderId: orderResponse?.data.data?._id,
               productId: "679c7c17a21b1a25bd7e9f37",
               quantity: 2,
               price: 49.99,
@@ -85,6 +99,16 @@ const PaymentSuccess = () => {
       console.error("❌ Error verifying payment:", error.message);
     }
   };
+
+
+  const addAddress=async()=>{
+    const {data}=await axios.post(`${apiUrl}/add-address`,{
+      id:"6798ddda9a17dc23d75fa18a",   //deleter this id after backeend is done 
+      address:address2,
+    })
+
+    console.log("address added successfuly",data)
+  }
     
 
  
