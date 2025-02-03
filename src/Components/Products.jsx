@@ -23,7 +23,7 @@ const Products=forwardRef(({priceMin,priceMax,gender},ref)=>{
     try {
       setLoading(true);
       const { data } = await axios.get(
-        `http://localhost:3000/api/v1/get-all-products?page=${page}`
+        `http://localhost:3000/api/v1/get-all-products?page=${page}`,{withCredentials:true}
       );
       setProducts(data?.data?.products);
       setTotalPages(data?.data?.totalPages)
