@@ -78,7 +78,7 @@ export default function AddCategory() {
           <SidebarForAdmin />
         </div>
 
-        <div className="main-content2  flex items-center justify-center min-h-screen   bg-[url(fossil.png)] invert-20  bg-cover bg-center  ">
+        <div className="main-content2  flex items-center justify-center min-h-screen bg-black    invert-20  bg-cover bg-center  ">
         
          
           <ToastContainer />
