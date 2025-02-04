@@ -52,6 +52,7 @@ const Products=forwardRef(({priceMin,priceMax,gender},ref)=>{
 
 
   const handleAddtoCart = (product) => {
+
     console.log(product)
     dispatch(
       addItem({
@@ -121,6 +122,8 @@ const Products=forwardRef(({priceMin,priceMax,gender},ref)=>{
     
     setPage(prev=>prev+1)
   }
+
+  
 
  const decreasePage=()=>{
   if(page==1) return;
@@ -231,6 +234,7 @@ const Products=forwardRef(({priceMin,priceMax,gender},ref)=>{
                     </h5>
                   </a>
                   <div className="flex items-center mt-2.5 mb-5">
+
                     {/* Render stars */}
                     {Array.from({ length: totalStars }, (_, index) => {
                       const coloredStars = Math.round(product.rating);

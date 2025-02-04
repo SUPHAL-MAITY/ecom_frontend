@@ -1,12 +1,26 @@
 import React, { useEffect,useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { addItem } from "../features/Cart/cart.js";
+import { ToastContainer, toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 
 const ProductDetails = () => {
+
     const [product,setProduct]=useState({})
     const[selectedImage,setSelectedImage]=useState(0)
     const {id}=useParams();
+    const dispatch=useDispatch()
+    const navigate=useNavigate()
+
+
+
+ let rand= Math.floor(Math.random()*4)  
+ console.log("rand",rand)
+
+
 
  const fetchSingleProduct=async()=>{
     try {
@@ -21,6 +35,10 @@ const ProductDetails = () => {
     }
     
  }
+
+
+
+
  useEffect(()=>{
     fetchSingleProduct()
 
@@ -28,10 +46,35 @@ const ProductDetails = () => {
 
 
 
+ const handleAddtoCart=(product)=>{
+  
+  console.log(product)
+
+  if(!product) reutrn;
+
+ 
+  console.log("rand",rand)
+
+  dispatch(addItem({
+        id: product._id,
+        title: product.title,
+        price: product.discountPrice,
+        image: product.images[0],
+  }))
+
+   toast("Item added to cart!");
+
+ }
+
+
+
+
   return (
     <>
+
+      <ToastContainer />
     
-      <section className="py-8 bg-white md:py-16 dark:bg-gray-900 antialiased">
+      <section className="py-8 font-serif bg-white md:py-16 dark:bg-gray-900 antialiased">
         
 
                 <div className="max-w-screen-xl px-4 mx-auto 2xl:px-0">
@@ -49,14 +92,14 @@ const ProductDetails = () => {
               
       
                   <div className="mt-6 sm:mt-8 lg:mt-0">
-                    <h1 className="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">
+                    <h1 className="text-xl font-medium text-gray-900 sm:text-2xl dark:text-white">
                       {product.title}
                     </h1>
                     <div className="mt-4 sm:items-center sm:gap-4 sm:flex">
-                      <span className="text-2xl line-through font-bold text-gray-900 sm:text-3xl dark:text-white">
+                      <span className="text-2xl line-through font-medium text-gray-900 sm:text-3xl dark:text-white">
                       ₹{product.price}
                       </span>
-                      <p className="text-2xl font-bold text-gray-900 sm:text-3xl dark:text-white">
+                      <p className="text-2xl font-medium text-gray-900 sm:text-3xl dark:text-white">
                       ₹{product.discountPrice}
                       </p>
 
@@ -132,39 +175,19 @@ const ProductDetails = () => {
                         </a>
                       </div>
                     </div>
+
+
+
       
-                    <div className="mt-6 sm:gap-4 sm:items-center sm:flex sm:mt-8">
-                      <a
-                        href="#"
-                        title=""
-                        className="flex items-center justify-center py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
-                        role="button"
-                      >
-                        <svg
-                          className="w-5 h-5 -ms-2 me-2"
-                          aria-hidden="true"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="24"
-                          height="24"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            stroke="currentColor"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"
-                          />
-                        </svg>
-                        Add to favorites
-                      </a>
+                    <div className="mt-6 sm:gap-4 sm:items-center   sm:flex sm:mt-8">
+                      
       
                       <a
                         href="#"
                         title=""
-                        className="text-white mt-4 sm:mt-0 bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800 flex items-center justify-center"
+                        className="text-white mt-4 sm:mt-0 bg-blue-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800 flex items-center justify-center"
                         role="button"
+                        onClick={()=>handleAddtoCart(product)}
                       >
                         <svg
                           className="w-5 h-5 -ms-2 me-2"
@@ -185,7 +208,23 @@ const ProductDetails = () => {
                         </svg>
                         Add to cart
                       </a>
+
+
+                      <a
+                        href="#"
+                        title=""
+                        className="text-white mt-4 sm:mt-0 bg-purple-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800 flex items-center justify-center"
+                        role="button"
+                        onClick={()=>navigate(-1)}
+                      >
+                       
+                       Back
+                      </a>
+
+
                     </div>
+
+
       
                     <hr className="my-6 md:my-8 border-gray-200 dark:border-gray-800" />
       
