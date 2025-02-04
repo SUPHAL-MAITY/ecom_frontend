@@ -3,6 +3,7 @@ import { Outlet } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
 import { toggleSidebar, toggleDropdown } from "../features/Toggle/toggle.js";
+import { useLocation } from 'react-router-dom';
 
 
 
@@ -13,6 +14,10 @@ import { toggleSidebar, toggleDropdown } from "../features/Toggle/toggle.js";
 
   const cart = useSelector((state) => state.cart);
   const isProfileDropdownOpen=useSelector((state)=>state.toggle.isProfileDropdownOpen)
+  const location=useLocation()
+
+
+  console.log(location.pathname)
   
   
 
@@ -40,7 +45,7 @@ import { toggleSidebar, toggleDropdown } from "../features/Toggle/toggle.js";
   return (
     <>
      
-     <nav className="fixed top-0 z-50 w-full h-16 text-white bg-black border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700 font-serif">
+     <nav className="fixed top-0 z-50 w-full h-16 text-white bg-gray-700 border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700 font-serif">
           <div className="px-3 py-3 lg:px-5 lg:pl-3">
             <div className="flex items-center justify-between">
               <div className="flex items-center justify-start ">
@@ -69,11 +74,18 @@ import { toggleSidebar, toggleDropdown } from "../features/Toggle/toggle.js";
               </div>
 
               <div className="w-1/2 sm:w-1/3">
-            <input
-              type="text"
-              placeholder="Search..."
-              className="p-2 rounded w-full bg-gray-700 text-white focus:outline-none focus:ring-2 "
-            />
+
+              {location.pathname=="/watches" ?  (
+                   <input
+                   type="text"
+                   placeholder="Search..."
+                   className="p-2 rounded w-full bg-gray-700 text-white focus:outline-none focus:ring-2 "
+                 />
+
+              ) : (
+                ""
+              )}
+         
           </div>
 
 
