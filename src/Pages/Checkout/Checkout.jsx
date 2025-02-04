@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { Select } from "../../Components/FormComponents/Select";
 import { Input } from "../../Components/FormComponents/Input";
 
@@ -10,16 +10,36 @@ import "./Checkout.css";
 const Checkout = () => {
   const cart = useSelector((state) => state.cart);
  
-
+  const [addresses,setAddresses]=useState([])
   const [address1, setAddress1] = useState("");
   const [address2, setAddress2] = useState("");
+ const [firstBlockVsible, setFirstBlockVsible] = useState(false);
+
+  const apiUrl = import.meta.env.VITE_API_BASE_URL
 
 
 
 
-  const [firstBlockVsible, setFirstBlockVsible] = useState(false);
+ const fetchAddressOfUser=async()=>{
+  try {
+    const {data}=await axios.get(`${apiUrl}/get-user-address`,{withCredentials:true})
+    console.log("data",data?.data)
+    setAddresses(data?.data)
+    
+  } catch (error) {
+    
+  }
+ }
 
-  const apiUrl = "http://localhost:3000";
+ useEffect(()=>{
+  fetchAddressOfUser()
+ },[])
+
+
+
+
+
+
 
   const handleInputChange1 = (e) => {
     setAddress1(e.target.value);
@@ -114,13 +134,22 @@ const Checkout = () => {
               id="address1"
               value={address1}
               onChange={handleInputChange1}
+              // options={[
+              //   { value: "", label: "Select a Address" },
+              //   { value: "us", label: "United States" },
+              //   { value: "ca", label: "Canada" },
+              //   { value: "uk", label: "United Kingdom" },
+              //   { value: "au", label: "Australia" },
+              // ]}
+
               options={[
-                { value: "", label: "Select a Address" },
-                { value: "us", label: "United States" },
-                { value: "ca", label: "Canada" },
-                { value: "uk", label: "United Kingdom" },
-                { value: "au", label: "Australia" },
-              ]}
+                {value:"",label:"Select a Address"},
+                ...addresses.map(c=>(
+                {value:c,label:c}
+              ))
+
+              ]
+                }
             />
           </div>
 
