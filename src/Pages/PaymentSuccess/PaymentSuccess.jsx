@@ -64,9 +64,11 @@ const PaymentSuccess = () => {
   
 
         // Save order details in your database
+
+
         const orderResponse= await axios.post(`${apiUrl}/create-order`, {
           
-            userId: "6798ddda9a17dc23d75fa18a", ///will be added in controller from middleware
+          
             status: "pending",
             totalPrice: cart.totalAmount,
             shippingAddress: address2 || address1,  
@@ -74,23 +76,39 @@ const PaymentSuccess = () => {
             paymentIntentId: data.payment_intent,
           
           
-        });
+        },
+        {
+          withCredentials:true,
+        }
+      
+      );
+
         if(orderResponse){
           alert("order saved sucessfully")
 
           console.log("orderresponse",orderResponse)
 
+        }
+
+
+        cart.cartItems.forEach(async(item)=>{
+
           const oderItemResponse=await axios.post(`${apiUrl}/create-order-items`,{
             
-              orderId: orderResponse?.data.data?._id,
-              productId: "679c7c17a21b1a25bd7e9f37",
-              quantity: 2,
-              price: 49.99,
-              totalPrice: 99.98
-            
-          })
+            orderId: orderResponse?.data.data?._id,
+            productId: item.id,
+            quantity: item.quantity,
+            price: item.price,
+            totalPrice:  item.totalPrice,
+          
+        })
 
-        }
+          
+        })
+
+      
+
+        
        
 
         console.log("✅ Order saved successfully!");
@@ -102,10 +120,15 @@ const PaymentSuccess = () => {
 
 
   const addAddress=async()=>{
-    const {data}=await axios.post(`${apiUrl}/add-address`,{
-      id:"6798ddda9a17dc23d75fa18a",   //deleter this id after backeend is done 
+    const {data}=await axios.post(`${apiUrl}/add-address`,{   
       address:address2,
-    })
+      
+    },
+    {
+      withCredentials: true, 
+  }
+   
+  )
 
     console.log("address added successfuly",data)
   }

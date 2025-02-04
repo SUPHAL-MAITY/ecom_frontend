@@ -57,7 +57,7 @@ const Products=forwardRef(({priceMin,priceMax,gender},ref)=>{
       addItem({
         id: product._id,
         title: product.title,
-        price: product.price,
+        price: product.discountPrice,
         image: product.images[0],
       })
     );
