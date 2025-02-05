@@ -64,7 +64,7 @@ useEffect(()=>{
 
 
 
-
+//////have to send the query to product page to filter product 
 
 
 
