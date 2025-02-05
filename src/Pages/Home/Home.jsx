@@ -1,8 +1,11 @@
 import React, { useEffect } from "react";
 import { Link } from 'react-router-dom';
 import "./Home.css";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+
+  const navigate=useNavigate()
 
 
 useEffect(()=>{
@@ -104,7 +107,7 @@ useEffect(()=>{
               <h5>Collection</h5>
             </div>
 
-            <div className="btn">
+            <div className="btn" onClick={()=>navigate("/watches?category=Men")}>
               <a href="">Shop Now</a>
             </div>
           </div>
@@ -115,12 +118,12 @@ useEffect(()=>{
               <div className="img-overlay"></div>
             </div>
 
-            <div className="text">
+            <div className="text"  >
               <h1>Women</h1>
               <h5>Collection</h5>
             </div>
 
-            <div className="btn">
+            <div className="btn" onClick={()=>navigate("/watches?category=Woman")} >
               <a href="">Shop Now</a>
             </div>
           </div>
