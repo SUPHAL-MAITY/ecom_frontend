@@ -158,6 +158,8 @@ useEffect(()=>{
 
 
   return (
+// need to adjust the prices size in laptop
+
     <>
       <ToastContainer />
 
