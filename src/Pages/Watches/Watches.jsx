@@ -3,6 +3,7 @@ import "./watches.css";
 import Products from "../../Components/Products";
 import { useSelector, useDispatch } from "react-redux";
 import { useRef } from "react";
+import { useSearchParams } from "react-router-dom";
 
 
 
@@ -15,17 +16,38 @@ const Watches = () => {
   const [priceMin,setPriceMin]=useState(null)
   const [priceMax,setPriceMax]=useState(null)
   const [selectedGender,setSelectedGender]=useState([])
+  const [searchParams]=useSearchParams()
 
   const childRef=useRef(null)
   
    
-   const cart = useSelector((state) => state.cart);
+  const cart = useSelector((state) => state.cart);
    
 
 
-   const isSidebarOpen = useSelector((state) => state.toggle.isSidebarOpen);
   
 
+   const isSidebarOpen = useSelector((state) => state.toggle.isSidebarOpen);
+
+
+  // get the category from the url 
+   const category=searchParams.get("category")
+   console.log("category obtained from url",category)
+  
+
+
+
+ /// if category is present in url , set it in gender
+   useEffect(()=>{
+
+    if(category){
+      setSelectedGender([category])
+    }
+    
+    
+   
+    
+    },[])
 
   
 const handleCheckboxChange=(e)=>{
@@ -40,6 +62,9 @@ const handleCheckboxChange=(e)=>{
   setPriceMin(Min)
 
 }
+
+
+
 
 ////handling checkbox
 const handleChange=(e)=>{
@@ -115,6 +140,8 @@ const handleFetch=async()=>{
                        value={c}
                        className="mr-2"
                        onChange={handleChange}
+                       checked={selectedGender.includes(c)}
+                      
                      />
                      {c}
                    </label>
@@ -156,9 +183,12 @@ const handleFetch=async()=>{
                     </label>
                   ))}
                 </div>
+
                 <button  onClick={handleFetch}  className="mt-4 w-full py-2 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600">
                   Apply
                 </button>
+
+
               </div>
             </div>
 
@@ -171,8 +201,10 @@ const handleFetch=async()=>{
           {/* main content here */}
 
           <div className="p-4 border-2 border-gray-200  rounded-lg dark:border-gray-700 sm:mt-6">
-            <Products  priceMin={priceMin} priceMax={priceMax} gender={selectedGender} ref={childRef} />
+            <Products category={category}  priceMin={priceMin} priceMax={priceMax} gender={selectedGender} ref={childRef} />
           </div>
+
+
         </div>
       </div>
     </>

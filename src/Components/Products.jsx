@@ -8,7 +8,7 @@ import { ToastContainer, toast } from "react-toastify";
 
 
 
-const Products=forwardRef(({priceMin,priceMax,gender},ref)=>{
+const Products=forwardRef(({priceMin,priceMax,gender,category},ref)=>{
 
   const [page,setPage]=useState(1)
   const [products, setProducts] = useState([]);
@@ -18,7 +18,12 @@ const Products=forwardRef(({priceMin,priceMax,gender},ref)=>{
   const dispatch = useDispatch();
   const totalStars = 5;
  
+
+  console.log("gender",gender)
   
+
+  ///data fetching for all products with pagination
+
   const fetchData = async () => {
     try {
       setLoading(true);
@@ -37,47 +42,7 @@ const Products=forwardRef(({priceMin,priceMax,gender},ref)=>{
   };
 
 
-  useEffect(() => {
-    if(priceMin==null && priceMax==null && gender.length==0){
-      fetchData();
-      
-    }
-  
-  
-}, [page]);
-
-
-
-
-
-
-  const handleAddtoCart = (product) => {
-
-    console.log(product)
-    dispatch(
-      addItem({
-        id: product._id,
-        title: product.title,
-        price: product.discountPrice,
-        image: product.images[0],
-      })
-    );
-    toast("Item added to cart!");
-  };
-
-
-
-
-
-
-  useImperativeHandle(ref,()=>(
-    {
-      fetchFilteredData,
-    }
-  ))
-
-
-
+  //// fetching filtered Data with priceMin, priceMax, gender
 
   const fetchFilteredData=async()=>{
     console.log("data is fetched ")
@@ -99,21 +64,82 @@ const Products=forwardRef(({priceMin,priceMax,gender},ref)=>{
 
   }
 
-  
 
+  ///// fetching product for Men or Woman obtained from url
 
-  if(priceMin>=0 && priceMax){
-    console.log(priceMin)
-    console.log(priceMax)
-   
+  const fetchCategoryProducts=async()=>{
+    console.log("category product  is  fetching ............. ")
+    try {
+      setLoading(true);
+      const { data } = await axios.get(      
+         `http://localhost:3000/api/v1/filter?gender=${category}`
+      );
+      setFilterProducts(data.data.products)
+      console.log("data from fetch  category products",data)
+      setLoading(false)
+     
+
+      
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
 
   }
 
 
-
-
-
+  useEffect(() => {
+    if(priceMin==null && priceMax==null && gender.length==0){
+      fetchData();
+      
+    }
   
+}, [page]);
+
+
+
+useEffect(()=>{
+  console.log(" useEffect render")
+  if(category){
+    fetchCategoryProducts()
+    console.log("data has been fetched by useEffect")
+  }
+
+},[])
+
+
+
+
+  const handleAddtoCart = (product) => {
+
+    console.log(product)
+    dispatch(
+      addItem({
+        id: product._id,
+        title: product.title,
+        price: product.discountPrice,
+        image: product.images[0],
+      })
+    );
+    toast("Item added to cart!");
+  };
+
+
+ 
+
+
+  useImperativeHandle(ref,()=>(
+    {
+      fetchFilteredData,
+    }
+  ))
+
+
+
+
+
+
+ 
 
 
 
