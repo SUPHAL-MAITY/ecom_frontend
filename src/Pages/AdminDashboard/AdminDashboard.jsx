@@ -179,7 +179,7 @@ const AdminDashboard = () => {
 
 
 
-                           <div class=" text-base font-medium dark:text-white">Yet To be achieved</div>
+                           <div className=" text-base font-medium dark:text-white">Yet To be achieved</div>
                            <div className="w-full bg-gray-200 rounded-full h-2.5 mb-4 mt-4  dark:bg-gray-700">
                                 
                                 <div className="bg-blue-600 h-2.5 rounded-full dark:bg-blue-500" style={{width: "45%"}}></div>
@@ -213,12 +213,12 @@ const AdminDashboard = () => {
                            <div className="hidden sm:flex justify-center">
                                
 
-                                <div class="profile-container">
-                                  <img src="https://via.placeholder.com/50" alt="Profile 1" class="profile"/>
-                                  <img src="https://via.placeholder.com/50" alt="Profile 2" class="profile"/>
-                                  <img src="https://via.placeholder.com/50" alt="Profile 3" class="profile"/>
-                                  <img src="https://via.placeholder.com/50" alt="Profile 4" class="profile"/>
-                                  <img src="https://via.placeholder.com/50" alt="Profile 5" class="profile"/>
+                                <div className="profile-container">
+                                  <img src="https://via.placeholder.com/50" alt="Profile 1" className="profile"/>
+                                  <img src="https://via.placeholder.com/50" alt="Profile 2" className="profile"/>
+                                  <img src="https://via.placeholder.com/50" alt="Profile 3" className="profile"/>
+                                  <img src="https://via.placeholder.com/50" alt="Profile 4" className="profile"/>
+                                  <img src="https://via.placeholder.com/50" alt="Profile 5" className="profile"/>
                                 </div>
 
                            </div>
