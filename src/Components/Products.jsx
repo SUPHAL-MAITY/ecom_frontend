@@ -51,8 +51,13 @@ const Products=forwardRef(({priceMin,priceMax,gender,category},ref)=>{
       const { data } = await axios.get(      
          `http://localhost:3000/api/v1/filter?priceMax=${priceMax}&priceMin=${priceMin}&${gender.map(c=>`gender=${c}`).join("&")}`
       );
+
+      if(data.data.products.length===0){
+        toast.error("No products found for this category")
+
+      }
       setFilterProducts(data.data.products)
-      console.log("data",data)
+      console.log("filtered data",data)
       setLoading(false)
      
 
@@ -158,8 +163,6 @@ useEffect(()=>{
 
 
   return (
-// need to adjust the prices size in laptop
-
     <>
       <ToastContainer />
 
