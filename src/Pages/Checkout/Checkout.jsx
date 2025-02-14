@@ -95,7 +95,7 @@ const Checkout = () => {
     try {
       // Send request to your backend to create the checkout session
       const response = await axios.post(
-        `${apiUrl}/api/v1/create-checkout-session`,
+        `${apiUrl}/create-checkout-session`,
         body,
         {
           headers: {
