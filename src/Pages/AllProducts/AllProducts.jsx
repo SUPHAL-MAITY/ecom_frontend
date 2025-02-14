@@ -3,30 +3,66 @@ import SidebarForAdmin from '../../Components/SidebarForAdmin/SidebarForAdmin'
 import axios from "axios"
 
 
+
 const AllProducts = () => {
 
      const [searchQuery, setSearchQuery] = useState('')
 
      const [products,setProducts]=useState([])
+
+     const [page,setPage]=useState(1)
+     const [loading, setLoading] = useState(false);
+     const [totalPages,setTotalPages]=useState()
+
     
-      const orders = [
-        { id: '#XGY-346', created: '7 min ago', customer: 'Albert Flores', total: '$630.00', profit: '$86.70', status: 'Pending' },
-        { id: '#YHD-047', created: '52 min ago', customer: 'Jenny Wilson', total: '$25.00', profit: '$4.20', status: 'Confirmed' },
-        { id: '#SRR-678', created: '1 hour ago', customer: 'Robert Fox', total: '$1,630.00', profit: '$203.90', status: 'Pending' },
-        { id: '#PXF-534', created: '3 hour ago', customer: 'Cody Fisher', total: '$119.00', profit: '$12.00', status: 'Shipped' },
-        { id: '#XGD-249', created: '2 day ago', customer: 'Arlene McCoy', total: '$660.00', profit: '$52.26', status: 'Shipped' },
-        { id: '#SKP-035', created: '2 day ago', customer: 'Eleanor Pena', total: '$290.00', profit: '$29.00', status: 'Rejected' },
-        { id: '#SKP-567', created: '7 min ago', customer: 'Dan Wilson', total: '$590.00', profit: '$50.00', status: 'Shipped' },
-      ]
+
+     useEffect(() => {    
+         fetchData();      
+     
+   }, [page]);
+   
+
+///data fetching for all products with pagination
+
+  const fetchData = async () => {
+    try {
+      setLoading(true);
+      const { data } = await axios.get(
+        `http://localhost:3000/api/v1/get-all-admin-products?page=${page}`,{withCredentials:true}
+      );
+      setProducts(data?.data?.products);
+      setTotalPages(data?.data?.totalPages)
+      setLoading(false);
+
+      console.log("all products data",data);
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  };
 
    
+//for pagination purpose
+  const  increasePage=()=>{
+    if(page==totalPages) return;
+    
+    setPage(prev=>prev+1)
+  }
+
+  
+
+ const decreasePage=()=>{
+  if(page==1) return;
+  setPage(prev=>prev-1)
+ }
+
 
 
   return (
     <>   
 
   
-    <div className="flex min-h-screen items-stretch">
+    <div className="flex min-h-screen items-stretch font-serif">
      <div className="h-full">
          <SidebarForAdmin/>
  
@@ -35,7 +71,7 @@ const AllProducts = () => {
  
      <div className="flex-1 overflow-x-auto">
  
-     <div className="p-6 ">
+     <div className="p-6   ">
              
              <div className="mb-8">
              <h1 className="text-xl font-semibold text-gray-900">All Products</h1>
@@ -95,35 +131,32 @@ const AllProducts = () => {
              <table className="w-full">
                  <thead>
                  <tr className="border-b bg-gray-200">
-                     <th className="text-left py-4 px-4 text-sm font-medium text-gray-500">ORDER ID</th>
-                     <th className="text-left py-4 px-4 text-sm font-medium text-gray-500">CREATED</th>
-                     <th className="text-left py-4 px-4 text-sm font-medium text-gray-500">CUSTOMER</th>
-                     <th className="text-left py-4 px-4 text-sm font-medium text-gray-500">TOTAL</th>
-                     <th className="text-left py-4 px-4 text-sm font-medium text-gray-500">PROFIT</th>
-                     <th className="text-left py-4 px-4 text-sm font-medium text-gray-500">STATUS</th>
+                     <th className="text-left py-4 px-4 text-sm font-medium text-gray-500">ID</th>
+                     <th className="text-left py-4 px-4 text-sm font-medium text-gray-500">Title</th>
+                     <th className="text-left py-4 px-4 text-sm font-medium text-gray-500">Price</th>
+                     <th className="text-left py-4 px-4 text-sm font-medium text-gray-500">Discount Price</th>
+                     <th className="text-left py-4 px-4 text-sm font-medium text-gray-500">Stock</th>
+                     <th className="text-left py-4 px-4 text-sm font-medium text-gray-500">Category</th>
                      <th className="w-10"></th>
                  </tr>
                  </thead>
                  <tbody>
-                 {orders.map((order,i) => (
-                     <tr key={order.id} className= {`border-b ${ i%2 !==0 ? "bg-gray-50" : "bg-white-100" } `}>
-                     <td className="py-4 px-4 text-sm font-medium text-gray-900">{order.id}</td>
-                     <td className="py-4 px-4 text-sm text-gray-500">{order.created}</td>
-                     <td className="py-4 px-4 text-sm text-gray-900">{order.customer}</td>
-                     <td className="py-4 px-4 text-sm text-gray-900">{order.total}</td>
-                     <td className="py-4 px-4 text-sm text-gray-900">{order.profit}</td>
-                     <td className="py-4 px-4">
-                         <span
-                         className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
-                             ${order.status === 'Pending' ? 'bg-yellow-100 text-yellow-800' : ''}
-                             ${order.status === 'Confirmed' ? 'bg-blue-100 text-blue-800' : ''}
-                             ${order.status === 'Shipped' ? 'bg-green-100 text-green-800' : ''}
-                             ${order.status === 'Rejected' ? 'bg-red-100 text-red-800' : ''}
-                         `}
-                         >
-                         {order.status}
-                         </span>
-                     </td>
+
+                 {products.map((product,i) => (
+                    
+                    <tr key={product._id} className= {`border-b ${ i%2 !==0 ? "bg-gray-50" : "bg-white-100" }  `}>
+                     <td className="py-4 px-4 text-sm font-medium text-gray-900">{product._id}</td>
+                     <td className="py-4 px-4 text-sm text-gray-500">{product.title.length >30 ? product.title.slice(0,30)+"..": product.title}</td>
+                     <td className="py-4 px-4 text-sm text-gray-900">{product.price}</td>
+                     <td className="py-4 px-4 text-sm text-gray-900">{product.discountPrice}</td>
+                     <td className="py-4 px-4 text-sm text-gray-900">{product.stock}</td>
+                     <td className={`py-4 px-4 text-sm text-gray-900 rounded-full inline-flex items-center justify-center text-xs font-medium
+                                  ${product.gender==="Woman"?'bg-pink-300 text-black w-[72px]' :"" }
+                                  ${product.gender==="Men"?"bg-blue-400 text-white w-[72px]":""}
+                                  ${product.gender==="Unisex"?"bg-gray-500 text-white w-[72px]":""}
+                     `}
+                     
+                     >{product.gender}</td>
                      <td className="py-4 px-4">
                          <button className="text-gray-400 hover:text-gray-500">
                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -132,22 +165,36 @@ const AllProducts = () => {
                          </button>
                      </td>
                      </tr>
+
+
+                    
+                   
                  ))}
+
+
+
                  </tbody>
              </table>
              </div>
      </div>
+
+
+   
+
+     
+         
  
  
  
      </div>
     
- 
+   
  
  
  
     </div>
- 
+
+  
     
  
  
