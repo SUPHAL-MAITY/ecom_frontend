@@ -79,7 +79,7 @@ const decreasePage=()=>{
 
   
     <div className="flex min-h-screen items-stretch font-serif">
-     <div className="h-full">
+     <div className=" sticky top-0 h-full">
          <SidebarForAdmin/>
  
      </div>
