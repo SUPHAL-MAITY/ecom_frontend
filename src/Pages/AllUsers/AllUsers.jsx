@@ -13,16 +13,7 @@ const AllUsers = () => {
 
     const [users,setUsers]=useState([])
 
-    const orders = [
-        { id: '#XGY-346', created: '7 min ago', customer: 'Albert Flores', total: '$630.00', profit: '$86.70', status: 'Pending' },
-        { id: '#YHD-047', created: '52 min ago', customer: 'Jenny Wilson', total: '$25.00', profit: '$4.20', status: 'Confirmed' },
-        { id: '#SRR-678', created: '1 hour ago', customer: 'Robert Fox', total: '$1,630.00', profit: '$203.90', status: 'Pending' },
-        { id: '#PXF-534', created: '3 hour ago', customer: 'Cody Fisher', total: '$119.00', profit: '$12.00', status: 'Shipped' },
-        { id: '#XGD-249', created: '2 day ago', customer: 'Arlene McCoy', total: '$660.00', profit: '$52.26', status: 'Shipped' },
-        { id: '#SKP-035', created: '2 day ago', customer: 'Eleanor Pena', total: '$290.00', profit: '$29.00', status: 'Rejected' },
-        { id: '#SKP-567', created: '7 min ago', customer: 'Dan Wilson', total: '$590.00', profit: '$50.00', status: 'Shipped' },
-      ]
-
+  
 
 
       useEffect(() => {    
@@ -191,14 +182,14 @@ const decreasePage=()=>{
  
  
     <div className="flex justify-center  space-x-1 mt-2">
-      <button disabled={page==1} onClick={decreasePage} className={`min-w-9 rounded-md bg-blue-100  border border border-slate-300 py-2 px-3 text-black font-serif font-bold text-center text-sm transition-all  text-slate-600 hover:text-white hover:bg-slate-800 hover:border-slate-800  active:border-slate-800 active:text-white active:bg-blue-200 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ml-2`}>
+        <button disabled={page==1} onClick={decreasePage} className={`min-w-9 rounded-md bg-blue-100  border border border-slate-300 py-2 px-3 text-black font-serif font-bold text-center text-sm transition-all  text-slate-600 hover:text-white hover:bg-slate-800 hover:border-slate-800  active:border-slate-800 active:text-white active:bg-blue-200 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ml-2`}>
             Prev
-          </button>
+         </button>
           
           <button disabled={page==totalPages} onClick={increasePage} className={`min-w-9 rounded-md bg-blue-100  border border border-slate-300 py-2 px-3 text-black font-serif font-bold text-center text-sm transition-all  text-slate-600 hover:text-white hover:bg-slate-800 hover:border-slate-800  active:border-slate-800 active:text-white active:bg-blue-200 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ml-2`}>
             Next
           </button>
-    </div>
+     </div>
 
 
  
