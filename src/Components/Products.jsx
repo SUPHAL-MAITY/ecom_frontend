@@ -170,7 +170,7 @@ useEffect(()=>{
 
       <div className="bg-white font-serif">
         <div className="mx-auto max-w-2xl px-4  sm:px-6 sm:py-4 lg:max-w-7xl lg:px-8">
-          <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
+          <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 2xl:grid-cols-3 xl:gap-x-8">
             
             { filterProducts.length>0 ? (
                
@@ -323,11 +323,11 @@ useEffect(()=>{
       {/* pagination button */}
 
       <div className="flex justify-center  space-x-1 mt-2">
-      <button disabled={page==1} onClick={decreasePage} className={`min-w-9 rounded-md bg-blue-100  border border border-slate-300 py-2 px-3 text-white font-serif font-bold text-center text-sm transition-all  text-slate-600 hover:text-white hover:bg-slate-800 hover:border-slate-800  active:border-slate-800 active:text-white active:bg-blue-200 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ml-2`}>
+      <button disabled={page==1} onClick={decreasePage} className={`min-w-9 rounded-md bg-blue-200  border border border-slate-300 py-2 px-3 text-black font-serif font-bold text-center text-sm transition-all  text-slate-600 hover:text-white hover:bg-slate-800 hover:border-slate-800  active:border-slate-800 active:text-white active:bg-blue-200 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ml-2`}>
             Prev
           </button>
           
-          <button disabled={page==totalPages} onClick={increasePage} className={`min-w-9 rounded-md bg-blue-100  border border border-slate-300 py-2 px-3 text-white font-serif font-bold text-center text-sm transition-all  text-slate-600 hover:text-white hover:bg-slate-800 hover:border-slate-800  active:border-slate-800 active:text-white active:bg-blue-200 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ml-2`}>
+          <button disabled={page==totalPages} onClick={increasePage} className={`min-w-9 rounded-md bg-blue-200  border border border-slate-300 py-2 px-3 text-black font-serif font-bold text-center text-sm transition-all  text-slate-600 hover:text-white hover:bg-slate-800 hover:border-slate-800  active:border-slate-800 active:text-white active:bg-blue-200 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ml-2`}>
             Next
           </button>
       </div>
