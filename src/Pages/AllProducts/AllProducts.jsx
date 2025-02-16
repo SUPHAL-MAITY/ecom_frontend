@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import SidebarForAdmin from "../../Components/SidebarForAdmin/SidebarForAdmin";
 import axios from "axios";
+import useDebounce from "../../hooks/useDebounce.jsx";
+
 
 const AllProducts = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -13,6 +15,28 @@ const AllProducts = () => {
   const [loading, setLoading] = useState(false);
   const [totalPages, setTotalPages] = useState();
 
+
+  
+const debounceSearch=useDebounce(searchQuery,500)
+
+
+
+
+
+const searchFetchData=async()=>{
+  const {data}=await axios.get(
+    `http://localhost:3000/api/v1/search?search=${debounceSearch}`,
+    { withCredentials: true }
+  );
+  if(data.data.length>0){
+    setProducts(data.data)
+  }
+
+  console.log("search data ",data)
+
+}
+
+
   useEffect(() => {
     if(category && category !=="show_all"){
       fetchFilterProducts()
@@ -23,6 +47,13 @@ const AllProducts = () => {
     
 
   }, [page,category]);
+
+  useEffect(()=>{
+    if(debounceSearch){
+      searchFetchData()
+    }
+
+  },[debounceSearch])
 
   ///data fetching for all products with pagination
 
@@ -93,6 +124,8 @@ const AllProducts = () => {
     setCategory(e.target.value)
     setPage(1)
   }
+
+  
 
   return (
     <>
