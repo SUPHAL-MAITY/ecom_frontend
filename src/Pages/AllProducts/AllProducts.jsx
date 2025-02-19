@@ -2,12 +2,14 @@ import { useState, useEffect } from "react";
 import SidebarForAdmin from "../../Components/SidebarForAdmin/SidebarForAdmin";
 import axios from "axios";
 import useDebounce from "../../hooks/useDebounce.jsx";
+import Loader from "../../Components/Loader/Loader.jsx";
+import { ToastContainer, toast } from "react-toastify";
 
 
 const AllProducts = () => {
+
   const [searchQuery, setSearchQuery] = useState("");
   const [category,setCategory]=useState("show_all")
-
   const [products, setProducts] = useState([]);
 
   const [page, setPage] = useState(1);
@@ -24,15 +26,35 @@ const debounceSearch=useDebounce(searchQuery,500)
 
 
 const searchFetchData=async()=>{
-  const {data}=await axios.get(
-    `http://localhost:3000/api/v1/search?search=${debounceSearch}`,
-    { withCredentials: true }
-  );
-  if(data.data.length>0){
-    setProducts(data.data)
+  if(debounceSearch.trim()==="") {
+    setSearchQuery("")
+    return;
   }
+  setLoading(true)
+  try {
 
-  console.log("search data ",data)
+    const {data}=await axios.get(
+      `http://localhost:3000/api/v1/search?search=${debounceSearch}`,
+      { withCredentials: true }
+    );
+    setLoading(false)
+    if(data.data.length===0){
+      toast.error("No products found")
+      setSearchQuery("")
+    }
+    if(data.data.length>0){
+      setProducts(data.data)
+      setSearchQuery("")
+    }
+  
+    console.log("search data ",data)
+    
+  } catch (error) {
+    console.log(error)
+    setLoading(false)
+    
+  }
+ 
 
 }
 
@@ -92,7 +114,7 @@ const searchFetchData=async()=>{
 
 
   const fetchFilterProducts=async()=>{
-    
+   
     console.log("filter data ........")
     try {
       if(category && category !=="show_all"){
@@ -121,6 +143,7 @@ const searchFetchData=async()=>{
 
 
   const handleFilterChange=(e)=>{
+    
     setCategory(e.target.value)
     setPage(1)
   }
@@ -129,6 +152,7 @@ const searchFetchData=async()=>{
 
   return (
     <>
+    <ToastContainer />
       <div className="flex min-h-screen items-stretch font-serif">
         <div className="h-full">
           <SidebarForAdmin />
@@ -185,9 +209,9 @@ const searchFetchData=async()=>{
               </div>
             </div>
 
-            <div className="overflow-x-auto ">
-              <table className="w-full">
-                <thead>
+            <div className="overflow-x-auto  ">
+              <table className="w-full ">
+                <thead className="w-full">
                   <tr className="border-b bg-gray-200">
                     <th className="text-left py-4 px-4 text-sm font-medium text-gray-500">
                       ID
@@ -210,93 +234,109 @@ const searchFetchData=async()=>{
                     <th className="w-10"></th>
                   </tr>
                 </thead>
-                <tbody>
-                  {products.map((product, i) => (
-                    <tr
-                      key={product._id}
-                      className={`border-b ${
-                        i % 2 !== 0 ? "bg-gray-50" : "bg-white-100"
-                      }  `}
-                    >
-                      <td className="py-4 px-4 text-sm font-medium text-gray-900">
-                        {product._id}
-                      </td>
-                      <td className="py-4 px-4 text-sm text-gray-500">
-                        {product.title.length > 30
-                          ? product.title.slice(0, 30) + ".."
-                          : product.title}
-                      </td>
-                      <td className="py-4 px-4 text-sm text-gray-900">
-                        {product.price}
-                      </td>
-                      <td className="py-4 px-4 text-sm text-gray-900">
-                        {product.discountPrice}
-                      </td>
-                      <td className="py-4 px-4 text-sm text-gray-900">
-                        {product.stock}
-                      </td>
-                      <td
-                        className={`py-4 px-4 text-sm text-gray-900 rounded-full inline-flex items-center justify-center text-xs font-medium
-                                  ${
-                                    product.gender === "Woman"
-                                      ? "bg-pink-300 text-black w-[72px]"
-                                      : ""
-                                  }
-                                  ${
-                                    product.gender === "Men"
-                                      ? "bg-blue-400 text-white w-[72px]"
-                                      : ""
-                                  }
-                                  ${
-                                    product.gender === "Unisex"
-                                      ? "bg-gray-500 text-white w-[72px]"
-                                      : ""
-                                  }
-                     `}
-                      >
-                        {product.gender}
-                      </td>
-                      <td className="py-4 px-4">
-                        <button className="text-gray-400 hover:text-gray-500">
-                          <svg
-                            className="w-4 h-4"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-                            />
-                          </svg>
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
+                 {loading && ( <div className="w-full border border-black ">
+                         <Loader/>
+                          </div>  )
+                }
+                 {!loading && (
+                   <tbody>
+                   {products.map((product, i) => (
+                     <tr
+                       key={product._id}
+                       className={`border-b ${
+                         i % 2 !== 0 ? "bg-gray-50" : "bg-white-100"
+                       }  `}
+                     >
+                       <td className="py-4 px-4 text-sm font-medium text-gray-900">
+                         {product._id}
+                       </td>
+                       <td className="py-4 px-4 text-sm text-gray-500">
+                         {product.title.length > 30
+                           ? product.title.slice(0, 30) + ".."
+                           : product.title}
+                       </td>
+                       <td className="py-4 px-4 text-sm text-gray-900">
+                         {product.price}
+                       </td>
+                       <td className="py-4 px-4 text-sm text-gray-900">
+                         {product.discountPrice}
+                       </td>
+                       <td className="py-4 px-4 text-sm text-gray-900">
+                         {product.stock}
+                       </td>
+                       <td
+                         className={`py-4 px-4 text-sm text-gray-900 rounded-full inline-flex items-center justify-center text-xs font-medium
+                                   ${
+                                     product.gender === "Woman"
+                                       ? "bg-pink-300 text-black w-[72px]"
+                                       : ""
+                                   }
+                                   ${
+                                     product.gender === "Men"
+                                       ? "bg-blue-400 text-white w-[72px]"
+                                       : ""
+                                   }
+                                   ${
+                                     product.gender === "Unisex"
+                                       ? "bg-gray-500 text-white w-[72px]"
+                                       : ""
+                                   }
+                      `}
+                       >
+                         {product.gender}
+                       </td>
+                       <td className="py-4 px-4">
+                         <button className="text-gray-400 hover:text-gray-500">
+                           <svg
+                             className="w-4 h-4"
+                             fill="none"
+                             stroke="currentColor"
+                             viewBox="0 0 24 24"
+                           >
+                             <path
+                               strokeLinecap="round"
+                               strokeLinejoin="round"
+                               strokeWidth={2}
+                               d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                             />
+                           </svg>
+                         </button>
+                       </td>
+                     </tr>
+                   ))}
+                 </tbody>
+
+
+                 )}
+               
+
               </table>
             </div>
           </div>
+          { !loading  && (
+             <div className="flex justify-center  space-x-1 mt-2">
+             <button
+               disabled={page == 1}
+               onClick={decreasePage}
+               className={`min-w-9 rounded-md bg-blue-100  border border border-slate-300 py-2 px-3 text-black font-serif font-bold text-center text-sm transition-all  text-slate-600 hover:text-white hover:bg-slate-800 hover:border-slate-800  active:border-slate-800 active:text-white active:bg-blue-200 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ml-2`}
+             >
+               Prev
+             </button>
+ 
+             <button
+               disabled={page == totalPages}
+               onClick={increasePage}
+               className={`min-w-9 rounded-md bg-blue-100  border border border-slate-300 py-2 px-3 text-black font-serif font-bold text-center text-sm transition-all  text-slate-600 hover:text-white hover:bg-slate-800 hover:border-slate-800  active:border-slate-800 active:text-white active:bg-blue-200 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ml-2`}
+             >
+               Next
+             </button>
+           </div>
+ 
 
-          <div className="flex justify-center  space-x-1 mt-2">
-            <button
-              disabled={page == 1}
-              onClick={decreasePage}
-              className={`min-w-9 rounded-md bg-blue-100  border border border-slate-300 py-2 px-3 text-black font-serif font-bold text-center text-sm transition-all  text-slate-600 hover:text-white hover:bg-slate-800 hover:border-slate-800  active:border-slate-800 active:text-white active:bg-blue-200 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ml-2`}
-            >
-              Prev
-            </button>
+          ) }
+         
 
-            <button
-              disabled={page == totalPages}
-              onClick={increasePage}
-              className={`min-w-9 rounded-md bg-blue-100  border border border-slate-300 py-2 px-3 text-black font-serif font-bold text-center text-sm transition-all  text-slate-600 hover:text-white hover:bg-slate-800 hover:border-slate-800  active:border-slate-800 active:text-white active:bg-blue-200 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ml-2`}
-            >
-              Next
-            </button>
-          </div>
+
         </div>
       </div>
     </>
