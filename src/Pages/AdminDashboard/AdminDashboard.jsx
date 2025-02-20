@@ -1,7 +1,7 @@
-import React from "react";
+import React ,{useState,useEffect} from "react";
 import "./AdminDashboard.css";
 import { FaChartBar, FaChartPie } from "react-icons/fa";
-
+import axios from "axios"
 import { LiaBabyCarriageSolid } from "react-icons/lia";
 import { FaArrowUp } from "react-icons/fa";
 import {PieChart,Pie,Cell,Tooltip,AreaChart, XAxis, YAxis, CartesianGrid, Area} from "recharts"
@@ -11,6 +11,38 @@ import SidebarForAdmin from "../../Components/SidebarForAdmin/SidebarForAdmin";
 
 
 const AdminDashboard = () => {
+
+  const [totalEarningThisMonth, setTotalEarningThisMonth] = useState(0);
+  const [totalEarningPrevMonth, setTotalEarningPrevMonth] = useState(0);
+  const [thisMonthDays, setThisMonthDays] = useState(0);
+  const [prevMonthDays, setPrevMonthDays] = useState(0);
+  const [totalOrders, setTotalOrders] = useState(0);
+  const [totalCustomers, setTotalCustomers] = useState(0);
+  const [totalSalePriceValue, setTotalSalePriceValue] = useState(0);
+  
+ 
+ useEffect(()=>{
+  fetchAdminData()
+ },[])
+
+  const fetchAdminData=async()=>{
+    try {
+      const {data}=await axios.get(`http://localhost:3000/api/v1/admin-details`)
+      console.log("admin data",data)
+
+      setTotalEarningThisMonth(data?.data.totalEarningThisMonth)
+      setTotalEarningPrevMonth(data?.data.totalEarningPrevMonth)
+      setThisMonthDays(data?.data.thisMonthDays)
+      setPrevMonthDays(data?.data.prevMonthDays)
+      setTotalOrders(data?.data.totalOrders)
+      setTotalCustomers(data?.data.totalCustomers)
+      setTotalSalePriceValue(data?.data.totalSalePriceValue)
+      
+
+    } catch (error) {
+      
+    }
+  }
 
 
   const data = [
@@ -84,7 +116,7 @@ const AdminDashboard = () => {
                         <div className="grid grid-cols-1 ">
                            <div className="">
                                 <div className="flex items-center">
-                                <h1 className="text-2xl min-[1340px]:text-4xl  font-bold  mr-4">$ 13500   </h1>  <div className="   flex items-center bg-green-200  rounded-md"> <FaArrowUp />  <span  className="bg-green-200"> 2.3% </span></div>   
+                                <h1 className="text-2xl min-[1340px]:text-4xl  font-bold  mr-4">${totalEarningThisMonth}   </h1>  <div className="   flex items-center bg-green-200  rounded-md"> <FaArrowUp />  <span  className="bg-green-200"> 2.3% </span></div>   
 
                                 </div>
                             
@@ -125,7 +157,7 @@ const AdminDashboard = () => {
                       <div className="grid grid-cols-1 ">
                            <div className="">
                                 <div className="flex items-center">
-                                <h1 className="text-2xl min-[1340px]:text-4xl font-bold  mr-4">$ 13500   </h1>  <div className="   flex items-center bg-green-200  rounded-md"> <FaArrowUp />  <span  className="bg-green-200"> 2.3% </span></div>   
+                                <h1 className="text-2xl min-[1340px]:text-4xl font-bold  mr-4">$ {Math.floor(totalEarningThisMonth/thisMonthDays)}  </h1>  <div className="   flex items-center bg-green-200  rounded-md"> <FaArrowUp />  <span  className="bg-green-200"> 2.3% </span></div>   
 
                                 </div>
                             
@@ -169,7 +201,7 @@ const AdminDashboard = () => {
                       <div className="grid grid-cols-1 ">
                            <div className="mb-6">
                                 <div className="flex items-center">
-                                <h1 className="text-2xl min-[1340px]:text-4xl font-bold  mr-4"> 7500   </h1>  <div className="   flex items-center bg-green-200  rounded-md"> <FaArrowUp />  <span  className="bg-green-200"> 2.3% </span></div>   
+                                <h1 className="text-2xl min-[1340px]:text-4xl font-bold  mr-4"> {totalOrders.toString().padStart(3,"0")}  </h1>  <div className="   flex items-center bg-green-200  rounded-md"> <FaArrowUp />  <span  className="bg-green-200"> 2.3% </span></div>   
 
                                 </div>
                             
@@ -202,7 +234,7 @@ const AdminDashboard = () => {
                         <div className="grid grid-cols-1 ">
                            <div className="">
                                 <div className="flex items-center">
-                                <h1 className="text-2xl min-[1340px]:text-4xl font-bold  mr-4"> 3500   </h1>  <div className="   flex items-center bg-green-200  rounded-md"> <FaArrowUp />  <span  className="bg-green-200"> 2.3% </span></div>   
+                                <h1 className="text-2xl min-[1340px]:text-4xl font-bold  mr-4"> {totalCustomers.toString().padStart(3,"0")}  </h1>  <div className="   flex items-center bg-green-200  rounded-md"> <FaArrowUp />  <span  className="bg-green-200"> 2.3% </span></div>   
 
                                 </div>
                             
@@ -242,7 +274,7 @@ const AdminDashboard = () => {
                               
                             </div>
                             <div className="">
-                              <h1 className="text-2xl min-[1340px]:text-4xl font-bold">$64094</h1>
+                              <h1 className="text-2xl min-[1340px]:text-4xl font-bold">${totalSalePriceValue}</h1>
                               <p className="font-mono text-gray-600 hidden sm:block ">Users from all channels</p>
                               
                             </div>
