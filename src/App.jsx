@@ -45,15 +45,15 @@ function App() {
             <Route path="/login" element={<Login/>} />
             <Route path="/trending" element={<TrendingProduct/>} />
             <Route path="/admin" element={<AdminProtectedRoutes> <AdminDashboard/> </AdminProtectedRoutes>  } />
-            <Route path="/recent-order" element={<RecentOrders/>} />
-            <Route path="/all-products" element={<AllProducts/>} />
-            <Route path="/all-users" element={<AllUsers/>} />
-            <Route path="/add-product" element={<AddProduct/> }/>
+            <Route path="/recent-order" element={ <AdminProtectedRoutes> <RecentOrders/> </AdminProtectedRoutes> } />
+            <Route path="/all-products" element={<AdminProtectedRoutes> <AdminDashboard/> </AdminProtectedRoutes> } />
+            <Route path="/all-users" element={<AdminProtectedRoutes> <AllUsers/> </AdminProtectedRoutes> } />
+            <Route path="/add-product" element={<AdminProtectedRoutes>  <AddProduct/> </AdminProtectedRoutes> }/>
             <Route path="/checkout" element={<Checkout/> }/>
             <Route path="/success" element={<PaymentSuccess/> }/>
             <Route path="/fail" element={<PaymentFailed/> }/>
             <Route path="/new-edition" element={<NewEdition/> }/>
-            <Route path="/add-category" element={<AddCategory/> }/>
+            <Route path="/add-category" element={<AdminProtectedRoutes> <AddCategory/> </AdminProtectedRoutes>  }/>
           
 
                                          
