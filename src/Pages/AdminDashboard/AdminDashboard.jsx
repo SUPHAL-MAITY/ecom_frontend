@@ -20,14 +20,14 @@ const AdminDashboard = () => {
   const [totalCustomers, setTotalCustomers] = useState(0);
   const [totalSalePriceValue, setTotalSalePriceValue] = useState(0);
   
- 
+  const url = import.meta.env.VITE_API_URL;
  useEffect(()=>{
   fetchAdminData()
  },[])
 
   const fetchAdminData=async()=>{
     try {
-      const {data}=await axios.get(`http://localhost:3000/api/v1/admin-details`)
+      const {data}=await axios.get(`${url}/api/v1/admin-details`)
       console.log("admin data",data)
 
       setTotalEarningThisMonth(data?.data.totalEarningThisMonth)
