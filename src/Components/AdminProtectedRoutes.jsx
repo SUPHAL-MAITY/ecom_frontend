@@ -9,7 +9,7 @@ const AdminProtectedRoutes = ({children}) => {
     const [auth,setAuth]=useState(null)
     const [loading,setLoading]=useState(true)
     const location=useLocation()
-
+    const url = import.meta.env.VITE_API_URL;
   useEffect(()=>{
     fetchAuthStatus()
 
@@ -18,7 +18,7 @@ const AdminProtectedRoutes = ({children}) => {
    const fetchAuthStatus=async()=>{
     try {
      
-      const {data}=await axios.get(`http://localhost:3000/api/v1/admin-auth`,{withCredentials:true})
+      const {data}=await axios.get(`${url}/api/v1/admin-auth`,{withCredentials:true})
       console.log("auth data",data)
       setAuth(data?.data?.auth)
       setLoading(false)
