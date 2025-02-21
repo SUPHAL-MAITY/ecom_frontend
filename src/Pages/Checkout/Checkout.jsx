@@ -15,14 +15,14 @@ const Checkout = () => {
   const [address2, setAddress2] = useState("");
  const [firstBlockVsible, setFirstBlockVsible] = useState(false);
 
-  const apiUrl = import.meta.env.VITE_API_BASE_URL
+ const url = import.meta.env.VITE_API_URL;
 
 
 
 
  const fetchAddressOfUser=async()=>{
   try {
-    const {data}=await axios.get(`${apiUrl}/get-user-address`,{withCredentials:true})
+    const {data}=await axios.get(`${url}/api/v1/get-user-address`,{withCredentials:true})
     console.log("data",data?.data)
     setAddresses(data?.data)
     
@@ -95,7 +95,7 @@ const Checkout = () => {
     try {
       // Send request to your backend to create the checkout session
       const response = await axios.post(
-        `${apiUrl}/create-checkout-session`,
+        `${url}/api/v1/create-checkout-session`,
         body,
         {
           headers: {
