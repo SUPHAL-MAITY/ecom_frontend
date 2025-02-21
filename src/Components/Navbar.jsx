@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet ,useNavigate} from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
 import { toggleSidebar, toggleDropdown } from "../features/Toggle/toggle.js";
 import { useLocation } from 'react-router-dom';
 import axios from "axios"
+
 
 
 
@@ -16,7 +17,7 @@ import axios from "axios"
   const cart = useSelector((state) => state.cart);
   const isProfileDropdownOpen=useSelector((state)=>state.toggle.isProfileDropdownOpen)
   const location=useLocation()
-
+  const navigate=useNavigate()
 
   console.log(location.pathname)
   
@@ -57,6 +58,16 @@ import axios from "axios"
 
   const handleProfileDropDownToggle=()=>{
     dispatch(toggleDropdown())
+  }
+
+
+  const handleLogout=async()=>{
+    console.log("logout clicked")
+    const {data}=await axios.get(`http://localhost:3000/api/v1/logout`,{withCredentials:true})
+    console.log(data)
+    navigate("/login")
+    
+
   }
 
 
@@ -185,7 +196,7 @@ import axios from "axios"
 
 
               <li>
-                <Link href="#" className="block px-4 py-2 hover:bg-gray-600 ">
+                <Link href="#" onClick={handleLogout} className="block px-4 py-2 hover:bg-gray-600 ">
                   Logout
                 </Link>
               </li>

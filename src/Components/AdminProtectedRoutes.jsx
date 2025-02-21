@@ -1,21 +1,23 @@
 import React ,{useEffect,useState} from 'react'
 import axios from "axios"
-import { Navigate } from 'react-router-dom'
+import { Navigate,useLocation } from 'react-router-dom'
 import Loader from './Loader/Loader.jsx'
 
 
 
 const AdminProtectedRoutes = ({children}) => {
-    const [auth,setAuth]=useState(false)
+    const [auth,setAuth]=useState(null)
     const [loading,setLoading]=useState(true)
+    const location=useLocation()
 
   useEffect(()=>{
     fetchAuthStatus()
 
-  },[])
+  },[location.pathname])
 
    const fetchAuthStatus=async()=>{
     try {
+     
       const {data}=await axios.get(`http://localhost:3000/api/v1/auth`,{withCredentials:true})
       console.log("auth data",data)
       setAuth(data?.data?.auth)
@@ -23,15 +25,20 @@ const AdminProtectedRoutes = ({children}) => {
       
     } catch (error) {
       setLoading(false)
+      setAuth(false)
       console.log(error)
+    }finally{
+      setLoading(false)
     }
      
     }
 
   if(loading) return (<Loader/>)
-  return (
-    auth ? children : <Navigate to="/login"/>
-  )
+
+  
+  return auth ? children : <Navigate to="/login"/>
+    
+  
 }
 
 export default AdminProtectedRoutes
