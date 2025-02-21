@@ -18,7 +18,7 @@ const AdminProtectedRoutes = ({children}) => {
    const fetchAuthStatus=async()=>{
     try {
      
-      const {data}=await axios.get(`http://localhost:3000/api/v1/auth`,{withCredentials:true})
+      const {data}=await axios.get(`http://localhost:3000/api/v1/admin-auth`,{withCredentials:true})
       console.log("auth data",data)
       setAuth(data?.data?.auth)
       setLoading(false)
