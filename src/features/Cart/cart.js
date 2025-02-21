@@ -48,7 +48,7 @@ export const cartSlice=createSlice({
 
             if(existingItem.quantity===1){
                 state.cartItems=state.cartItems.filter(item=>item.id!==id)
-                state.totalAmount -=existingItem.price  ;
+                state.totalAmount -= existingItem.price  ;
                 state.totalItems -= 1;
 
             }else{
@@ -59,7 +59,13 @@ export const cartSlice=createSlice({
 
             }
         },
-        clearCart:()=>{},
+        clearCart:(state)=>{
+            state.cartItems=[];
+            state.totalAmount=0;
+            state.totalItems=0;
+
+
+        },
 
     }
 

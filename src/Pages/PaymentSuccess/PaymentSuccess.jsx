@@ -2,8 +2,8 @@ import React ,{ useEffect } from 'react'
 import "./PaymentSuccess.css"
 import { useSearchParams } from "react-router-dom";
 import axios from "axios";
-import { useSelector } from 'react-redux';
-
+import { useSelector,useDispatch } from 'react-redux';
+import { clearCart } from '../../features/Cart/cart.js';
 
 import { useWindowSize } from 'react-use'
 import Confetti from 'react-confetti'
@@ -22,9 +22,11 @@ const PaymentSuccess = () => {
     const { width, height } = useWindowSize()
     const [searchParams] = useSearchParams();
     const sessionId = searchParams.get("session_id");
+    const dispatch=useDispatch()
 
 
    const cart=useSelector((state)=>state.cart)
+
 
    const apiUrl=import.meta.env.VITE_API_BASE_URL
    console.log(sessionId)
@@ -51,7 +53,7 @@ const PaymentSuccess = () => {
 
       if (data.payment_status === "paid") {
         console.log("✅ Payment verified! Saving order...");
-
+        dispatch(clearCart())
         // console.log("👉 User Details:", data.userDetails);
         // console.log("👉 Cart Items:", data.cartItems);
         console.log("👉 Total Amount:", data.amount_total / 100);
