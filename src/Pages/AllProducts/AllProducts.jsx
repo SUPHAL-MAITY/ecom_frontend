@@ -20,7 +20,7 @@ const AllProducts = () => {
 
   
 const debounceSearch=useDebounce(searchQuery,500)
-
+const url = import.meta.env.VITE_API_URL;
 
 
 
@@ -34,7 +34,7 @@ const searchFetchData=async()=>{
   try {
 
     const {data}=await axios.get(
-      `http://localhost:3000/api/v1/search?search=${debounceSearch}`,
+      `${url}/api/v1/search?search=${debounceSearch}`,
       { withCredentials: true }
     );
     setLoading(false)
@@ -84,7 +84,7 @@ const searchFetchData=async()=>{
     try {
       setLoading(true);
       const { data } = await axios.get(
-        `http://localhost:3000/api/v1/get-all-admin-products?page=${page}`,
+        `${url}/api/v1/get-all-admin-products?page=${page}`,
         { withCredentials: true }
       );
       setProducts(data?.data?.products);
@@ -121,7 +121,7 @@ const searchFetchData=async()=>{
         setLoading(true);
         console.log("page",page)
         const { data } = await axios.get(
-          `http://localhost:3000/api/v1/get-filter-products?category=${category}&page=${page}`,
+          `${url}/api/v1/get-filter-products?category=${category}&page=${page}`,
           { withCredentials: true }
         );
         setProducts(data?.data?.products);
