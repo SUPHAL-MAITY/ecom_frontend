@@ -17,6 +17,7 @@ const AllUsers = () => {
   const [users, setUsers] = useState([]);
 
   const debounceSearch=useDebounce(searchQuery,500)
+  const url = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     fetchData();
@@ -47,7 +48,7 @@ const AllUsers = () => {
         setLoading(true);
         
         const { data } = await axios.get(
-          `http://localhost:3000/api/v1/search-user?q=${debounceSearch}`,
+          `${url}/api/v1/search-user?q=${debounceSearch}`,
           { withCredentials: true }
         );
         if(data?.data?.users.length>0){
@@ -82,7 +83,7 @@ const AllUsers = () => {
     try {
       setLoading(true);
       const { data } = await axios.get(
-        `http://localhost:3000/api/v1/get-all-users?page=${page}`,
+        `${url}/api/v1/get-all-users?page=${page}`,
         { withCredentials: true }
       );
       setUsers(data?.data.users);
