@@ -7,7 +7,7 @@ const my_api = import.meta.env.VITE_API_BASE_URL;
 
 const AddProduct = () => {
   
-
+  const url = import.meta.env.VITE_API_URL;
   const [selectedImage, setSelectedImage] = useState(0);
   const [brands, setBrands] = useState([]);
 
@@ -66,8 +66,8 @@ const AddProduct = () => {
   // get all brands for cateories dropdown
   const getAllBrands = async () => {
     try {
-      const { data } = await axios.get(`${my_api}/get-all-category`);
-      console.log(data);
+      const { data } = await axios.get(`${url}/api/v1/get-all-category`,{withCredentials:true});
+      console.log("brands",data);
       setBrands(data?.data);
     } catch (error) {}
   };
@@ -103,7 +103,7 @@ const AddProduct = () => {
       console.log("formDataToSend", formDataToSend);
 
       const { data } = await axios.post(
-        `${my_api}/create-product`,
+        `${url}/api/v1/create-product`,
         formDataToSend,
         {
           headers: {
