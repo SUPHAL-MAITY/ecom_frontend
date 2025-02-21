@@ -46,7 +46,7 @@ function App() {
             <Route path="/trending" element={<TrendingProduct/>} />
             <Route path="/admin" element={<AdminProtectedRoutes> <AdminDashboard/> </AdminProtectedRoutes>  } />
             <Route path="/recent-order" element={ <AdminProtectedRoutes> <RecentOrders/> </AdminProtectedRoutes> } />
-            <Route path="/all-products" element={<AdminProtectedRoutes> <AdminDashboard/> </AdminProtectedRoutes> } />
+            <Route path="/all-products" element={<AdminProtectedRoutes> <AllProducts/> </AdminProtectedRoutes> } />
             <Route path="/all-users" element={<AdminProtectedRoutes> <AllUsers/> </AdminProtectedRoutes> } />
             <Route path="/add-product" element={<AdminProtectedRoutes>  <AddProduct/> </AdminProtectedRoutes> }/>
             <Route path="/checkout" element={<Checkout/> }/>
