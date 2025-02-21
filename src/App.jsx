@@ -22,6 +22,7 @@ import PaymentSuccess from './Pages/PaymentSuccess/PaymentSuccess.jsx';
 import PaymentFailed from './Pages/PaymentFailed/PaymentFailed.jsx';
 import NewEdition from './Pages/NewEdition/NewEdition.jsx';
 import AddCategory from './Pages/AddCategory/AddCategory.jsx';
+import AdminProtectedRoutes from './Components/AdminProtectedRoutes.jsx';
 
 
 
@@ -33,9 +34,7 @@ function App() {
     <>
     
 
-    <Routes>
-
-     
+    <Routes>       
        <Route   element={<Navbar/>}>
           
             <Route path="/product/:id" element={<ProductDetails/>} />
@@ -45,7 +44,7 @@ function App() {
             <Route path="/signup" element={<Signup/>} />
             <Route path="/login" element={<Login/>} />
             <Route path="/trending" element={<TrendingProduct/>} />
-            <Route path="/admin" element={<AdminDashboard/>} />
+            <Route path="/admin" element={<AdminProtectedRoutes> <AdminDashboard/> </AdminProtectedRoutes>  } />
             <Route path="/recent-order" element={<RecentOrders/>} />
             <Route path="/all-products" element={<AllProducts/>} />
             <Route path="/all-users" element={<AllUsers/>} />
@@ -55,13 +54,9 @@ function App() {
             <Route path="/fail" element={<PaymentFailed/> }/>
             <Route path="/new-edition" element={<NewEdition/> }/>
             <Route path="/add-category" element={<AddCategory/> }/>
-           
+          
 
-            
-           
-           
-                             
-
+                                         
        </Route>
 
        <Route>          

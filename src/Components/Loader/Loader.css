@@ -21,7 +21,7 @@
 
 
     .loader-container{
-        border:2px solid black;
+        
         display: flex;
         justify-content: center;
         margin-top:24px;
