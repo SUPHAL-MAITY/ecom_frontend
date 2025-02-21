@@ -13,7 +13,7 @@ export default function AddCategory() {
   const [image, setImage] = useState("");
   const[isSubmitting,setIsSubmitting]=useState(false)
 
-  const my_api = import.meta.env.VITE_API_BASE_URL;
+  const url = import.meta.env.VITE_API_URL;
 
 
   function delayReload(){
@@ -43,7 +43,7 @@ export default function AddCategory() {
       // console.log(image.size);
       setIsSubmitting(true)
       const { data } = await axios.post(
-        `${my_api}/create-category`,
+        `${url}/api/v1/create-category`,
         { name, image },
         {
           headers: {
