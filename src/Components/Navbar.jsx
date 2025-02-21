@@ -20,7 +20,7 @@ import axios from "axios"
   const navigate=useNavigate()
 
   console.log(location.pathname)
-  
+  const url = import.meta.env.VITE_API_URL;
   
 
   useEffect(()=>{
@@ -29,7 +29,7 @@ import axios from "axios"
 
   const fetchProfileImage=async()=>{
     try {
-      const {data}=await axios.get(`http://localhost:3000/api/v1/profile-image`,{withCredentials:true})
+      const {data}=await axios.get(`${url}/api/v1/profile-image`,{withCredentials:true})
       setImage(data.data)
       
     } catch (error) {
@@ -63,7 +63,7 @@ import axios from "axios"
 
   const handleLogout=async()=>{
     console.log("logout clicked")
-    const {data}=await axios.get(`http://localhost:3000/api/v1/logout`,{withCredentials:true})
+    const {data}=await axios.get(`${url}/api/v1/logout`,{withCredentials:true})
     console.log(data)
     navigate("/login")
     
