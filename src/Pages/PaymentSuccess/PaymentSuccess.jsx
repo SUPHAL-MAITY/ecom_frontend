@@ -27,7 +27,7 @@ const PaymentSuccess = () => {
 
    const cart=useSelector((state)=>state.cart)
 
-
+   const url = import.meta.env.VITE_API_URL;
    const apiUrl=import.meta.env.VITE_API_BASE_URL
    console.log(sessionId)
 
@@ -48,7 +48,7 @@ const PaymentSuccess = () => {
 
   const verifyPayment = async (sessionId) => {
     try {
-      const { data } = await axios.get( `${apiUrl}/verify-payment?session_id=${sessionId}`);
+      const { data } = await axios.get( `${url}/api/v1/verify-payment?session_id=${sessionId}`);
       console.log("veified payment data",data)
 
       if (data.payment_status === "paid") {
@@ -68,7 +68,7 @@ const PaymentSuccess = () => {
         // Save order details in your database
 
 
-        const orderResponse= await axios.post(`${apiUrl}/create-order`, {
+        const orderResponse= await axios.post(`${url}/api/v1/create-order`, {
           
           
             status: "pending",
@@ -95,7 +95,7 @@ const PaymentSuccess = () => {
 
         cart.cartItems.forEach(async(item)=>{
 
-          const oderItemResponse=await axios.post(`${apiUrl}/create-order-items`,{
+          const oderItemResponse=await axios.post(`${url}/api/v1/create-order-items`,{
             
             orderId: orderResponse?.data.data?._id,
             productId: item.id,
