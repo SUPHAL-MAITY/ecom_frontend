@@ -17,7 +17,7 @@ export default function RecentOrders() {
   const [filterData,setFilterData]=useState([])
   const debounceSearch=useDebounce(searchQuery,500)
 
-
+  const url = import.meta.env.VITE_API_URL;
 
  
   useEffect(()=>{
@@ -48,7 +48,7 @@ export default function RecentOrders() {
       console.log("status inside the search fetch data",status)
       console.log("debounSearch inside the search fetch data",debounceSearch)
       const {data}=await axios.get(
-        `http://localhost:3000/api/v1/search-orders?q=${debounceSearch}`,
+        `${url}/api/v1/search-orders?q=${debounceSearch}`,
         { withCredentials: true }
       );
       setLoading(false)
@@ -93,7 +93,7 @@ export default function RecentOrders() {
 
       setLoading(true)
       const {data}=await axios.get(
-        `http://localhost:3000/api/v1/get-status-orders?q=${status}`,
+        `${url}/api/v1/get-status-orders?q=${status}`,
         { withCredentials: true }
       );
       setLoading(false)
@@ -131,7 +131,7 @@ export default function RecentOrders() {
       console.log("debounSearch inside the  fetch data",debounceSearch)
       setLoading(true);
       const { data } = await axios.get(
-        `http://localhost:3000/api/v1/get-recent-orders?page=${page}`,
+        `${url}/api/v1/get-recent-orders?page=${page}`,
         { withCredentials: true }
       );
       setOrders(data?.data?.orders);
