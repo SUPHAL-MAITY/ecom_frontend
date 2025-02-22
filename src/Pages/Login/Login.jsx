@@ -8,6 +8,8 @@ import { ToastContainer, toast } from 'react-toastify';
 
 const Login = () => {
 
+const url = import.meta.env.VITE_API_URL;
+
 const formik=useFormik({
     initialValues:{
         email:"",
@@ -21,7 +23,7 @@ const formik=useFormik({
     onSubmit: async(values,{resetForm})=>{
         console.log(values)
         try{
-            const {data}=await axios.post("http://localhost:3000/api/v1/login",{values},{withCredentials:true})
+            const {data}=await axios.post(`${url}/api/v1/login`,{values},{withCredentials:true})
             console.log(data)
             resetForm()
             if(data.statusCode===200){
