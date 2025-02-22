@@ -16,7 +16,7 @@ const [phoneNumber,setPhoneNumber]=useState("")
 const [address1,setAddress1]=useState("")
 const [address2,setAddress2]=useState("")
 
-
+const url = import.meta.env.VITE_API_URL;
 
 const  debouncedFirstName=useDebounce(firstName,500)
 const debouncedLastName=useDebounce(lastName,500)
@@ -77,7 +77,7 @@ onSubmit:async(values,{setSubmitting,resetForm})=>{
 
   try {
 
-    const {data}=await axios.post("http://localhost:3000/api/v1/signup",{values})
+    const {data}=await axios.post(`${url}/api/v1/signup`,{values})
     console.log("data",data)
     resetForm()
     resetInputs()
