@@ -12,9 +12,11 @@ const Cart = () => {
   const navigate=useNavigate()
   const [loggedIn,setLoggedIn]=useState(null)
 
+  const url = import.meta.env.VITE_API_URL;
+
   const fetchLoggedinStatus=async()=>{
     try {
-      const {data}=await axios.get(`http://localhost:3000/api/v1/check-auth`,{withCredentials:true})
+      const {data}=await axios.get(`${url}/api/v1/check-auth`,{withCredentials:true})
       console.log(data)
       setLoggedIn(data?.data?.loggedIn)
     } catch (error) {
