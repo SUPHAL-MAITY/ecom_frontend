@@ -9,13 +9,13 @@ import { useNavigate } from "react-router-dom";
 
 const ProductDetails = () => {
 
-    const [product,setProduct]=useState({})
-    const[selectedImage,setSelectedImage]=useState(0)
-    const {id}=useParams();
-    const dispatch=useDispatch()
-    const navigate=useNavigate()
+const [product,setProduct]=useState({})
+const[selectedImage,setSelectedImage]=useState(0)
+const {id}=useParams();
+const dispatch=useDispatch()
+const navigate=useNavigate()
 
-
+const url = import.meta.env.VITE_API_URL;
 
  let rand= Math.floor(Math.random()*4)  
  console.log("rand",rand)
@@ -25,7 +25,7 @@ const ProductDetails = () => {
  const fetchSingleProduct=async()=>{
     try {
      
-        const {data}=await axios.get(`http://localhost:3000/api/v1/get-single-product/${id}`)
+        const {data}=await axios.get(`${url}/api/v1/get-single-product/${id}`)
         setProduct(data?.data)
         console.log(data)
         
