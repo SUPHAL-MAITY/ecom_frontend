@@ -176,7 +176,7 @@ useEffect(()=>{
               <div>
                 <label
                   htmlFor="last_name"
-                  className="block mb-1 text-sm font-medium text-gray-900 dark:text-white"
+                  className="block mb-1 text-sm font-medium text-gray-900 "
                 >
                   Last name
                 </label>
