@@ -271,24 +271,29 @@ const Products = forwardRef(({ priceMin, priceMax, gender, category }, ref) => {
       </div>
 
       {/* pagination button */}
+      {!loading && (
+             <div className="flex justify-center  space-x-1 mt-2">
+             <button
+               disabled={page == 1}
+               onClick={decreasePage}
+               className={`min-w-9 rounded-md bg-blue-200  border border border-slate-300 py-2 px-3 text-black font-serif font-bold text-center text-sm transition-all  text-slate-600 hover:text-white hover:bg-slate-800 hover:border-slate-800  active:border-slate-800 active:text-white active:bg-blue-200 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ml-2`}
+             >
+               Prev
+             </button>
+     
+             <button
+               disabled={page == totalPages}
+               onClick={increasePage}
+               className={`min-w-9 rounded-md bg-blue-200  border border border-slate-300 py-2 px-3 text-black font-serif font-bold text-center text-sm transition-all  text-slate-600 hover:text-white hover:bg-slate-800 hover:border-slate-800  active:border-slate-800 active:text-white active:bg-blue-200 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ml-2`}
+             >
+               Next
+             </button>
+           </div>
 
-      <div className="flex justify-center  space-x-1 mt-2">
-        <button
-          disabled={page == 1}
-          onClick={decreasePage}
-          className={`min-w-9 rounded-md bg-blue-200  border border border-slate-300 py-2 px-3 text-black font-serif font-bold text-center text-sm transition-all  text-slate-600 hover:text-white hover:bg-slate-800 hover:border-slate-800  active:border-slate-800 active:text-white active:bg-blue-200 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ml-2`}
-        >
-          Prev
-        </button>
+      )}
+ 
 
-        <button
-          disabled={page == totalPages}
-          onClick={increasePage}
-          className={`min-w-9 rounded-md bg-blue-200  border border border-slate-300 py-2 px-3 text-black font-serif font-bold text-center text-sm transition-all  text-slate-600 hover:text-white hover:bg-slate-800 hover:border-slate-800  active:border-slate-800 active:text-white active:bg-blue-200 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ml-2`}
-        >
-          Next
-        </button>
-      </div>
+
     </>
   );
 });
