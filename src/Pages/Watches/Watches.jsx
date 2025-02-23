@@ -30,24 +30,9 @@ const Watches = () => {
    const isSidebarOpen = useSelector((state) => state.toggle.isSidebarOpen);
 
 
-  // get the category from the url 
-   const category=searchParams.get("category")
-   
   
-
-
-
- /// if category is present in url , set it in gender
-   useEffect(()=>{
-
-    if(category){
-      setSelectedGender([category])
-    }
-    
-    
    
-    
-    },[])
+
 
   
 const handleCheckboxChange=(e)=>{
@@ -199,7 +184,7 @@ const handleFetch=async()=>{
           {/* main content here */}
 
           <div className="p-4 border-2 border-gray-200  rounded-lg dark:border-gray-700 sm:mt-6">
-            <Products category={category}  priceMin={priceMin} priceMax={priceMax} gender={selectedGender} ref={childRef} />
+            <Products   priceMin={priceMin} priceMax={priceMax} gender={selectedGender} ref={childRef} />
           </div>
 
 

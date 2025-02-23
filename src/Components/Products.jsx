@@ -11,7 +11,7 @@ import { useDispatch } from "react-redux";
 import { addItem } from "../features/Cart/cart.js";
 import { ToastContainer, toast } from "react-toastify";
 
-const Products = forwardRef(({ priceMin, priceMax, gender, category }, ref) => {
+const Products = forwardRef(({ priceMin, priceMax, gender }, ref) => {
   const [page, setPage] = useState(1);
   const [products, setProducts] = useState([]);
   const [filterProducts, setFilterProducts] = useState([]);
@@ -68,23 +68,8 @@ const Products = forwardRef(({ priceMin, priceMax, gender, category }, ref) => {
     }
   };
 
-  ///// fetching product for Men or Woman obtained from url
 
-  const fetchCategoryProducts = async () => {
-    
-    try {
-      setLoading(true);
-      const { data } = await axios.get(
-        `${url}/api/v1/filter?gender=${category}`
-      );
-      setFilterProducts(data.data.products);
-      
-      setLoading(false);
-    } catch (error) {
-      console.log(error);
-      setLoading(false);
-    }
-  };
+
 
   useEffect(() => {
     if (priceMin == null && priceMax == null && gender.length == 0) {
@@ -92,13 +77,8 @@ const Products = forwardRef(({ priceMin, priceMax, gender, category }, ref) => {
     }
   }, [page]);
 
-  useEffect(() => {
-    
-    if (category) {
-      fetchCategoryProducts();
-      
-    }
-  }, []);
+
+  
 
   const handleAddtoCart = (product) => {
     
