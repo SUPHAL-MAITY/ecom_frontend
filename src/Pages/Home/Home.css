@@ -135,6 +135,13 @@ header{
 
 /* responsive design */
 
+
+@media (max-width: 480px){
+    .menu{
+        display: none;
+    }
+}
+
 @media (max-width: 780px) {
    .content{
     display: flex;
