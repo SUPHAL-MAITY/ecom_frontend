@@ -1,9 +1,9 @@
-import React, { useState,useEffect } from "react";
+import React, { useState } from "react";
 import "./watches.css";
 import Products from "../../Components/Products";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { useRef } from "react";
-import { useSearchParams } from "react-router-dom";
+
 
 
 
@@ -16,7 +16,7 @@ const Watches = () => {
   const [priceMin,setPriceMin]=useState(null)
   const [priceMax,setPriceMax]=useState(null)
   const [selectedGender,setSelectedGender]=useState([])
-  const [searchParams]=useSearchParams()
+  
 
   const childRef=useRef(null)
   

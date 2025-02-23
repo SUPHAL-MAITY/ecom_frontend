@@ -107,8 +107,9 @@ useEffect(()=>{
               <h5>Collection</h5>
             </div>
 
-            <div className="btn" onClick={()=>navigate("/watches")}>
-              <a href="">Shop Now</a>
+            <div className="btn" >
+              
+              <Link to="/watches">Shop Now</Link>
             </div>
           </div>
 
@@ -123,8 +124,8 @@ useEffect(()=>{
               <h5>Collection</h5>
             </div>
 
-            <div className="btn" onClick={()=>navigate("/watches")} >
-              <a href="">Shop Now</a>
+            <div className="btn"  >
+              <Link to="/watches">Shop Now</Link>
             </div>
           </div>
 
