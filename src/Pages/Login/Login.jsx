@@ -100,9 +100,9 @@ const formik=useFormik({
           <p className="alert">Invalid Credentials..!!</p>
           <button className="login-btn">Login </button>
         </div>
-        <h1 className="form-or">or</h1>
+        {/* <h1 className="form-or">or</h1>
 
-        <button className="login-btn">Login with google</button>
+        <button className="login-btn">Login with google</button> */}
       </form>
     </>
   );
