@@ -24,7 +24,7 @@
   border-radius: 100%;
   margin: 50px auto;
   box-shadow: 0 10px 15px rgba(0, 0, 0, 0.15);
-  z-index: 50;
+  z-index: 10;
   position: relative;
 }
 
@@ -66,7 +66,7 @@
   height: 30px;
   border-radius: 100%;
   background: #fff;
-  z-index: 500;
+  z-index: 10;
   left: 40px;
   top: 80px;
   overflow: hidden;
@@ -225,7 +225,7 @@
   transition: 0.3s;
   position: relative;
   transform: translateY(-100px);
-  z-index: 500;
+  z-index: 10;
   border: 1px solid #eee;
 }
 .login-form .up {
@@ -306,7 +306,7 @@
   font-size: 16px;
   right: -180px;
   top: -300px;
-  z-index: 200;
+  z-index: 10;
   padding: 30px 25px;
   background: #fff;
   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);

@@ -160,7 +160,7 @@ import axios from "axios"
 
           <div
             id="dropdown"
-            className={`z-10  ${
+            className={`z-50  ${
               isProfileDropdownOpen ? " " : "hidden"
             }  bg-gray-700 divide-y divide-gray-100 rounded-lg shadow w-44 fixed right-0 `}
           >
