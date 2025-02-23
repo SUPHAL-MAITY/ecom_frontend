@@ -13,7 +13,8 @@ import axios from "axios"
   
 
   const [image,setImage]=useState("https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_640.png")
-
+   const [loggedIn,setLoggedIn]=useState(null)
+  
   const cart = useSelector((state) => state.cart);
   const isProfileDropdownOpen=useSelector((state)=>state.toggle.isProfileDropdownOpen)
   const location=useLocation()
@@ -25,7 +26,8 @@ import axios from "axios"
 
   useEffect(()=>{
     fetchProfileImage()
-  },[])
+    fetchLoggedinStatus()
+  },[location.pathname])
 
   const fetchProfileImage=async()=>{
     try {
@@ -46,7 +48,17 @@ import axios from "axios"
   const dispatch = useDispatch();
 
 
-
+  const fetchLoggedinStatus=async()=>{
+    try {
+      const {data}=await axios.get(`${url}/api/v1/check-auth`,{withCredentials:true})
+      
+      setLoggedIn(data?.data?.loggedIn)
+    } catch (error) {
+      console.log(error)
+      setLoggedIn(false)
+      
+    }
+  }
  
 
 
@@ -178,11 +190,16 @@ import axios from "axios"
                   Collection
                 </Link>
               </li>
-              <li>
-                <Link to="/login" className="block px-4 py-2 hover:bg-gray-600 ">
-                 Sign-in
-                </Link>
-              </li>
+
+              {!loggedIn && (
+                  <li>
+                  <Link to="/login" className="block px-4 py-2 hover:bg-gray-600 ">
+                   Sign-in
+                  </Link>
+                </li>
+                
+              )}
+            
               <li>
                 <Link to="/signup" className="block px-4 py-2 hover:bg-gray-600 ">
                   sign-up
@@ -194,12 +211,15 @@ import axios from "axios"
                 </Link>
               </li>
 
-
-              <li>
+            {loggedIn && (
+                <li>
                 <Link href="#" onClick={handleLogout} className="block px-4 py-2 hover:bg-gray-600 ">
                   Logout
                 </Link>
               </li>
+
+            )}
+            
              
 
 
