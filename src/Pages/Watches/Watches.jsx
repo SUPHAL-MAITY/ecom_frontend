@@ -32,7 +32,7 @@ const Watches = () => {
 
   // get the category from the url 
    const category=searchParams.get("category")
-   console.log("category obtained from url",category)
+   
   
 
 
@@ -51,9 +51,7 @@ const Watches = () => {
 
   
 const handleCheckboxChange=(e)=>{
-  console.log("checkbox clicked")
-  console.log(e.target.checked)
-  console.log(e.target.value)
+  
   let string=e.target.value;
   let parts = string.split("-"); // Splitting the string into an array
   let Min = parseInt(parts[0]); // First value
@@ -82,7 +80,7 @@ const handleFetch=async()=>{
   
   if(childRef.current){
     const response=await childRef.current.fetchFilteredData()
-    console.log("button clicked")
+    
   }
 }
 
@@ -147,7 +145,7 @@ const handleFetch=async()=>{
                    </label>
 
                   ))}
-                 {console.log(selectedGender)}
+                
 
 
                 </div>

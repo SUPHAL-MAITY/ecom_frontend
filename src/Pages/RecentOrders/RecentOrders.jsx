@@ -45,8 +45,7 @@ export default function RecentOrders() {
     setLoading(true)
     setPage(1)
     try {
-      console.log("status inside the search fetch data",status)
-      console.log("debounSearch inside the search fetch data",debounceSearch)
+      
       const {data}=await axios.get(
         `${url}/api/v1/search-orders?q=${debounceSearch}`,
         { withCredentials: true }
@@ -62,7 +61,7 @@ export default function RecentOrders() {
         setSearchQuery("")
       }
     
-      console.log("search order data ",data)
+      
       
     } catch (error) {
       if(error.response.status===401){
@@ -87,8 +86,7 @@ export default function RecentOrders() {
     
     setPage(1)
     try {
-      console.log("status inside the status fetch data",status)
-      console.log("debounceSearch inside the status fetch data",debounceSearch)
+      
 
 
       setLoading(true)
@@ -101,17 +99,7 @@ export default function RecentOrders() {
       setTotalPages(data?.data?.totalPages);   
       setFilterData(data?.data?.orders);
       
-      // if(data.data.length===0){
-      //   toast.error("No products found")
-      //   setSearchQuery("")
-      // }
-
-      // if(data.data.length>0){
-      //   setOrders(data?.data)
-      //   setSearchQuery("")
-      // }
-    
-      console.log("status based  data ",data)
+        
       
     } catch (error) {
      
@@ -127,8 +115,7 @@ export default function RecentOrders() {
 
   const fetchData = async () => {
     try {
-      console.log("status inside the  fetch data",status)
-      console.log("debounSearch inside the  fetch data",debounceSearch)
+      
       setLoading(true);
       const { data } = await axios.get(
         `${url}/api/v1/get-recent-orders?page=${page}`,
@@ -138,7 +125,7 @@ export default function RecentOrders() {
       setTotalPages(data?.data?.totalPages);
       setLoading(false);
 
-      console.log("recent orders data", data);
+      
     } catch (error) {
       console.log(error);
       setLoading(false);

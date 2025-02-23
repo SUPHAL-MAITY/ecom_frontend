@@ -23,7 +23,7 @@ const Checkout = () => {
  const fetchAddressOfUser=async()=>{
   try {
     const {data}=await axios.get(`${url}/api/v1/get-user-address`,{withCredentials:true})
-    console.log("data",data?.data)
+    
     setAddresses(data?.data)
     
   } catch (error) {
@@ -72,7 +72,7 @@ const Checkout = () => {
     }
 
     
-    console.log("Form submitted");
+    
 
     // Load Stripe
     const stripe = await loadStripe(

@@ -17,7 +17,7 @@ const Cart = () => {
   const fetchLoggedinStatus=async()=>{
     try {
       const {data}=await axios.get(`${url}/api/v1/check-auth`,{withCredentials:true})
-      console.log(data)
+      
       setLoggedIn(data?.data?.loggedIn)
     } catch (error) {
       console.log(error)
@@ -34,7 +34,7 @@ const Cart = () => {
 
   },[])
 
-  console.log(cart)
+  
 
 
     const handleAddtoCart=(product)=>{

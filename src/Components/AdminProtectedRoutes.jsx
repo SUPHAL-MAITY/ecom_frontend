@@ -17,7 +17,7 @@ const AdminProtectedRoutes = ({ children }) => {
       const { data } = await axios.get(`${url}/api/v1/admin-auth`, {
         withCredentials: true,
       });
-      console.log("auth data", data);
+      
       setAuth(data?.data?.auth);
       setLoading(false);
     } catch (error) {

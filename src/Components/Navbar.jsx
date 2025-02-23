@@ -19,7 +19,7 @@ import axios from "axios"
   const location=useLocation()
   const navigate=useNavigate()
 
-  console.log(location.pathname)
+  
   const url = import.meta.env.VITE_API_URL;
   
 
@@ -62,9 +62,9 @@ import axios from "axios"
 
 
   const handleLogout=async()=>{
-    console.log("logout clicked")
+    
     const {data}=await axios.get(`${url}/api/v1/logout`,{withCredentials:true})
-    console.log(data)
+    
     navigate("/login")
     
 

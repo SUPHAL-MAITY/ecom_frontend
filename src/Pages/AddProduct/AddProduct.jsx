@@ -55,9 +55,9 @@ const AddProduct = () => {
 
     //adding images to formData
     let files = e.target.files;
-    console.log("files", files);
+    
     let imageArray = Array.from(files);
-    console.log("imageArray", imageArray);
+    
     setFormData({ ...formData, images: [...formData.images, ...imageArray] });
   };
 
@@ -67,7 +67,7 @@ const AddProduct = () => {
   const getAllBrands = async () => {
     try {
       const { data } = await axios.get(`${url}/api/v1/get-all-category`,{withCredentials:true});
-      console.log("brands",data);
+      
       setBrands(data?.data);
     } catch (error) {}
   };
@@ -84,7 +84,7 @@ const AddProduct = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("formData", formData);
+    
     // converting formData  to FormData
 
     const formDataToSend = new FormData();
@@ -100,7 +100,7 @@ const AddProduct = () => {
 
     try {
       setIsSubmitting(true);
-      console.log("formDataToSend", formDataToSend);
+      
 
       const { data } = await axios.post(
         `${url}/api/v1/create-product`,
@@ -111,7 +111,7 @@ const AddProduct = () => {
           },
         }
       );
-      console.log(data);
+      
       setIsSubmitting(false);
       toast.success("Product added successfully");
       setFormData({
@@ -144,7 +144,7 @@ const AddProduct = () => {
   ////handler for selecting image on button click
 
   const handleInputButton = () => {
-    console.log("button clicked");
+    
     document.getElementById("imageInput").click();
   };
 
@@ -392,7 +392,7 @@ const AddProduct = () => {
                         />
                       </div>
                     </div>
-                    {console.log("formdata images", formData.images)}
+                    
                   </div>
 
 

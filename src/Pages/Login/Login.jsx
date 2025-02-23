@@ -21,10 +21,10 @@ const formik=useFormik({
     }),
 
     onSubmit: async(values,{resetForm})=>{
-        console.log(values)
+        
         try{
             const {data}=await axios.post(`${url}/api/v1/login`,{values},{withCredentials:true})
-            console.log(data)
+            
             resetForm()
             if(data.statusCode===200){
                 toast.success("Login successful")
@@ -33,7 +33,7 @@ const formik=useFormik({
         }catch(err){
             console.log(err)
             
-            console.log(err.response.status)
+            
             if(err.response.status===401){
                 toast.error("Invalid credentials")
             }

@@ -28,7 +28,7 @@ const AdminDashboard = () => {
   const fetchAdminData=async()=>{
     try {
       const {data}=await axios.get(`${url}/api/v1/admin-details`)
-      console.log("admin data",data)
+      
 
       setTotalEarningThisMonth(data?.data.totalEarningThisMonth)
       setTotalEarningPrevMonth(data?.data.totalEarningPrevMonth)

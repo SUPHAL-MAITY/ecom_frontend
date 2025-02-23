@@ -14,8 +14,7 @@ const address2=localStorage.getItem("address2")
 const address1=localStorage.getItem("address1")
 
 
-console.log("address2 from local storage",address2)
-console.log("address1 from local storage",address1)
+
 
 const PaymentSuccess = () => {
 
@@ -29,11 +28,11 @@ const PaymentSuccess = () => {
 
    const url = import.meta.env.VITE_API_URL;
    
-   console.log(sessionId)
+   
 
   useEffect(() => {
     if(address2){
-      console.log("address 2 will be added")
+      
       addAddress()
     }
     if (sessionId) {
@@ -49,22 +48,13 @@ const PaymentSuccess = () => {
   const verifyPayment = async (sessionId) => {
     try {
       const { data } = await axios.get( `${url}/api/v1/verify-payment?session_id=${sessionId}`);
-      console.log("veified payment data",data)
+      
 
       if (data.payment_status === "paid") {
-        console.log("✅ Payment verified! Saving order...");
-        dispatch(clearCart())
-        // console.log("👉 User Details:", data.userDetails);
-        // console.log("👉 Cart Items:", data.cartItems);
-        console.log("👉 Total Amount:", data.amount_total / 100);
-        console.log("👉 Payment Intent:", data.payment_intent);
-        console.log("👉 Payment Status:", data.payment_status);
-        console.log("👉 Payment ID:", data.payment_id);
         
-
-        console.log("cart items",cart.cartItems)
-  
-
+        dispatch(clearCart())
+        
+        
         // Save order details in your database
 
 
@@ -88,7 +78,7 @@ const PaymentSuccess = () => {
         if(orderResponse){
           alert("order saved sucessfully")
 
-          console.log("orderresponse",orderResponse)
+          
 
         }
 
@@ -113,7 +103,7 @@ const PaymentSuccess = () => {
         
        
 
-        console.log("✅ Order saved successfully!");
+        
       }
     } catch (error) {
       console.error("❌ Error verifying payment:", error.message);
@@ -132,7 +122,7 @@ const PaymentSuccess = () => {
    
   )
 
-    console.log("address added successfuly",data)
+    
   }
     
 

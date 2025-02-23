@@ -72,13 +72,12 @@ validationSchema:Yup.object({
 }),
 
 onSubmit:async(values,{setSubmitting,resetForm})=>{
-  console.log("hello world")
-  console.log(values)
+  
 
   try {
 
     const {data}=await axios.post(`${url}/api/v1/signup`,{values})
-    console.log("data",data)
+    
     resetForm()
     resetInputs()
     

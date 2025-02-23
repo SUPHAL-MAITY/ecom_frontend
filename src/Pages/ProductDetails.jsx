@@ -18,7 +18,7 @@ const navigate=useNavigate()
 const url = import.meta.env.VITE_API_URL;
 
  let rand= Math.floor(Math.random()*4)  
- console.log("rand",rand)
+ 
 
 
 
@@ -27,7 +27,7 @@ const url = import.meta.env.VITE_API_URL;
      
         const {data}=await axios.get(`${url}/api/v1/get-single-product/${id}`)
         setProduct(data?.data)
-        console.log(data)
+        
         
     } catch (error) {
         console.log(error)
@@ -48,12 +48,12 @@ const url = import.meta.env.VITE_API_URL;
 
  const handleAddtoCart=(product)=>{
   
-  console.log(product)
+  
 
   if(!product) reutrn;
 
  
-  console.log("rand",rand)
+  
 
   dispatch(addItem({
         id: product._id,

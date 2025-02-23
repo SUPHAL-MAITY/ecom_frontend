@@ -40,7 +40,7 @@ export default function AddCategory() {
     
     try {
       name = name.trim();
-      // console.log(image.size);
+      
       setIsSubmitting(true)
       const { data } = await axios.post(
         `${url}/api/v1/create-category`,
@@ -57,7 +57,7 @@ export default function AddCategory() {
       );
       setIsSubmitting(false)
       delayReload()
-      console.log("data", data);
+      
       toast("category created successfully!");
     } catch (err) {
       setIsSubmitting(false)

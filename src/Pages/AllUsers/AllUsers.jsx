@@ -28,7 +28,7 @@ const AllUsers = () => {
     if(debounceSearch){
 
 
-      console.log("debounceSearch",debounceSearch)
+      
       searchUsers()
     }
   },[debounceSearch])
@@ -42,7 +42,7 @@ const AllUsers = () => {
       return;
     }
 
-    console.log("searching the user ........")
+    
     try {
       
         setLoading(true);
@@ -63,7 +63,7 @@ const AllUsers = () => {
         
         setLoading(false);
   
-        console.log("user data", data);
+        
 
         
       

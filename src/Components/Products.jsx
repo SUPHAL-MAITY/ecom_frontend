@@ -20,7 +20,7 @@ const Products = forwardRef(({ priceMin, priceMax, gender, category }, ref) => {
   const dispatch = useDispatch();
   const totalStars = 5;
 
-  console.log("gender", gender);
+ 
 
   const url = import.meta.env.VITE_API_URL;
 
@@ -37,7 +37,7 @@ const Products = forwardRef(({ priceMin, priceMax, gender, category }, ref) => {
       setTotalPages(data?.data?.totalPages);
       setLoading(false);
 
-      console.log(data);
+      
     } catch (error) {
       console.log(error);
       setLoading(false);
@@ -47,7 +47,7 @@ const Products = forwardRef(({ priceMin, priceMax, gender, category }, ref) => {
   //// fetching filtered Data with priceMin, priceMax, gender
 
   const fetchFilteredData = async () => {
-    console.log("data is fetched ");
+    
     try {
       setLoading(true);
       const { data } = await axios.get(
@@ -60,7 +60,7 @@ const Products = forwardRef(({ priceMin, priceMax, gender, category }, ref) => {
         toast.error("No products found for this category");
       }
       setFilterProducts(data.data.products);
-      console.log("filtered data", data);
+      
       setLoading(false);
     } catch (error) {
       console.log(error);
@@ -71,14 +71,14 @@ const Products = forwardRef(({ priceMin, priceMax, gender, category }, ref) => {
   ///// fetching product for Men or Woman obtained from url
 
   const fetchCategoryProducts = async () => {
-    console.log("category product  is  fetching ............. ");
+    
     try {
       setLoading(true);
       const { data } = await axios.get(
         `${url}/api/v1/filter?gender=${category}`
       );
       setFilterProducts(data.data.products);
-      console.log("data from fetch  category products", data);
+      
       setLoading(false);
     } catch (error) {
       console.log(error);
@@ -93,15 +93,15 @@ const Products = forwardRef(({ priceMin, priceMax, gender, category }, ref) => {
   }, [page]);
 
   useEffect(() => {
-    console.log(" useEffect render");
+    
     if (category) {
       fetchCategoryProducts();
-      console.log("data has been fetched by useEffect");
+      
     }
   }, []);
 
   const handleAddtoCart = (product) => {
-    console.log(product);
+    
     dispatch(
       addItem({
         id: product._id,

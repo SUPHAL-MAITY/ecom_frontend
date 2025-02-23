@@ -47,7 +47,7 @@ const searchFetchData=async()=>{
       setSearchQuery("")
     }
   
-    console.log("search data ",data)
+    
     
   } catch (error) {
     console.log(error)
@@ -80,7 +80,7 @@ const searchFetchData=async()=>{
   ///data fetching for all products with pagination
 
   const fetchData = async () => {
-    console.log("fetch data done...")
+    
     try {
       setLoading(true);
       const { data } = await axios.get(
@@ -91,7 +91,7 @@ const searchFetchData=async()=>{
       setTotalPages(data?.data?.totalPages);
       setLoading(false);
 
-      console.log("all products data", data);
+      
     } catch (error) {
       console.log(error);
       setLoading(false);
@@ -115,21 +115,21 @@ const searchFetchData=async()=>{
 
   const fetchFilterProducts=async()=>{
    
-    console.log("filter data ........")
+    
     try {
       if(category && category !=="show_all"){
         setLoading(true);
-        console.log("page",page)
+        
         const { data } = await axios.get(
           `${url}/api/v1/get-filter-products?category=${category}&page=${page}`,
           { withCredentials: true }
         );
         setProducts(data?.data?.products);
         setTotalPages(data?.data?.totalPages);
-        console.log("total pages",data?.data?.totalPages)
+        
         setLoading(false);
   
-        console.log("all filter  products data", data);
+       
 
         
       }
