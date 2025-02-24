@@ -1,6 +1,7 @@
 import React, { useEffect,useState } from "react";
 import { Link } from 'react-router-dom';
 import "./Home.css";
+import { useNavigate } from "react-router-dom";
 
 
 const Home = () => {
@@ -8,6 +9,7 @@ const Home = () => {
   
 const [isVisible,setIsVisible]=useState(false)
 let scrollTimer;
+const navigate=useNavigate();
 
 useEffect(()=>{
     animation()
@@ -140,9 +142,9 @@ useEffect(()=>{
               <h5>Collection</h5>
             </div>
 
-            <div className="btn" >
+            <div className="btn" onClick={()=>navigate("/watches?category=Men")}>
               
-              <Link to="/watches">Shop Now</Link>
+            <a href="">Shop Now</a>
             </div>
           </div>
 
@@ -157,8 +159,8 @@ useEffect(()=>{
               <h5>Collection</h5>
             </div>
 
-            <div className="btn"  >
-              <Link to="/watches">Shop Now</Link>
+            <div className="btn" onClick={()=>navigate("/watches?category=Woman")} >
+            <a href="">Shop Now</a>
             </div>
           </div>
 

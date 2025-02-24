@@ -4,6 +4,7 @@ import Products from "../../Components/Products";
 import { useSelector , useDispatch } from "react-redux";
 import { useRef } from "react";
 import { toggleSidebar, toggleDropdown } from "../../features/Toggle/toggle.js";
+import { useSearchParams } from "react-router-dom";
 
 
 
@@ -17,6 +18,7 @@ const Watches = () => {
   const [priceMin,setPriceMin]=useState(null)
   const [priceMax,setPriceMax]=useState(null)
   const [selectedGender,setSelectedGender]=useState([])
+  const [searchParams]=useSearchParams()
   
 
   const childRef=useRef(null)
@@ -27,6 +29,20 @@ const Watches = () => {
   const isSidebarOpen = useSelector((state) => state.toggle.isSidebarOpen);
   
   const dispatch=useDispatch()
+
+
+
+  // get the category from the url 
+  const category=searchParams.get("category")
+
+  useEffect(()=>{
+
+    if(category){
+      setSelectedGender([category])
+    }
+    
+    
+    },[])
 
 ///////closing the side bar and profile dropdown if open while opening
   useEffect(()=>{
@@ -194,7 +210,7 @@ const handleFetch=async()=>{
           {/* main content here */}
 
           <div className=" p-4    sm:mt-2">
-            <Products   priceMin={priceMin} priceMax={priceMax} gender={selectedGender} ref={childRef} />
+            <Products category={category}  priceMin={priceMin} priceMax={priceMax} gender={selectedGender} ref={childRef} />
           </div>
 
 

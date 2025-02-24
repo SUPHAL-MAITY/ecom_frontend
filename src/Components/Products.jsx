@@ -11,7 +11,7 @@ import { useDispatch } from "react-redux";
 import { addItem } from "../features/Cart/cart.js";
 import { ToastContainer, toast } from "react-toastify";
 
-const Products = forwardRef(({ priceMin, priceMax, gender }, ref) => {
+const Products = forwardRef(({ priceMin, priceMax, gender , category }, ref) => {
   const [page, setPage] = useState(1);
   const [products, setProducts] = useState([]);
   const [filterProducts, setFilterProducts] = useState([]);
@@ -79,6 +79,32 @@ const Products = forwardRef(({ priceMin, priceMax, gender }, ref) => {
 
 
   
+ ///// fetching product for Men or Woman obtained from url
+
+ const fetchCategoryProducts = async () => {
+    
+  try {
+    setLoading(true);
+    const { data } = await axios.get(
+      `${url}/api/v1/filter?gender=${category}`
+    );
+    setFilterProducts(data.data.products);
+    
+    setLoading(false);
+  } catch (error) {
+    console.log(error);
+    setLoading(false);
+  }
+};
+
+useEffect(() => {
+    
+  if (category) {
+    fetchCategoryProducts();
+    
+  }
+}, []);
+
 
   const handleAddtoCart = (product) => {
     
@@ -257,7 +283,7 @@ const Products = forwardRef(({ priceMin, priceMax, gender }, ref) => {
      
 
       {/* pagination button */}
-      {!loading && (
+      {!loading && !category && (
              <div className="flex justify-center  space-x-1 mt-2">
              <button
                disabled={page == 1}
