@@ -1,5 +1,7 @@
 import React from 'react'
 import { Clock, ShoppingCart, Truck, Shield, Star, ChevronRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
+
 
 const NewEdition = () => {
 
@@ -58,10 +60,10 @@ const NewEdition = () => {
               <p className="text-xl text-gray-200 mb-8">
                 Discover our collection of luxury timepieces crafted with precision and style.
               </p>
-              <button className="bg-white text-black px-8 py-4 rounded-md font-semibold hover:bg-gray-100 transition-colors flex items-center space-x-2">
-                <span>Shop Collection</span>
+              <Link to="/watches"><button className="bg-white text-black px-8 py-4 rounded-md font-semibold hover:bg-gray-100 transition-colors flex items-center space-x-2">
+               <span>Shop Collection</span>
                 <ChevronRight className="w-5 h-5" />
-              </button>
+              </button></Link> 
             </div>
           </div>
         </div>
