@@ -16,7 +16,7 @@ const navigate=useNavigate()
 
 console.log("location",location)
 
-const from=location.state.from.pathname || "/";
+const from=location?.state?.from?.pathname || "/";
 console.log("from",from)
 
 

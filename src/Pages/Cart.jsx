@@ -248,7 +248,7 @@ const Cart = () => {
 
           <div className="flex items-center flex-col  align-items gap-3 mt-8">
           
-            <button disabled={loggedIn===false} onClick={ ()=>{navigate("/checkout")}} className="rounded-full w-full max-w-[280px] py-4 text-center justify-center items-center bg-indigo-600 font-semibold text-lg text-white flex transition-all duration-500 hover:bg-indigo-700 disabled:bg-gray-300">
+            <button  onClick={ ()=>{navigate("/checkout")}} className="rounded-full w-full max-w-[280px] py-4 text-center justify-center items-center bg-indigo-600 font-semibold text-lg text-white flex transition-all duration-500 hover:bg-indigo-700 disabled:bg-gray-300">
               Continue to Payment
               <svg
                 className="ml-2"

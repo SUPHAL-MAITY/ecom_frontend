@@ -49,7 +49,7 @@ function App() {
             <Route path="/all-products" element={<AdminProtectedRoutes> <AllProducts/> </AdminProtectedRoutes> } />
             <Route path="/all-users" element={<AdminProtectedRoutes> <AllUsers/> </AdminProtectedRoutes> } />
             <Route path="/add-product" element={<AdminProtectedRoutes>  <AddProduct/> </AdminProtectedRoutes> }/>
-            <Route path="/checkout" element={<Checkout/> }/>
+            <Route path="/checkout" element={<AdminProtectedRoutes><Checkout/></AdminProtectedRoutes> }/>
             <Route path="/success" element={<PaymentSuccess/> }/>
             <Route path="/fail" element={<PaymentFailed/> }/>
             <Route path="/new-edition" element={<NewEdition/> }/>
