@@ -1,15 +1,48 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import { Link } from 'react-router-dom';
 import "./Home.css";
-import { useNavigate } from "react-router-dom";
+
 
 const Home = () => {
 
-  const navigate=useNavigate()
-
+  
+const [isVisible,setIsVisible]=useState(false)
+let scrollTimer;
 
 useEffect(()=>{
     animation()
+
+    const timer=setTimeout(()=>{
+      setIsVisible(true)
+    },2000)
+
+    return ()=>{
+      clearTimeout(timer)
+    }
+},[])
+
+
+useEffect(()=>{
+
+ const handleScroll=()=>{
+   setIsVisible(false)
+
+   if (scrollTimer) clearTimeout(scrollTimer);
+
+   scrollTimer=setTimeout(()=>{
+    setIsVisible(true)
+   },500)
+
+ }
+
+
+
+  window.addEventListener("scroll",handleScroll)
+
+  return ()=>{
+    window.removeEventListener("scroll",handleScroll)
+  }
+
 },[])
 
 
@@ -96,7 +129,7 @@ useEffect(()=>{
         </header>
 
 
-        <div className="content">
+      <div className="content">
           <div className="men common">
             <div className="img">
               <img className="image1" src="male_watch.png" alt="" />
@@ -131,7 +164,31 @@ useEffect(()=>{
 
           
         </div>
+
+        {isVisible && (
+        <div className="snapbar">
+          <ul>
+             <li>
+               <Link to="/watches">All watches</Link>
+             </li>
+             <li>
+               <Link to="/new-edition">New edition</Link>
+             </li>
+            
+             <li>
+               <Link to="/cart">Cart</Link>
+             </li>
+           </ul>
+
+       </div>
+
+        )}
+
+        
+
       </div>
+
+     
     </>
   );
 };
