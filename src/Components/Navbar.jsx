@@ -19,6 +19,7 @@ import axios from "axios"
   const isProfileDropdownOpen=useSelector((state)=>state.toggle.isProfileDropdownOpen)
   const location=useLocation()
   const navigate=useNavigate()
+  const dispatch = useDispatch();
 
   
   const url = import.meta.env.VITE_API_URL;
@@ -28,11 +29,41 @@ import axios from "axios"
     fetchProfileImage()
     fetchLoggedinStatus()
   },[location.pathname])
+  
+
+
+  //// closing the profile dropdown when clicking outside
+
+
+  useEffect(()=>{
+   
+    const handleClick=()=>{
+      if(isProfileDropdownOpen){
+        dispatch(toggleDropdown())
+      }
+    }
+
+    document.addEventListener("click",handleClick)
+
+    return ()=>{
+      document.removeEventListener("click",handleClick)
+    }
+  },[isProfileDropdownOpen])
+
+  const handleProfileDropDownToggle=(e)=>{
+    e.stopPropagation();
+    
+    dispatch(toggleDropdown())
+    
+    
+  }
+
+////////////fetching profile image
 
   const fetchProfileImage=async()=>{
     try {
       const {data}=await axios.get(`${url}/api/v1/profile-image`,{withCredentials:true})
-      setImage(data.data)
+      setImage(data?.data)
       
     } catch (error) {
       
@@ -44,8 +75,8 @@ import axios from "axios"
 
 
 
-
-  const dispatch = useDispatch();
+ 
+  
 
 
   const fetchLoggedinStatus=async()=>{
@@ -68,9 +99,7 @@ import axios from "axios"
   }
 
 
-  const handleProfileDropDownToggle=()=>{
-    dispatch(toggleDropdown())
-  }
+ 
 
 
   const handleLogout=async()=>{
