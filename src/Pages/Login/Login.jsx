@@ -50,9 +50,7 @@ const formik=useFormik({
 
   return (
     <>
-     <ToastContainer
-           
-           />
+     <ToastContainer/>
       <div className="panda">
         <div className="ear"></div>
         <div className="face">

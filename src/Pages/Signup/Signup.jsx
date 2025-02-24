@@ -2,13 +2,15 @@ import React,{useEffect,useState}  from "react";
 import {useFormik} from "formik"
 import useDebounce from "../../hooks/useDebounce.jsx";
 import axios from "axios"
+import { useNavigate } from "react-router-dom";
 
 import * as Yup from "yup";
-
+import { ToastContainer, toast } from 'react-toastify';
 
 const Signup = () => {
 const [firstName,setFirstName]=useState("")
 const [lastName,setLastName]=useState("")
+const navigate = useNavigate();
 
 const [countryCode,setCountryCode]=useState("")
 const [phoneNumber,setPhoneNumber]=useState("")
@@ -80,11 +82,13 @@ onSubmit:async(values,{setSubmitting,resetForm})=>{
     
     resetForm()
     resetInputs()
+    navigate("/login");
     
   } catch (error) {
     console.log(error)
     resetForm()
     resetInputs()
+     toast.error("Something Went Wrong")
     
   }
   
@@ -135,6 +139,8 @@ useEffect(()=>{
 
 
   return (
+    <>
+    <ToastContainer/>
     <div className="  flex flex-col  sm:flex-row  font-serif">
 
       <div className="w-full   hidden  sm:flex  justify-center items-center  sm:w-1/2   ">
@@ -346,6 +352,7 @@ useEffect(()=>{
 
 
     </div>
+    </>
   );
 };
 
