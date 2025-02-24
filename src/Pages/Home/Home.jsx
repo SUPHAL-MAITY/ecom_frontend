@@ -113,7 +113,7 @@ useEffect(()=>{
           <div className="menu">
             <ul>
               <li>
-                <Link to="/watches">All watches</Link>
+                <Link to="/watches">Shop</Link>
               </li>
               <li>
                 <Link to="/new-edition">New edition</Link>
@@ -169,7 +169,7 @@ useEffect(()=>{
         <div className="snapbar">
           <ul>
              <li>
-               <Link to="/watches">All watches</Link>
+               <Link to="/watches">Shop</Link>
              </li>
              <li>
                <Link to="/new-edition">New edition</Link>
