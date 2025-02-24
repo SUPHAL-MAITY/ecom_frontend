@@ -183,7 +183,7 @@ const handleFetch=async()=>{
 
           {/* main content here */}
 
-          <div className="p-4 border-2 border-gray-200  rounded-lg dark:border-gray-700 sm:mt-6">
+          <div className=" p-4    sm:mt-2">
             <Products   priceMin={priceMin} priceMax={priceMax} gender={selectedGender} ref={childRef} />
           </div>
 
