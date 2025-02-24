@@ -122,7 +122,7 @@ useEffect(()=>{
                 <Link to="/trending">Trending</Link>
               </li>
               <li>
-                <Link to="#">Collection</Link>
+                <Link to="/cart">Cart</Link>
               </li>
             </ul>
           </div>
