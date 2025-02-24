@@ -89,7 +89,7 @@ const handleFetch=async()=>{
             isSidebarOpen ? "translate-x-0" : "-translate-x-full"
           }   bg-gray-800  sm:translate-x-0  aria-label="Sidebar"`}
         >
-          <div className="h-full  px-3 pb-4 overflow-y-auto bg-gray-800  dark:bg-gray-800">
+          <div className="h-full  px-3 pb-4 overflow-y-auto scrollbar-hide bg-gray-800  dark:bg-gray-800">
 
 
            
