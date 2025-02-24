@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./watches.css";
 import Products from "../../Components/Products";
-import { useSelector } from "react-redux";
+import { useSelector , useDispatch } from "react-redux";
 import { useRef } from "react";
+import { toggleSidebar, toggleDropdown } from "../../features/Toggle/toggle.js";
 
 
 
@@ -22,14 +23,19 @@ const Watches = () => {
   
    
   const cart = useSelector((state) => state.cart);
-   
-
-
+  const isProfileDropdownOpen=useSelector((state)=>state.toggle.isProfileDropdownOpen)
+  const isSidebarOpen = useSelector((state) => state.toggle.isSidebarOpen);
   
+  const dispatch=useDispatch()
 
-   const isSidebarOpen = useSelector((state) => state.toggle.isSidebarOpen);
 
+  useEffect(()=>{
+    if(isProfileDropdownOpen){
+    
+       dispatch(toggleDropdown())
+    }
 
+  },[])
   
    
 
