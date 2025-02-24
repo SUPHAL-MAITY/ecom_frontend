@@ -35,6 +35,10 @@ const Watches = () => {
        dispatch(toggleDropdown())
     }
 
+    if(isSidebarOpen){
+      dispatch(toggleSidebar())
+    }
+
   },[])
   
    
