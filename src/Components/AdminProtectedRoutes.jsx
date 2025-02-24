@@ -31,7 +31,7 @@ const AdminProtectedRoutes = ({ children }) => {
 
   if (loading) return <Loader />;
 
-  return auth ? children : <Navigate to="/login" />;
+  return auth ? children : <Navigate to="/login"  state={{from:location}} />;
 };
 
 export default AdminProtectedRoutes;

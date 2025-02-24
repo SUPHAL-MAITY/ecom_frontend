@@ -5,10 +5,20 @@ import {useFormik} from "formik"
 import axios from "axios"
 import * as Yup from "yup";
 import { ToastContainer, toast } from 'react-toastify';
+import { useLocation,useNavigate } from "react-router-dom"; 
+
 
 const Login = () => {
 
 const url = import.meta.env.VITE_API_URL;
+const location=useLocation()
+const navigate=useNavigate()
+
+console.log("location",location)
+
+const from=location.state.from.pathname || "/";
+console.log("from",from)
+
 
 const formik=useFormik({
     initialValues:{
@@ -28,6 +38,7 @@ const formik=useFormik({
             resetForm()
             if(data.statusCode===200){
                 toast.success("Login successful")
+                navigate(from)
             }
 
         }catch(err){
