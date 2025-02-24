@@ -28,7 +28,7 @@ const Watches = () => {
   
   const dispatch=useDispatch()
 
-
+///////closing the side bar and profile dropdown if open while opening
   useEffect(()=>{
     if(isProfileDropdownOpen){
     
